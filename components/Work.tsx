@@ -1,0 +1,307 @@
+"use client";
+import Link from "next/link";
+
+const projects = [
+  {
+    id: 1,
+    year: "2025",
+    client: "Lone Star Capital",
+    title: "Digital rebrand for a Texas private equity firm",
+    category: "Brand Identity · Web Design",
+    bg: "#0d1a2e",
+    col: "left",
+    tall: true,
+  },
+  {
+    id: 2,
+    year: "2025",
+    client: "Harrington Law Group",
+    title: "Authority-first website for a regional law practice",
+    category: "Web Design · Content Marketing",
+    bg: "#1a0e08",
+    col: "right",
+    tall: false,
+  },
+  {
+    id: 3,
+    year: "2024",
+    client: "Summit Build Co.",
+    title: "High-performance site for a construction firm",
+    category: "Web Design · SEO",
+    bg: "#0a1a10",
+    col: "left",
+    tall: false,
+  },
+  {
+    id: 4,
+    year: "2024",
+    client: "Meridian Bank",
+    title: "AI-driven lead generation system and full rebrand",
+    category: "AI & Automations · Brand Identity",
+    bg: "#140820",
+    col: "right",
+    tall: true,
+  },
+];
+
+const leftProjects = projects.filter((p) => p.col === "left");
+const rightProjects = projects.filter((p) => p.col === "right");
+
+export default function Work() {
+  return (
+    <section
+      id="work"
+      style={{ background: "#fff", padding: "120px 48px" }}
+    >
+      {/* Header */}
+      <div
+        className="reveal"
+        style={{
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          marginBottom: "64px",
+          flexWrap: "wrap",
+          gap: "24px",
+        }}
+      >
+        <div>
+          <p className="section-label" style={{ marginBottom: "16px" }}>
+            Selected work
+          </p>
+          <h2
+            style={{
+              fontFamily:
+                'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
+              fontWeight: 800,
+              lineHeight: 1.18,
+              letterSpacing: "-0.02em",
+              color: "#0E0E0E",
+            }}
+          >
+            Projects we&apos;re
+            <br />
+            proud of
+          </h2>
+        </div>
+        <Link
+          href="#"
+          className="reveal reveal-d1"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "10px",
+            background: "#0E0E0E",
+            color: "#fff",
+            fontSize: "0.92rem",
+            fontWeight: 500,
+            padding: "14px 28px",
+            borderRadius: "100px",
+            textDecoration: "none",
+            border: "2px solid #0E0E0E",
+            transition: "background 0.25s, border-color 0.25s",
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = "#FF6B2B";
+            el.style.borderColor = "#FF6B2B";
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = "#0E0E0E";
+            el.style.borderColor = "#0E0E0E";
+          }}
+        >
+          See all work ↗
+        </Link>
+      </div>
+
+      {/* Offset grid — Made By Shape style */}
+      <div
+        className="work-grid-offset"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "24px",
+          alignItems: "start",
+        }}
+      >
+        {/* Left column */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          {leftProjects.map((p, i) => (
+            <WorkCard key={p.id} project={p} delay={i} />
+          ))}
+        </div>
+
+        {/* Right column — offset downward for Made By Shape stagger */}
+        <div
+          className="work-col-right"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "24px",
+            marginTop: "96px",
+          }}
+        >
+          {rightProjects.map((p, i) => (
+            <WorkCard key={p.id} project={p} delay={i + 1} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WorkCard({
+  project,
+  delay,
+}: {
+  project: (typeof projects)[0];
+  delay: number;
+}) {
+  const delayClass =
+    delay === 0
+      ? "reveal"
+      : delay === 1
+      ? "reveal reveal-d1"
+      : delay === 2
+      ? "reveal reveal-d2"
+      : "reveal reveal-d3";
+
+  return (
+    <div
+      className={delayClass}
+      data-hover
+      style={{
+        borderRadius: "20px",
+        overflow: "hidden",
+        background: "#F4F3F1",
+        position: "relative",
+        cursor: "none",
+        transition: "transform 0.3s",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
+        if (arrow) {
+          arrow.style.background = "#FF6B2B";
+          arrow.style.color = "#fff";
+        }
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
+        if (arrow) {
+          arrow.style.background = "rgba(255,255,255,0.9)";
+          arrow.style.color = "#0E0E0E";
+        }
+      }}
+    >
+      {/* Image placeholder */}
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: project.tall ? "3 / 4" : "16 / 10",
+          background: project.bg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Subtle gradient overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)",
+          }}
+        />
+        {/* Project initials */}
+        <span
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontWeight: 800,
+            fontSize: "3rem",
+            color: "rgba(255,255,255,0.05)",
+            letterSpacing: "0.1em",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          {project.client
+            .split(" ")
+            .map((w) => w[0])
+            .join("")}
+        </span>
+      </div>
+
+      {/* Arrow button */}
+      <div
+        data-arrow
+        style={{
+          position: "absolute",
+          top: "16px",
+          right: "16px",
+          width: "38px",
+          height: "38px",
+          borderRadius: "50%",
+          background: "rgba(255,255,255,0.9)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "1rem",
+          color: "#0E0E0E",
+          transition: "background 0.2s, color 0.2s",
+          zIndex: 2,
+        }}
+      >
+        ↗
+      </div>
+
+      {/* Card body */}
+      <div style={{ padding: "22px 24px" }}>
+        <div
+          style={{
+            fontSize: "0.78rem",
+            color: "#7A7670",
+            marginBottom: "6px",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
+          {project.year}
+          <span style={{ color: "#FF6B2B" }}>•</span>
+          {project.client}
+        </div>
+        <p
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "1.05rem",
+            fontWeight: 700,
+            letterSpacing: "-0.01em",
+            color: "#0E0E0E",
+            marginBottom: "8px",
+            lineHeight: 1.3,
+          }}
+        >
+          {project.title}
+        </p>
+        <p
+          style={{
+            fontSize: "0.78rem",
+            color: "#7A7670",
+          }}
+        >
+          {project.category}
+        </p>
+      </div>
+    </div>
+  );
+}
