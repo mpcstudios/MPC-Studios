@@ -12,9 +12,11 @@ export default function About() {
   return (
     <section
       id="about"
-      style={{ background: "#F4F3F1", padding: "120px 48px" }}
+      className="section-pad"
+      style={{ background: "#F4F3F1" }}
     >
       <div
+        className="about-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",

@@ -5,6 +5,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section
+      className="hero-grid"
       style={{
         minHeight: "100vh",
         padding: "180px 48px 100px",
@@ -82,10 +83,8 @@ export default function Hero() {
             marginBottom: "32px",
           }}
         >
-          A creative{" "}
-          <span style={{ color: "#F77837" }}>design &amp;</span>
-          <br />
-          digital studio
+          Your Goals.{" "}
+          <span style={{ color: "#F77837" }}>Our Solutions.</span>
         </h1>
 
         <p

@@ -51,7 +51,8 @@ export default function Work() {
   return (
     <section
       id="work"
-      style={{ background: "#fff", padding: "120px 48px" }}
+      className="section-pad"
+      style={{ background: "#fff" }}
     >
       {/* Header */}
       <div

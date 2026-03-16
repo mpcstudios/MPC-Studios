@@ -137,6 +137,9 @@ body {
   filter: none;
 }
 
+/* ─── Section Padding ────────────────────── */
+.section-pad { padding: 120px 48px; }
+
 /* ─── Section Label ───────────────────────── */
 .section-label {
   display: inline-flex;
@@ -151,11 +154,40 @@ body {
   font-size: 1.1rem;
 }
 
-/* ─── Responsive nav links ────────────────── */
-@media (max-width: 900px) {
+/* ─── Responsive ──────────────────────────── */
+@media (max-width: 1024px) {
+  /* Nav */
   .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+
+  /* Hero */
   .hero-visual-wrap { display: none !important; }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    padding: 120px 20px 80px !important;
+    gap: 0 !important;
+  }
+
+  /* Sections — reduce padding */
+  .section-pad { padding: 72px 20px !important; }
+
+  /* About */
   .about-right-col { display: none !important; }
+  .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+  /* Testimonials */
+  .testi-outer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .testi-inner-grid { grid-template-columns: 1fr !important; }
+
+  /* Services — hide tags on small screens */
+  .service-tags-wrap { display: none !important; }
+
+  /* Work */
   .work-grid-offset { grid-template-columns: 1fr !important; }
   .work-col-right { margin-top: 0 !important; }
+
+  /* Footer */
+  .footer-top { flex-direction: column !important; gap: 40px !important; }
+  .footer-cols { flex-wrap: wrap !important; gap: 32px !important; }
 }

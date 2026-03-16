@@ -20,10 +20,13 @@ MPC Studios is a Texas-based agency with over 25 years of experience serving cli
 
 ## Design Direction
 
-- **Color Scheme:** Charcoal gray (`#1a1a1a`) and burnt orange (`#E05A00`).
-- **Aesthetic:** Photography-driven layouts with bold typography and purposeful whitespace.
-- **Typography:** Editorial display fonts paired with clear, readable body type.
-- **Motion:** Subtle, purposeful animations — staggered reveals and scroll-triggered transitions.
+- **Color Scheme:** Near-black (`#0E0E0E`) and orange (`#F77837`).
+- **Aesthetic:** Clean white backgrounds, bold typography, purposeful whitespace.
+- **Display font:** Bricolage Grotesque (variable: `--font-display`) — all headings
+- **Body font:** DM Sans (variable: `--font-body`)
+- **Orange on typography:** solid `#F77837` via `.text-gradient` class
+- **Orange on buttons:** warm gradient via `.btn-gradient` class (`#fe6e64` → `#ffc14f`)
+- **Motion:** Staggered fade-up on hero (`.anim-fu1–4`), float on cards (`.anim-float`), scroll reveal (`.reveal`)
 
 ### Design References
 
@@ -34,10 +37,11 @@ MPC Studios is a Texas-based agency with over 25 years of experience serving cli
 
 ## Tech Stack
 
-- [Next.js 15](https://nextjs.org/) — App Router
+- [Next.js 16](https://nextjs.org/) — App Router
+- [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [PostCSS](https://postcss.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/) — CSS-first config in `globals.css`
+- Package manager: npm
 
 ---
 
@@ -73,12 +77,29 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ```
 mpc-studios/
 ├── app/
-│   ├── layout.tsx        # Root layout, fonts, global styles
-│   ├── page.tsx          # Homepage
-│   └── globals.css       # Global CSS variables and base styles
-├── public/               # Static assets (images, icons)
-├── components/           # Reusable UI components
-└── README.md
+│   ├── layout.tsx           # Root layout, fonts, metadata
+│   ├── globals.css          # Tailwind v4 config, CSS variables, animations
+│   ├── page.tsx             # Homepage (assembles components)
+│   ├── services/page.tsx    # Services page (placeholder)
+│   ├── work/page.tsx        # Work/portfolio page (placeholder)
+│   ├── about/page.tsx       # About page (placeholder)
+│   ├── resources/page.tsx   # Resources/blog page (placeholder)
+│   └── contact/page.tsx     # Contact page (placeholder)
+├── components/
+│   ├── Nav.tsx              # Fixed top nav with logo + links
+│   ├── Hero.tsx             # Two-column hero with floating cards
+│   ├── Marquee.tsx          # Dark scrolling services ticker
+│   ├── ClientLogos.tsx      # Animated logo marquee
+│   ├── Work.tsx             # Project gallery
+│   ├── Services.tsx         # Services list
+│   ├── About.tsx            # About section
+│   ├── Testimonials.tsx     # Client testimonials
+│   ├── CTA.tsx              # Call-to-action section
+│   ├── Footer.tsx           # Site footer
+│   ├── Cursor.tsx           # Custom cursor
+│   └── RevealInit.tsx       # Scroll reveal observer
+└── public/
+    └── brand/               # Logo files (Black MPC Studios Logo.svg, White Logo.svg)
 ```
 
 ---
@@ -94,6 +115,18 @@ git push
 ```
 
 ---
+
+## Mobile & Responsive Design
+
+- **Mobile-first always** — design and build for small screens first, then enhance for larger viewports.
+- All layouts must be fully functional and visually clean at 375px (iPhone SE) and up.
+- Use fluid typography (`clamp()`) for headings rather than fixed sizes.
+- Stack multi-column layouts to a single column on mobile.
+- The hero visual (floating cards) hides on mobile — content column takes full width.
+- The nav hides desktop links on mobile — a hamburger or simplified nav is used instead.
+- Touch targets (buttons, links) must be at least 44px tall.
+- No horizontal scroll at any viewport width.
+- Test at 375px, 768px, and 1280px breakpoints before considering a section complete.
 
 ## Accessibility & Performance
 

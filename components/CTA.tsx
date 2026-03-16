@@ -8,7 +8,7 @@ export default function CTA() {
       style={{
         background: "#0E0E0E",
         textAlign: "center",
-        padding: "140px 48px",
+        padding: "140px 20px",
         position: "relative",
         overflow: "hidden",
       }}

@@ -33,10 +33,10 @@ export default function Services() {
   return (
     <section
       id="services"
+      className="section-pad"
       style={{
         background: "#0E0E0E",
         color: "#fff",
-        padding: "120px 48px",
       }}
     >
       {/* Header */}

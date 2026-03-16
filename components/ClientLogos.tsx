@@ -44,15 +44,21 @@ export default function ClientLogos() {
               alignItems: "center",
               padding: "0 48px",
               flexShrink: 0,
+              opacity: 0.25,
+              transition: "opacity 0.3s ease",
+              cursor: "default",
+              fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontWeight: 800,
+              fontSize: "0.95rem",
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              color: "#0E0E0E",
             }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.25")}
           >
-            {/* Replace src with client logo path when assets are ready */}
-            <img
-              src="/brand/Gray Logo.svg"
-              alt={name}
-              className="client-logo"
-              style={{ height: "32px", width: "auto" }}
-            />
+            {/* Swap this div for an <img> once logo files are in /public/brand/ */}
+            {name}
           </div>
         ))}
       </div>

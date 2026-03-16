@@ -16,7 +16,7 @@ export default function Footer() {
     <footer
       style={{
         background: "#0E0E0E",
-        padding: "60px 48px 40px",
+        padding: "60px 20px 40px",
         borderTop: "1px solid rgba(255,255,255,0.06)",
       }}
     >
@@ -32,27 +32,15 @@ export default function Footer() {
       >
         {/* Logo + tagline */}
         <div>
-          <Link
-            href="/"
-            style={{
-              fontFamily:
-                'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "1.5rem",
-              fontWeight: 800,
-              color: "#fff",
-              textDecoration: "none",
-              letterSpacing: "-0.01em",
-              display: "block",
-            }}
-          >
-            MPC<span style={{ color: "#F77837" }}>.</span>
+          <Link href="/">
+            <img src="/brand/White Logo.svg" alt="MPC Studios" style={{ height: "36px", width: "auto", display: "block" }} />
           </Link>
           <span
             style={{
               display: "block",
               fontSize: "0.8rem",
               color: "rgba(255,255,255,0.3)",
-              marginTop: "4px",
+              marginTop: "8px",
             }}
           >
             Design &amp; Digital Studio · Est. 1998 · Texas

@@ -38,9 +38,11 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      style={{ background: "#fff", padding: "120px 48px" }}
+      className="section-pad"
+      style={{ background: "#fff" }}
     >
       <div
+        className="testi-outer-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 2fr",
@@ -98,7 +100,7 @@ export default function Testimonials() {
 
         {/* Grid */}
         <div
-          className="reveal reveal-d1"
+          className="reveal reveal-d1 testi-inner-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
