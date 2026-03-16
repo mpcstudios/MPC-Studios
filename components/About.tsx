@@ -83,8 +83,8 @@ export default function About() {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "#FF6B2B";
-              el.style.borderColor = "#FF6B2B";
+              el.style.background = "#F77837";
+              el.style.borderColor = "#F77837";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
@@ -119,7 +119,7 @@ export default function About() {
                       'var(--font-display, "Bricolage Grotesque", sans-serif)',
                     fontSize: "2.4rem",
                     fontWeight: 800,
-                    color: "#FF6B2B",
+                    color: "#F77837",
                     lineHeight: 1.2,
                     marginBottom: "6px",
                   }}
@@ -180,7 +180,7 @@ export default function About() {
               bottom: 0,
               left: 0,
               width: "55%",
-              background: "#FF6B2B",
+              background: "#F77837",
               borderRadius: "20px",
               padding: "28px",
               color: "#fff",

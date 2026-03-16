@@ -87,7 +87,7 @@ export default function Testimonials() {
               marginTop: "28px",
             }}
           >
-            <span style={{ color: "#FF6B2B", fontSize: "0.9rem" }}>
+            <span style={{ color: "#F77837", fontSize: "0.9rem" }}>
               ★★★★★
             </span>
             <span style={{ fontSize: "0.82rem", color: "#7A7670" }}>
@@ -126,7 +126,7 @@ export default function Testimonials() {
             >
               <div
                 style={{
-                  color: "#FF6B2B",
+                  color: "#F77837",
                   fontSize: "0.85rem",
                   letterSpacing: "2px",
                   marginBottom: "14px",
@@ -156,7 +156,7 @@ export default function Testimonials() {
                     width: "36px",
                     height: "36px",
                     borderRadius: "50%",
-                    background: "#FF6B2B",
+                    background: "#F77837",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

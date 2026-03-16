@@ -40,7 +40,7 @@ export default function CTA() {
             marginBottom: "24px",
           }}
         >
-          <span style={{ color: "#FF6B2B" }}>•</span> Let&apos;s work together
+          <span style={{ color: "#F77837" }}>•</span> Let&apos;s work together
         </p>
 
         <h2
@@ -59,7 +59,7 @@ export default function CTA() {
         >
           Ready to take your
           <br />
-          <span style={{ color: "#FF6B2B" }}>business further?</span>
+          <span style={{ color: "#F77837" }}>business further?</span>
         </h2>
 
         <p
@@ -91,7 +91,7 @@ export default function CTA() {
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
-              background: "#FF6B2B",
+              background: "#F77837",
               color: "#fff",
               fontSize: "0.92rem",
               fontWeight: 500,
@@ -107,7 +107,7 @@ export default function CTA() {
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "#FF6B2B";
+              el.style.background = "#F77837";
               el.style.transform = "scale(1)";
             }}
           >
@@ -130,8 +130,8 @@ export default function CTA() {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.borderColor = "#FF6B2B";
-              el.style.color = "#FF6B2B";
+              el.style.borderColor = "#F77837";
+              el.style.color = "#F77837";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;

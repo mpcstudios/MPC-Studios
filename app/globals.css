@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #FF6B2B;
+  --color-accent: #F77837;
   --color-accent-light: #FF8C55;
   --color-ink: #0E0E0E;
   --color-cream: #F4F3F1;
@@ -31,7 +31,7 @@ body {
 .cursor-dot {
   width: 12px;
   height: 12px;
-  background: #FF6B2B;
+  background: #F77837;
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -44,7 +44,7 @@ body {
 .cursor-ring {
   width: 36px;
   height: 36px;
-  border: 1.5px solid #FF6B2B;
+  border: 1.5px solid #F77837;
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -108,6 +108,35 @@ body {
 .anim-marquee     { animation: marqueeScroll 28s linear infinite; white-space: nowrap; }
 .anim-scroll-pulse{ animation: scrollPulse 1.5s ease-in-out infinite; }
 
+/* ─── Typography & Button ─────────────────── */
+.text-gradient {
+  color: #F77837;
+}
+.btn-gradient {
+  background: linear-gradient(to right, #fe6e64 0%, #fc8446 33%, #F77837 66%, #ffc14f 100%);
+  transition: opacity 0.2s ease;
+}
+.btn-gradient:hover {
+  opacity: 0.88;
+}
+
+/* ─── Client Logo Marquee ─────────────────── */
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+}
+.logo-marquee-track:hover {
+  animation-play-state: paused;
+}
+.client-logo {
+  filter: grayscale(100%) brightness(0) opacity(0.25);
+  transition: filter 0.3s ease;
+}
+.client-logo:hover {
+  filter: none;
+}
+
 /* ─── Section Label ───────────────────────── */
 .section-label {
   display: inline-flex;
@@ -118,7 +147,7 @@ body {
 }
 .section-label::before {
   content: '•';
-  color: #FF6B2B;
+  color: #F77837;
   font-size: 1.1rem;
 }
 

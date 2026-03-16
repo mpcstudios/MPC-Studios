@@ -61,7 +61,7 @@ export default function Hero() {
             style={{
               width: "8px",
               height: "8px",
-              background: "#FF6B2B",
+              background: "#F77837",
               borderRadius: "50%",
               flexShrink: 0,
               display: "inline-block",
@@ -83,7 +83,7 @@ export default function Hero() {
           }}
         >
           A creative{" "}
-          <span style={{ color: "#FF6B2B" }}>design &amp;</span>
+          <span style={{ color: "#F77837" }}>design &amp;</span>
           <br />
           digital studio
         </h1>
@@ -114,29 +114,17 @@ export default function Hero() {
         >
           <Link
             href="#work"
+            className="btn-gradient"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
-              background: "#0E0E0E",
               color: "#fff",
               fontSize: "0.92rem",
               fontWeight: 500,
               padding: "14px 28px",
               borderRadius: "100px",
               textDecoration: "none",
-              border: "2px solid #0E0E0E",
-              transition: "background 0.25s, border-color 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#FF6B2B";
-              el.style.borderColor = "#FF6B2B";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#0E0E0E";
-              el.style.borderColor = "#0E0E0E";
             }}
           >
             View our work ↗
@@ -154,7 +142,7 @@ export default function Hero() {
               transition: "color 0.2s",
             }}
             onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.color = "#FF6B2B")
+              ((e.currentTarget as HTMLElement).style.color = "#F77837")
             }
             onMouseLeave={(e) =>
               ((e.currentTarget as HTMLElement).style.color = "#0E0E0E")
@@ -208,7 +196,7 @@ export default function Hero() {
             Brand
             <br />
             Identity
-            <span style={{ color: "#FF6B2B" }}>.</span>
+            <span style={{ color: "#F77837" }}>.</span>
           </p>
           <div
             style={{
@@ -223,7 +211,7 @@ export default function Hero() {
                 width: "36px",
                 height: "36px",
                 borderRadius: "50%",
-                background: "#FF6B2B",
+                background: "#F77837",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -265,7 +253,7 @@ export default function Hero() {
               fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
               fontSize: "2.4rem",
               fontWeight: 800,
-              color: "#FF6B2B",
+              color: "#F77837",
               lineHeight: 1.2,
             }}
           >
@@ -283,7 +271,7 @@ export default function Hero() {
             position: "absolute",
             bottom: "60px",
             left: "20px",
-            background: "#FF6B2B",
+            background: "#F77837",
             color: "#fff",
             borderRadius: "20px",
             boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
@@ -326,39 +314,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        className="anim-si"
-        style={{
-          position: "absolute",
-          bottom: "40px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "8px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "0.72rem",
-            color: "#7A7670",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}
-        >
-          Scroll
-        </span>
-        <div
-          className="anim-scroll-pulse"
-          style={{
-            width: "1px",
-            height: "40px",
-            background: "linear-gradient(to bottom, #FF6B2B, transparent)",
-          }}
-        />
-      </div>
     </section>
   );
 }

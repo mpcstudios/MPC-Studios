@@ -45,7 +45,7 @@ export default function Footer() {
               display: "block",
             }}
           >
-            MPC<span style={{ color: "#FF6B2B" }}>.</span>
+            MPC<span style={{ color: "#F77837" }}>.</span>
           </Link>
           <span
             style={{
@@ -97,7 +97,7 @@ export default function Footer() {
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "#FF6B2B")
+                      ((e.currentTarget as HTMLElement).style.color = "#F77837")
                     }
                     onMouseLeave={(e) =>
                       ((e.currentTarget as HTMLElement).style.color =
@@ -148,8 +148,8 @@ export default function Footer() {
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "#FF6B2B";
-                el.style.color = "#FF6B2B";
+                el.style.borderColor = "#F77837";
+                el.style.color = "#F77837";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
@@ -192,7 +192,7 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "#FF6B2B")
+                ((e.currentTarget as HTMLElement).style.color = "#F77837")
               }
               onMouseLeave={(e) =>
                 ((e.currentTarget as HTMLElement).style.color =

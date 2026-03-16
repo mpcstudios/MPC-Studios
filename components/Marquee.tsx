@@ -41,7 +41,7 @@ export default function Marquee() {
             }}
           >
             {item}
-            <span style={{ color: "#FF6B2B", fontSize: "1.1rem" }}>✦</span>
+            <span style={{ color: "#F77837", fontSize: "1.1rem" }}>✦</span>
           </span>
         ))}
       </div>

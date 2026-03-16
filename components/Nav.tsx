@@ -52,7 +52,7 @@ export default function Nav() {
           letterSpacing: "-0.01em",
         }}
       >
-        MPC<span style={{ color: "#FF6B2B" }}>.</span>
+        MPC<span style={{ color: "#F77837" }}>.</span>
       </Link>
 
       {/* Links */}
@@ -78,7 +78,7 @@ export default function Nav() {
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "#FF6B2B")
+                ((e.currentTarget as HTMLElement).style.color = "#F77837")
               }
               onMouseLeave={(e) =>
                 ((e.currentTarget as HTMLElement).style.color = "#0E0E0E")
@@ -93,25 +93,18 @@ export default function Nav() {
       {/* CTA */}
       <Link
         href="#contact"
+        className="btn-gradient"
         style={{
           display: "inline-flex",
           alignItems: "center",
           gap: "8px",
-          background: "#0E0E0E",
           color: "#fff",
           fontSize: "0.88rem",
           fontWeight: 500,
           padding: "11px 22px",
           borderRadius: "100px",
           textDecoration: "none",
-          transition: "background 0.2s",
         }}
-        onMouseEnter={(e) =>
-          ((e.currentTarget as HTMLElement).style.background = "#FF6B2B")
-        }
-        onMouseLeave={(e) =>
-          ((e.currentTarget as HTMLElement).style.background = "#0E0E0E")
-        }
       >
         Start a project ↗
       </Link>

@@ -104,8 +104,8 @@ export default function Work() {
           }}
           onMouseEnter={(e) => {
             const el = e.currentTarget as HTMLElement;
-            el.style.background = "#FF6B2B";
-            el.style.borderColor = "#FF6B2B";
+            el.style.background = "#F77837";
+            el.style.borderColor = "#F77837";
           }}
           onMouseLeave={(e) => {
             const el = e.currentTarget as HTMLElement;
@@ -185,7 +185,7 @@ function WorkCard({
         (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
         if (arrow) {
-          arrow.style.background = "#FF6B2B";
+          arrow.style.background = "#F77837";
           arrow.style.color = "#fff";
         }
       }}
@@ -276,7 +276,7 @@ function WorkCard({
           }}
         >
           {project.year}
-          <span style={{ color: "#FF6B2B" }}>•</span>
+          <span style={{ color: "#F77837" }}>•</span>
           {project.client}
         </div>
         <p

@@ -62,7 +62,7 @@ export default function Services() {
               marginBottom: "16px",
             }}
           >
-            <span style={{ color: "#FF6B2B" }}>•</span> Our expertise
+            <span style={{ color: "#F77837" }}>•</span> Our expertise
           </p>
           <h2
             style={{
@@ -87,7 +87,7 @@ export default function Services() {
             display: "inline-flex",
             alignItems: "center",
             gap: "10px",
-            background: "#FF6B2B",
+            background: "#F77837",
             color: "#fff",
             fontSize: "0.92rem",
             fontWeight: 500,
@@ -100,7 +100,7 @@ export default function Services() {
             ((e.currentTarget as HTMLElement).style.background = "#FF8C55")
           }
           onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#FF6B2B")
+            ((e.currentTarget as HTMLElement).style.background = "#F77837")
           }
         >
           Start a project ↗
@@ -145,11 +145,11 @@ function ServiceRow({
         const el = e.currentTarget as HTMLElement;
         el.style.paddingLeft = "16px";
         const nameEl = el.querySelector<HTMLElement>("[data-name]");
-        if (nameEl) nameEl.style.color = "#FF6B2B";
+        if (nameEl) nameEl.style.color = "#F77837";
         const arrowEl = el.querySelector<HTMLElement>("[data-arrow]");
         if (arrowEl) {
-          arrowEl.style.background = "#FF6B2B";
-          arrowEl.style.borderColor = "#FF6B2B";
+          arrowEl.style.background = "#F77837";
+          arrowEl.style.borderColor = "#F77837";
           arrowEl.style.color = "#fff";
         }
       }}
