@@ -7,14 +7,9 @@ export default function Hero() {
     <section
       className="hero-grid"
       style={{
-        minHeight: "100vh",
-        padding: "180px 48px 100px",
+        padding: "260px 0 160px",
         position: "relative",
         overflow: "hidden",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        alignItems: "center",
-        gap: "60px",
       }}
     >
       {/* Background blobs */}
@@ -45,37 +40,14 @@ export default function Hero() {
         }}
       />
 
+      <div className="content-wrap" style={{ display: "grid", gridTemplateColumns: "11fr 9fr", alignItems: "center", gap: "60px" }}>
       {/* Content */}
       <div style={{ position: "relative", zIndex: 1 }}>
-        <p
-          className="anim-fu1"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            fontSize: "0.85rem",
-            color: "#7A7670",
-            marginBottom: "28px",
-          }}
-        >
-          <span
-            style={{
-              width: "8px",
-              height: "8px",
-              background: "#F77837",
-              borderRadius: "50%",
-              flexShrink: 0,
-              display: "inline-block",
-            }}
-          />
-          Hiya, we&apos;re MPC Studios 👋
-        </p>
-
         <h1
           className="anim-fu2"
           style={{
             fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontSize: "clamp(3.8rem, 7vw, 7.5rem)",
+            fontSize: "clamp(3.8rem, 6.5vw, 6.5rem)",
             fontWeight: 800,
             lineHeight: 1.1,
             letterSpacing: "-0.03em",
@@ -83,23 +55,24 @@ export default function Hero() {
             marginBottom: "32px",
           }}
         >
-          Your Goals.{" "}
+          Your Goals.
+          <br />
           <span style={{ color: "#F77837" }}>Our Solutions.</span>
         </h1>
 
         <p
           className="anim-fu3"
           style={{
-            fontSize: "1.05rem",
+            fontSize: "1.1rem",
             lineHeight: 1.75,
             color: "#7A7670",
             maxWidth: "460px",
             marginBottom: "44px",
           }}
         >
-          We build bold brands and high-performance digital experiences for
-          businesses in banking, legal, and construction that want to stand out
-          and grow.
+          Custom websites. Content that connects. AI-powered solutions. Built
+          by a Texas team with over 25 years of experience delivering results
+          that matter.
         </p>
 
         <div
@@ -112,31 +85,32 @@ export default function Hero() {
           }}
         >
           <Link
-            href="#work"
+            href="#contact"
             className="btn-gradient"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
               color: "#fff",
-              fontSize: "0.92rem",
-              fontWeight: 500,
+              fontSize: "1.1rem",
+              fontWeight: 700,
               padding: "14px 28px",
               borderRadius: "100px",
               textDecoration: "none",
             }}
           >
-            View our work ↗
+            Let&apos;s Talk About Your Goals ↗
           </Link>
           <Link
-            href="#about"
+            href="#work"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
               background: "transparent",
               color: "#0E0E0E",
-              fontSize: "0.92rem",
+              fontSize: "1.1rem",
+              fontWeight: 700,
               textDecoration: "none",
               transition: "color 0.2s",
             }}
@@ -147,7 +121,7 @@ export default function Hero() {
               ((e.currentTarget as HTMLElement).style.color = "#0E0E0E")
             }
           >
-            Meet the team →
+            View Our Work →
           </Link>
         </div>
       </div>
@@ -155,7 +129,7 @@ export default function Hero() {
       {/* Hero Visual — floating cards */}
       <div
         className="hero-visual-wrap anim-fi"
-        style={{ position: "relative", height: "560px" }}
+        style={{ position: "relative", height: "440px" }}
       >
         {/* Main dark card */}
         <div
@@ -311,6 +285,7 @@ export default function Hero() {
             on Google Reviews
           </p>
         </div>
+      </div>
       </div>
 
     </section>

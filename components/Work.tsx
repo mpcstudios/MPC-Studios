@@ -54,6 +54,7 @@ export default function Work() {
       className="section-pad"
       style={{ background: "#fff" }}
     >
+      <div className="content-wrap">
       {/* Header */}
       <div
         className="reveal"
@@ -149,6 +150,7 @@ export default function Work() {
             <WorkCard key={p.id} project={p} delay={i + 1} />
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

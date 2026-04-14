@@ -30,10 +30,7 @@ export default function Nav() {
           left: 0,
           right: 0,
           zIndex: 100,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: scrolled ? "14px clamp(20px, 4vw, 48px)" : "22px clamp(20px, 4vw, 48px)",
+          padding: scrolled ? "14px 0" : "22px 0",
           background: "rgba(255,255,255,0.88)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
@@ -42,6 +39,7 @@ export default function Nav() {
           transition: "padding 0.3s, box-shadow 0.3s",
         }}
       >
+        <div className="content-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
         <Link href="/" style={{ flexShrink: 1, minWidth: 0, marginRight: "16px" }}>
           <img src="/brand/Black MPC Studios Logo.svg" alt="MPC Studios" style={{ height: "clamp(40px, 6vw, 72px)", width: "auto", display: "block" }} />
@@ -129,6 +127,7 @@ export default function Nav() {
           <span style={{ display: "block", width: "24px", height: "2px", background: "#0E0E0E", opacity: menuOpen ? 0 : 1, transition: "opacity 0.2s" }} />
           <span style={{ display: "block", width: "24px", height: "2px", background: "#0E0E0E", transition: "transform 0.2s, opacity 0.2s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
         </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

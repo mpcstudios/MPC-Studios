@@ -41,6 +41,7 @@ export default function Testimonials() {
       className="section-pad"
       style={{ background: "#fff" }}
     >
+      <div className="content-wrap">
       <div
         className="testi-outer-grid"
         style={{
@@ -193,6 +194,7 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

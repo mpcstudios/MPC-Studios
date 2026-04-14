@@ -8,7 +8,7 @@ export default function CTA() {
       style={{
         background: "#0E0E0E",
         textAlign: "center",
-        padding: "140px 20px",
+        padding: "140px 0",
         position: "relative",
         overflow: "hidden",
       }}
@@ -28,7 +28,7 @@ export default function CTA() {
         }}
       />
 
-      <div style={{ position: "relative", zIndex: 1 }}>
+      <div className="content-wrap" style={{ position: "relative", zIndex: 1 }}>
         <p
           className="reveal"
           style={{

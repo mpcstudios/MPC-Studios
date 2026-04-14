@@ -130,7 +130,7 @@ body {
   animation-play-state: paused;
 }
 .client-logo {
-  filter: grayscale(100%) brightness(0) opacity(0.25);
+  filter: grayscale(100%) brightness(0) opacity(0.85);
   transition: filter 0.3s ease;
 }
 .client-logo:hover {
@@ -138,7 +138,10 @@ body {
 }
 
 /* ─── Section Padding ────────────────────── */
-.section-pad { padding: 120px 48px; }
+.section-pad { padding: 120px 0; }
+
+/* ─── Content Wrapper ────────────────────── */
+.content-wrap { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
 
 /* ─── Section Label ───────────────────────── */
 .section-label {
@@ -163,14 +166,15 @@ body {
 
   /* Hero */
   .hero-visual-wrap { display: none !important; }
-  .hero-grid {
+  .hero-grid { padding: 120px 0 80px !important; }
+  .hero-grid .content-wrap {
     grid-template-columns: 1fr !important;
-    padding: 120px 20px 80px !important;
     gap: 0 !important;
   }
 
   /* Sections — reduce padding */
-  .section-pad { padding: 72px 20px !important; }
+  .section-pad { padding: 72px 0 !important; }
+  .content-wrap { padding: 0 20px !important; }
 
   /* About */
   .about-right-col { display: none !important; }

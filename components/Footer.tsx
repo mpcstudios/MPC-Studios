@@ -16,10 +16,11 @@ export default function Footer() {
     <footer
       style={{
         background: "#0E0E0E",
-        padding: "60px 20px 40px",
+        padding: "60px 0 40px",
         borderTop: "1px solid rgba(255,255,255,0.06)",
       }}
     >
+      <div className="content-wrap">
       <div
         style={{
           display: "flex",
@@ -149,6 +150,7 @@ export default function Footer() {
             </Link>
           ))}
         </div>
+      </div>
       </div>
     </footer>
   );

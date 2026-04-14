@@ -15,6 +15,7 @@ export default function About() {
       className="section-pad"
       style={{ background: "#F4F3F1" }}
     >
+      <div className="content-wrap">
       <div
         className="about-grid"
         style={{
@@ -206,6 +207,7 @@ export default function About() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
