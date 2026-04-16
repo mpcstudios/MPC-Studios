@@ -62,14 +62,12 @@ export default function About() {
         <div
           className="about-grid"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "start",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
           {/* Left — copy */}
-          <div className="reveal">
+          <div className="reveal" style={{ maxWidth: "75%", position: "relative", zIndex: 1 }}>
             <p className="section-label" style={{ marginBottom: "20px" }}>
               Who we are
             </p>
@@ -146,29 +144,30 @@ export default function About() {
           <div
             className="about-right-col reveal reveal-d2"
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: "360px",
+              position: "absolute",
+              top: "50%",
+              right: "-5%",
+              transform: "translateY(-50%)",
               cursor: "default",
+              pointerEvents: "auto",
+              zIndex: 0,
             }}
           >
             <img
               ref={logoRef}
-              src="/brand/Black MPC Studios Logo.svg"
+              src="/brand/mpc-icon.png"
               alt="MPC Studios"
               style={{
-                width: "80%",
-                maxWidth: "400px",
-                opacity: 0.08,
+                width: "600px",
+                opacity: 0.07,
                 transition: "transform 0.15s ease-out, opacity 0.4s ease",
                 willChange: "transform",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "0.15";
+                (e.currentTarget as HTMLElement).style.opacity = "0.12";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "0.08";
+                (e.currentTarget as HTMLElement).style.opacity = "0.07";
               }}
             />
           </div>

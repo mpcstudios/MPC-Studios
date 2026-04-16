@@ -5,12 +5,12 @@ const services = [
   {
     name: "Website Design & Development",
     description:
-      "Custom-built websites engineered for performance, security, and conversion. No templates, no shortcuts.",
+      "Custom-built websites engineered for performance, security, and conversion. No templates, no shortcuts — built from scratch to match your business goals.",
   },
   {
     name: "Custom Software Applications",
     description:
-      "Internal tools, portals, and full-stack applications built to solve the problems off-the-shelf software won't touch.",
+      "Internal tools, portals, and full-stack applications built to solve the problems off-the-shelf software won't touch. Designed for scale and built to last.",
   },
   {
     name: "AI & Automation",
