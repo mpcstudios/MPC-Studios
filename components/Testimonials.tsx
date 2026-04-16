@@ -74,7 +74,7 @@ export default function Testimonials() {
           </h2>
           <p
             style={{
-              fontSize: "1rem",
+              fontSize: "1.125rem",
               lineHeight: 1.7,
               color: "#7A7670",
             }}

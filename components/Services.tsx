@@ -55,15 +55,15 @@ export default function Services() {
           <div>
             <p
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                fontSize: "0.82rem",
-                color: "rgba(255,255,255,0.35)",
+                fontSize: "0.85rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#F77837",
                 marginBottom: "16px",
               }}
             >
-              <span style={{ color: "#F77837" }}>•</span> Our expertise
+              Our expertise
             </p>
             <h2
               style={{
@@ -181,7 +181,7 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
       {/* Description */}
       <p
         style={{
-          fontSize: "1rem",
+          fontSize: "1.125rem",
           lineHeight: 1.7,
           color: "rgba(255,255,255,0.6)",
           maxWidth: "480px",

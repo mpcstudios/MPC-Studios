@@ -145,16 +145,15 @@ body {
 
 /* ─── Section Label ───────────────────────── */
 .section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  color: #7A7670;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F77837;
 }
 .section-label::before {
-  content: '•';
-  color: #F77837;
-  font-size: 1.1rem;
+  content: none;
 }
 
 /* ─── Responsive ──────────────────────────── */

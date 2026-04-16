@@ -1,14 +1,57 @@
 "use client";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 const stats = [
-  { n: "500+", l: "Projects delivered" },
-  { n: "25yr", l: "In the industry" },
-  { n: "98%", l: "Client retention" },
-  { n: "5★", l: "Google reviews" },
+  {
+    n: "20+",
+    title: "Years as One Team",
+    desc: "Our core team has worked together for over two decades. No turnover, no outsourcing.",
+  },
+  {
+    n: "7",
+    title: "Dedicated People",
+    desc: "A tight-knit crew of designers, developers, and strategists who know each other\u2019s strengths.",
+  },
+  {
+    n: "100%",
+    title: "Texas-Based",
+    desc: "Every line of code written in the Rio Grande Valley. Local presence, national reach.",
+  },
+  {
+    n: "0",
+    title: "Shortcuts Taken",
+    desc: "We take on the projects other agencies won\u2019t \u2014 compliance, legacy migrations, custom integrations.",
+  },
 ];
 
 export default function About() {
+  const logoRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const el = logoRef.current;
+    if (!el) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = el.parentElement!.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+      el.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.02)`;
+    };
+
+    const handleMouseLeave = () => {
+      el.style.transform = "perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)";
+    };
+
+    const parent = el.parentElement!;
+    parent.addEventListener("mousemove", handleMouseMove);
+    parent.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      parent.removeEventListener("mousemove", handleMouseMove);
+      parent.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   return (
     <section
       id="about"
@@ -16,198 +59,177 @@ export default function About() {
       style={{ background: "#F4F3F1" }}
     >
       <div className="content-wrap">
-      <div
-        className="about-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "80px",
-          alignItems: "center",
-        }}
-      >
-        {/* Left */}
-        <div className="reveal">
-          <p className="section-label" style={{ marginBottom: "20px" }}>
-            Who we are
-          </p>
-          <h2
-            style={{
-              fontFamily:
-                'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
-              fontWeight: 800,
-              lineHeight: 1.18,
-              letterSpacing: "-0.02em",
-              color: "#0E0E0E",
-              marginBottom: "28px",
-            }}
-          >
-            A studio that cares about your brand &amp; results
-          </h2>
-          <p
-            style={{
-              fontSize: "1rem",
-              lineHeight: 1.75,
-              color: "#7A7670",
-              marginBottom: "20px",
-            }}
-          >
-            Founded in 1998, MPC Studios is a Texas-based full-service creative
-            and digital agency. For over 25 years we&apos;ve partnered with
-            businesses in banking, legal, and construction — helping them look
-            exceptional and perform online.
-          </p>
-          <p
-            style={{
-              fontSize: "1rem",
-              lineHeight: 1.75,
-              color: "#7A7670",
-              marginBottom: "40px",
-            }}
-          >
-            We believe great design should drive real outcomes. Every project is
-            crafted with both beauty and business goals in mind.
-          </p>
-          <Link
-            href="#contact"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              background: "#0E0E0E",
-              color: "#fff",
-              fontSize: "0.92rem",
-              fontWeight: 500,
-              padding: "14px 28px",
-              borderRadius: "100px",
-              textDecoration: "none",
-              border: "2px solid #0E0E0E",
-              transition: "background 0.25s, border-color 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#F77837";
-              el.style.borderColor = "#F77837";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#0E0E0E";
-              el.style.borderColor = "#0E0E0E";
-            }}
-          >
-            About MPC Studios ↗
-          </Link>
-
-          {/* Stats */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "20px",
-              marginTop: "48px",
-            }}
-          >
-            {stats.map(({ n, l }) => (
-              <div
-                key={l}
-                style={{
-                  background: "#fff",
-                  borderRadius: "20px",
-                  padding: "24px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily:
-                      'var(--font-display, "Bricolage Grotesque", sans-serif)',
-                    fontSize: "2.4rem",
-                    fontWeight: 800,
-                    color: "#F77837",
-                    lineHeight: 1.2,
-                    marginBottom: "6px",
-                  }}
-                >
-                  {n}
-                </div>
-                <div style={{ fontSize: "0.82rem", color: "#7A7670" }}>{l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right — visual block */}
         <div
-          className="about-right-col reveal reveal-d2"
-          style={{ position: "relative", height: "520px" }}
+          className="about-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "80px",
+            alignItems: "start",
+          }}
         >
-          {/* Main image block */}
+          {/* Left — copy */}
+          <div className="reveal">
+            <p className="section-label" style={{ marginBottom: "20px" }}>
+              Who we are
+            </p>
+            <h2
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
+                fontWeight: 800,
+                lineHeight: 1.18,
+                letterSpacing: "-0.02em",
+                color: "#0E0E0E",
+                marginBottom: "28px",
+              }}
+            >
+              A studio that cares about your brand &amp; results
+            </h2>
+            <p
+              style={{
+                fontSize: "1.125rem",
+                lineHeight: 1.75,
+                color: "#7A7670",
+                marginBottom: "20px",
+              }}
+            >
+              Founded in 1998, MPC Studios is a Texas-based full-service creative
+              and digital agency. For over 25 years we&apos;ve partnered with
+              businesses in banking, legal, and construction — helping them look
+              exceptional and perform online.
+            </p>
+            <p
+              style={{
+                fontSize: "1.125rem",
+                lineHeight: 1.75,
+                color: "#7A7670",
+                marginBottom: "40px",
+              }}
+            >
+              We believe great design should drive real outcomes. Every project is
+              crafted with both beauty and business goals in mind.
+            </p>
+            <Link
+              href="#contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                background: "#0E0E0E",
+                color: "#fff",
+                fontSize: "0.92rem",
+                fontWeight: 500,
+                padding: "14px 28px",
+                borderRadius: "100px",
+                textDecoration: "none",
+                border: "2px solid #0E0E0E",
+                transition: "background 0.25s, border-color 0.25s",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#F77837";
+                el.style.borderColor = "#F77837";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#0E0E0E";
+                el.style.borderColor = "#0E0E0E";
+              }}
+            >
+              About MPC Studios ↗
+            </Link>
+          </div>
+
+          {/* Right — animated logo */}
           <div
+            className="about-right-col reveal reveal-d2"
             style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "85%",
-              aspectRatio: "4 / 5",
-              background: "#0E0E0E",
-              borderRadius: "20px",
-              overflow: "hidden",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              minHeight: "360px",
+              cursor: "default",
             }}
           >
-            <p
+            <img
+              ref={logoRef}
+              src="/brand/Black MPC Studios Logo.svg"
+              alt="MPC Studios"
               style={{
-                fontFamily:
-                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
-                fontSize: "1.4rem",
-                fontWeight: 800,
-                color: "rgba(255,255,255,0.06)",
-                textAlign: "center",
-                padding: "20px",
-                lineHeight: 1.4,
+                width: "80%",
+                maxWidth: "400px",
+                opacity: 0.08,
+                transition: "transform 0.15s ease-out, opacity 0.4s ease",
+                willChange: "transform",
               }}
-            >
-              MPC STUDIOS INC
-              <br />
-              CREATIVE &amp; DIGITAL
-              <br />
-              EST. 1998 · TEXAS
-            </p>
-          </div>
-
-          {/* Accent quote block */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "55%",
-              background: "#F77837",
-              borderRadius: "20px",
-              padding: "28px",
-              color: "#fff",
-            }}
-          >
-            <p
-              style={{
-                fontFamily:
-                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
-                fontSize: "1.05rem",
-                fontWeight: 700,
-                lineHeight: 1.4,
-                marginBottom: "14px",
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.opacity = "0.15";
               }}
-            >
-              &ldquo;We don&apos;t just build websites — we build growth
-              engines.&rdquo;
-            </p>
-            <p style={{ fontSize: "0.78rem", opacity: 0.75 }}>
-              — Founder, MPC Studios
-            </p>
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.opacity = "0.08";
+              }}
+            />
           </div>
         </div>
-      </div>
+
+        {/* Stats grid */}
+        <div
+          className="reveal reveal-d1"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "20px",
+            marginTop: "64px",
+          }}
+        >
+          {stats.map(({ n, title, desc }) => (
+            <div
+              key={title}
+              style={{
+                background: "#fff",
+                borderRadius: "20px",
+                padding: "28px",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily:
+                    'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                  fontSize: "2.4rem",
+                  fontWeight: 800,
+                  color: "#F77837",
+                  lineHeight: 1.2,
+                  marginBottom: "8px",
+                }}
+              >
+                {n}
+              </div>
+              <div
+                style={{
+                  fontFamily:
+                    'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                  fontSize: "1.125rem",
+                  fontWeight: 700,
+                  color: "#0E0E0E",
+                  marginBottom: "8px",
+                }}
+              >
+                {title}
+              </div>
+              <div
+                style={{
+                  fontSize: "0.85rem",
+                  lineHeight: 1.6,
+                  color: "#7A7670",
+                }}
+              >
+                {desc}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

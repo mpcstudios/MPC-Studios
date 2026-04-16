@@ -4,48 +4,50 @@ import Link from "next/link";
 const projects = [
   {
     id: 1,
-    year: "2025",
     client: "Lone Star Capital",
     title: "Digital rebrand for a Texas private equity firm",
     category: "Brand Identity · Web Design",
     bg: "#0d1a2e",
-    col: "left",
-    tall: true,
   },
   {
     id: 2,
-    year: "2025",
     client: "Harrington Law Group",
     title: "Authority-first website for a regional law practice",
     category: "Web Design · Content Marketing",
     bg: "#1a0e08",
-    col: "right",
-    tall: false,
   },
   {
     id: 3,
-    year: "2024",
     client: "Summit Build Co.",
     title: "High-performance site for a construction firm",
     category: "Web Design · SEO",
     bg: "#0a1a10",
-    col: "left",
-    tall: false,
   },
   {
     id: 4,
-    year: "2024",
     client: "Meridian Bank",
     title: "AI-driven lead generation system and full rebrand",
     category: "AI & Automations · Brand Identity",
     bg: "#140820",
-    col: "right",
-    tall: true,
+  },
+  {
+    id: 5,
+    client: "Apex Ventures",
+    title: "Growth-focused website for a venture capital firm",
+    category: "Web Design · Digital Strategy",
+    bg: "#1a1a0a",
+  },
+  {
+    id: 6,
+    client: "Bluebonnet Brands",
+    title: "E-commerce platform and brand identity refresh",
+    category: "Brand Identity · Web Development",
+    bg: "#0e0a1a",
   },
 ];
 
-const leftProjects = projects.filter((p) => p.col === "left");
-const rightProjects = projects.filter((p) => p.col === "right");
+const leftProjects = projects.filter((_, i) => i % 2 === 0);
+const rightProjects = projects.filter((_, i) => i % 2 === 1);
 
 export default function Work() {
   return (
@@ -55,102 +57,102 @@ export default function Work() {
       style={{ background: "#fff" }}
     >
       <div className="content-wrap">
-      {/* Header */}
-      <div
-        className="reveal"
-        style={{
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          marginBottom: "64px",
-          flexWrap: "wrap",
-          gap: "24px",
-        }}
-      >
-        <div>
-          <p className="section-label" style={{ marginBottom: "16px" }}>
-            Selected work
-          </p>
-          <h2
-            style={{
-              fontFamily:
-                'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
-              fontWeight: 800,
-              lineHeight: 1.18,
-              letterSpacing: "-0.02em",
-              color: "#0E0E0E",
-            }}
-          >
-            Projects we&apos;re
-            <br />
-            proud of
-          </h2>
-        </div>
-        <Link
-          href="#"
-          className="reveal reveal-d1"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "10px",
-            background: "#0E0E0E",
-            color: "#fff",
-            fontSize: "0.92rem",
-            fontWeight: 500,
-            padding: "14px 28px",
-            borderRadius: "100px",
-            textDecoration: "none",
-            border: "2px solid #0E0E0E",
-            transition: "background 0.25s, border-color 0.25s",
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget as HTMLElement;
-            el.style.background = "#F77837";
-            el.style.borderColor = "#F77837";
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget as HTMLElement;
-            el.style.background = "#0E0E0E";
-            el.style.borderColor = "#0E0E0E";
-          }}
-        >
-          See all work ↗
-        </Link>
-      </div>
-
-      {/* Offset grid — Made By Shape style */}
-      <div
-        className="work-grid-offset"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "24px",
-          alignItems: "start",
-        }}
-      >
-        {/* Left column */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-          {leftProjects.map((p, i) => (
-            <WorkCard key={p.id} project={p} delay={i} />
-          ))}
-        </div>
-
-        {/* Right column — offset downward for Made By Shape stagger */}
+        {/* Header */}
         <div
-          className="work-col-right"
+          className="reveal"
           style={{
             display: "flex",
-            flexDirection: "column",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            marginBottom: "64px",
+            flexWrap: "wrap",
             gap: "24px",
-            marginTop: "96px",
           }}
         >
-          {rightProjects.map((p, i) => (
-            <WorkCard key={p.id} project={p} delay={i + 1} />
-          ))}
+          <div>
+            <p className="section-label" style={{ marginBottom: "16px" }}>
+              Selected work
+            </p>
+            <h2
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
+                fontWeight: 800,
+                lineHeight: 1.18,
+                letterSpacing: "-0.02em",
+                color: "#0E0E0E",
+              }}
+            >
+              Projects we&apos;re
+              <br />
+              proud of
+            </h2>
+          </div>
+          <Link
+            href="#"
+            className="reveal reveal-d1"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              background: "#0E0E0E",
+              color: "#fff",
+              fontSize: "0.92rem",
+              fontWeight: 500,
+              padding: "14px 28px",
+              borderRadius: "100px",
+              textDecoration: "none",
+              border: "2px solid #0E0E0E",
+              transition: "background 0.25s, border-color 0.25s",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#F77837";
+              el.style.borderColor = "#F77837";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#0E0E0E";
+              el.style.borderColor = "#0E0E0E";
+            }}
+          >
+            See all work ↗
+          </Link>
         </div>
-      </div>
+
+        {/* Offset grid */}
+        <div
+          className="work-grid-offset"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "48px",
+            alignItems: "start",
+          }}
+        >
+          {/* Left column */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
+            {leftProjects.map((p, i) => (
+              <WorkCard key={p.id} project={p} delay={i} />
+            ))}
+          </div>
+
+          {/* Right column — offset downward */}
+          <div
+            className="work-col-right"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "64px",
+              marginTop: "96px",
+            }}
+          >
+            {rightProjects.map((p, i) => (
+              <WorkCard key={p.id} project={p} delay={i + 1} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -177,9 +179,8 @@ function WorkCard({
       className={delayClass}
       data-hover
       style={{
-        borderRadius: "20px",
         overflow: "hidden",
-        background: "#F4F3F1",
+        background: "transparent",
         position: "relative",
         cursor: "none",
         transition: "transform 0.3s",
@@ -205,8 +206,9 @@ function WorkCard({
       <div
         style={{
           width: "100%",
-          aspectRatio: project.tall ? "3 / 4" : "16 / 10",
+          aspectRatio: "16 / 10",
           background: project.bg,
+          borderRadius: "20px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -214,7 +216,6 @@ function WorkCard({
           overflow: "hidden",
         }}
       >
-        {/* Subtle gradient overlay */}
         <div
           style={{
             position: "absolute",
@@ -223,7 +224,6 @@ function WorkCard({
               "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)",
           }}
         />
-        {/* Project initials */}
         <span
           style={{
             fontFamily:
@@ -257,7 +257,7 @@ function WorkCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: "1rem",
+          fontSize: "1.125rem",
           color: "#0E0E0E",
           transition: "background 0.2s, color 0.2s",
           zIndex: 2,
@@ -267,42 +267,29 @@ function WorkCard({
       </div>
 
       {/* Card body */}
-      <div style={{ padding: "22px 24px" }}>
-        <div
+      <div style={{ padding: "20px 4px" }}>
+        <p
           style={{
-            fontSize: "0.78rem",
+            fontSize: "1.125rem",
+            fontWeight: 600,
             color: "#7A7670",
-            marginBottom: "6px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
+            marginBottom: "8px",
           }}
         >
-          {project.year}
-          <span style={{ color: "#F77837" }}>•</span>
           {project.client}
-        </div>
+        </p>
         <p
           style={{
             fontFamily:
               'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontSize: "1.05rem",
+            fontSize: "1.5rem",
             fontWeight: 700,
             letterSpacing: "-0.01em",
             color: "#0E0E0E",
-            marginBottom: "8px",
             lineHeight: 1.3,
           }}
         >
           {project.title}
-        </p>
-        <p
-          style={{
-            fontSize: "0.78rem",
-            color: "#7A7670",
-          }}
-        >
-          {project.category}
         </p>
       </div>
     </div>

@@ -189,7 +189,7 @@ export default function Hero() {
                 alignItems: "center",
                 justifyContent: "center",
                 color: "white",
-                fontSize: "1rem",
+                fontSize: "1.125rem",
                 flexShrink: 0,
               }}
             >

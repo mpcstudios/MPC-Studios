@@ -32,15 +32,15 @@ export default function CTA() {
         <p
           className="reveal"
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            fontSize: "0.82rem",
-            color: "rgba(255,255,255,0.35)",
+            fontSize: "0.85rem",
+            fontWeight: 600,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "#F77837",
             marginBottom: "24px",
           }}
         >
-          <span style={{ color: "#F77837" }}>•</span> Let&apos;s work together
+          Let&apos;s work together
         </p>
 
         <h2
