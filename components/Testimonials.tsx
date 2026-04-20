@@ -2,35 +2,19 @@
 const testimonials = [
   {
     quote:
-      "MPC Studios transformed our entire digital presence. The new brand and website have genuinely changed how prospects perceive us.",
-    name: "James Lawton",
-    role: "CEO, Lone Star Capital",
-    initials: "JL",
+      "MPC Studios exceeded expectations and delivered a visually appealing, highly functional website that was better than I could have imagined.",
+    name: "Grant Buck",
+    role: "Texas Regional Bank",
+    initials: "GB",
     dark: false,
   },
   {
     quote:
-      "The team truly understood our complex regulatory environment. Our new website generated 40% more qualified leads within three months.",
-    name: "Sarah Reeves",
-    role: "Managing Partner, Harrington Law Group",
-    initials: "SR",
+      "I\u2019ve worked with MPC Studios for years, and it\u2019s always been a great experience. With other vendors, I had to micromanage everything, but with MPC, I know it\u2019s going to be done right.",
+    name: "Ren\u00e9 Xavier Gonz\u00e1lez",
+    role: "SIDEE Industrial Development",
+    initials: "RG",
     dark: true,
-  },
-  {
-    quote:
-      "Exceptional attention to detail. MPC Studios didn't just deliver a website — they delivered a complete brand experience that sets us apart.",
-    name: "Marcus Hall",
-    role: "VP Marketing, Meridian Bank",
-    initials: "MH",
-    dark: true,
-  },
-  {
-    quote:
-      "Fast, professional, and creative. The AI automation workflows they built have saved our team 20 hours a week. I&apos;ve worked with many agencies and MPC is hands down the best.",
-    name: "Aisha Patel",
-    role: "CEO, Summit Build Co.",
-    initials: "AP",
-    dark: false,
   },
 ];
 

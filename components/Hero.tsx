@@ -71,7 +71,7 @@ export default function Hero() {
           }}
         >
           Custom websites. Content that connects. AI-powered solutions. Built
-          by a Texas team with over 25 years of experience delivering results
+          by a Texas team with 28 years of experience delivering results
           that matter.
         </p>
 

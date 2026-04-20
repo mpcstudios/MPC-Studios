@@ -4,12 +4,12 @@ import Link from "next/link";
 
 const stats = [
   {
-    n: "20+",
-    title: "Years as One Team",
-    desc: "Our core team has worked together for over two decades. No turnover, no outsourcing.",
+    n: "28",
+    title: "Years in Business",
+    desc: "Founded in 1998 in Harlingen, Texas. Deep roots in the Rio Grande Valley, serving clients nationwide.",
   },
   {
-    n: "7",
+    n: "6",
     title: "Dedicated People",
     desc: "A tight-knit crew of designers, developers, and strategists who know each other\u2019s strengths.",
   },
@@ -93,10 +93,10 @@ export default function About() {
                 marginBottom: "20px",
               }}
             >
-              Founded in 1998, MPC Studios is a Texas-based full-service creative
-              and digital agency. For over 25 years we&apos;ve partnered with
-              businesses in banking, legal, and construction — helping them look
-              exceptional and perform online.
+              Founded in 1998, MPC Studios is a digital agency based in Harlingen,
+              Texas. For 28 years we&apos;ve designed and built websites, applications,
+              and digital solutions for businesses across the United States — with
+              deep roots in the Rio Grande Valley.
             </p>
             <p
               style={{
