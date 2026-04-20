@@ -92,14 +92,14 @@ export default function Hero() {
               alignItems: "center",
               gap: "10px",
               color: "#fff",
-              fontSize: "1.1rem",
+              fontSize: "0.92rem",
               fontWeight: 700,
               padding: "14px 28px",
               borderRadius: "100px",
               textDecoration: "none",
             }}
           >
-            Let&apos;s Talk About Your Goals ↗
+            Book a Strategy Call ↗
           </Link>
           <Link
             href="#work"
@@ -109,7 +109,7 @@ export default function Hero() {
               gap: "8px",
               background: "transparent",
               color: "#0E0E0E",
-              fontSize: "1.1rem",
+              fontSize: "0.92rem",
               fontWeight: 700,
               textDecoration: "none",
               transition: "color 0.2s",
@@ -126,162 +126,313 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Hero Visual — floating cards */}
+      {/* Hero Visual — goal/solution cards with idle bob cards around them */}
       <div
         className="hero-visual-wrap anim-fi"
-        style={{ position: "relative", height: "440px" }}
+        style={{ position: "relative", height: "540px" }}
       >
-        {/* Main dark card */}
+        {/* Primary card 1 — Website (dark, focal) */}
         <div
-          className="anim-float"
+          className="hero-goal-card"
           style={{
             position: "absolute",
-            top: "20px",
+            top: 0,
             right: 0,
-            width: "320px",
+            width: "290px",
             background: "#0E0E0E",
             color: "#fff",
             borderRadius: "20px",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
-            padding: "28px 32px",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.14)",
+            padding: "22px 26px",
+            zIndex: 3,
           }}
         >
           <p
             style={{
-              fontSize: "0.72rem",
+              fontSize: "0.68rem",
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "rgba(255,255,255,0.4)",
-              marginBottom: "14px",
+              letterSpacing: "0.14em",
+              color: "rgba(255,255,255,0.45)",
+              marginBottom: "8px",
             }}
           >
-            Current project
+            Goal
           </p>
           <p
             style={{
               fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "1.9rem",
+              fontSize: "1.5rem",
               fontWeight: 800,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.01em",
               lineHeight: 1.2,
             }}
           >
-            Brand
-            <br />
-            Identity
+            Turn visits into customers
             <span style={{ color: "#F77837" }}>.</span>
           </p>
           <div
             style={{
-              marginTop: "20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
+              height: "1px",
+              background: "rgba(255,255,255,0.12)",
+              margin: "16px 0",
+            }}
+          />
+          <p
+            style={{
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "rgba(255,255,255,0.45)",
+              marginBottom: "6px",
             }}
           >
-            <div
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                background: "#F77837",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontSize: "1.125rem",
-                flexShrink: 0,
-              }}
-            >
-              ✦
-            </div>
-            <div>
-              <p style={{ fontSize: "0.9rem", color: "#fff", fontWeight: 600 }}>
-                Apex Ventures
-              </p>
-              <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)" }}>
-                Full rebrand + website
-              </p>
-            </div>
-          </div>
+            Solution
+          </p>
+          <p
+            style={{
+              fontSize: "0.92rem",
+              color: "rgba(255,255,255,0.88)",
+              lineHeight: 1.45,
+            }}
+          >
+            Custom design + high-performance build
+          </p>
         </div>
 
-        {/* Stat card */}
+        {/* Primary card 2 — Content (white) */}
+        <div
+          className="hero-goal-card"
+          style={{
+            position: "absolute",
+            top: "185px",
+            left: 0,
+            width: "270px",
+            background: "#fff",
+            borderRadius: "20px",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.09)",
+            padding: "22px 26px",
+            zIndex: 2,
+          }}
+        >
+          <p
+            style={{
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "#7A7670",
+              marginBottom: "8px",
+            }}
+          >
+            Goal
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontSize: "1.5rem",
+              fontWeight: 800,
+              letterSpacing: "-0.01em",
+              lineHeight: 1.2,
+              color: "#0E0E0E",
+            }}
+          >
+            Become the authority
+            <span style={{ color: "#F77837" }}>.</span>
+          </p>
+          <div
+            style={{
+              height: "1px",
+              background: "rgba(0,0,0,0.08)",
+              margin: "16px 0",
+            }}
+          />
+          <p
+            style={{
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "#7A7670",
+              marginBottom: "6px",
+            }}
+          >
+            Solution
+          </p>
+          <p
+            style={{
+              fontSize: "0.92rem",
+              color: "#0E0E0E",
+              lineHeight: 1.45,
+            }}
+          >
+            Strategic content that converts
+          </p>
+        </div>
+
+        {/* Primary card 3 — AI & Automations (white w/ gradient top edge) */}
+        <div
+          className="hero-goal-card"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: "20px",
+            width: "290px",
+            background: "#fff",
+            borderRadius: "20px",
+            boxShadow: "0 10px 40px rgba(247,120,55,0.18)",
+            padding: "22px 26px",
+            zIndex: 2,
+            overflow: "hidden",
+          }}
+        >
+          {/* Top gradient strip */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "4px",
+              background:
+                "linear-gradient(90deg, #ffc14f, #F77837, #ffc14f, #F77837)",
+            }}
+          />
+          <p
+            style={{
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "#7A7670",
+              marginBottom: "8px",
+            }}
+          >
+            Goal
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontSize: "1.5rem",
+              fontWeight: 800,
+              letterSpacing: "-0.01em",
+              lineHeight: 1.2,
+              color: "#0E0E0E",
+            }}
+          >
+            Automate the boring stuff
+            <span style={{ color: "#F77837" }}>.</span>
+          </p>
+          <div
+            style={{
+              height: "1px",
+              background: "rgba(0,0,0,0.08)",
+              margin: "16px 0",
+            }}
+          />
+          <p
+            style={{
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "#7A7670",
+              marginBottom: "6px",
+            }}
+          >
+            Solution
+          </p>
+          <p
+            style={{
+              fontSize: "0.92rem",
+              color: "#0E0E0E",
+              lineHeight: 1.45,
+            }}
+          >
+            AI + automations that run themselves
+          </p>
+        </div>
+
+        {/* Idle bob card — 150+ projects */}
         <div
           className="anim-float1"
           style={{
             position: "absolute",
-            bottom: "100px",
-            right: "30px",
-            width: "160px",
+            top: "40px",
+            left: 0,
+            width: "128px",
             textAlign: "center",
             background: "#fff",
-            borderRadius: "20px",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
-            padding: "28px 32px",
+            borderRadius: "18px",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.10)",
+            padding: "18px 16px",
+            zIndex: 4,
           }}
         >
           <div
             style={{
               fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "2.4rem",
+              fontSize: "1.9rem",
               fontWeight: 800,
               color: "#F77837",
-              lineHeight: 1.2,
+              lineHeight: 1.1,
             }}
           >
             150+
           </div>
-          <div style={{ fontSize: "0.78rem", color: "#7A7670", marginTop: "4px" }}>
+          <div
+            style={{ fontSize: "0.72rem", color: "#7A7670", marginTop: "4px" }}
+          >
             Projects delivered
           </div>
         </div>
 
-        {/* Tag card */}
+        {/* Idle bob card — Award-winning tag */}
         <div
           className="anim-float3"
           style={{
             position: "absolute",
-            bottom: "60px",
-            left: "20px",
+            top: "310px",
+            right: "-8px",
             background: "#F77837",
             color: "#fff",
-            borderRadius: "20px",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
-            padding: "14px 22px",
+            borderRadius: "16px",
+            boxShadow: "0 8px 30px rgba(247,120,55,0.28)",
+            padding: "10px 16px",
             display: "flex",
             alignItems: "center",
-            gap: "10px",
+            gap: "8px",
+            zIndex: 4,
           }}
         >
-          <span style={{ fontSize: "1.2rem" }}>🏆</span>
+          <span style={{ fontSize: "1.1rem" }}>🏆</span>
           <div>
-            <p style={{ fontSize: "0.9rem", fontWeight: 600 }}>Award-winning</p>
-            <p style={{ fontSize: "0.82rem" }}>Design studio</p>
+            <p style={{ fontSize: "0.82rem", fontWeight: 700, lineHeight: 1.1 }}>
+              Award-winning
+            </p>
+            <p style={{ fontSize: "0.72rem", opacity: 0.9, lineHeight: 1.1 }}>
+              Design studio
+            </p>
           </div>
         </div>
 
-        {/* Award card */}
+        {/* Idle bob card — 5-star rating */}
         <div
           className="anim-float2"
           style={{
             position: "absolute",
-            top: "200px",
-            left: "10px",
-            width: "170px",
+            top: "430px",
+            left: "-15px",
+            width: "145px",
             background: "#fff",
-            borderRadius: "20px",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
-            padding: "28px 24px",
+            borderRadius: "18px",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.10)",
+            padding: "16px 18px",
+            zIndex: 4,
           }}
         >
-          <div style={{ fontSize: "1.4rem", marginBottom: "8px" }}>
+          <div style={{ fontSize: "1.05rem", marginBottom: "4px" }}>
             ⭐⭐⭐⭐⭐
           </div>
-          <p style={{ fontSize: "0.86rem", fontWeight: 600, color: "#0E0E0E" }}>
+          <p style={{ fontSize: "0.82rem", fontWeight: 700, color: "#0E0E0E" }}>
             5-star rated
           </p>
-          <p style={{ fontSize: "0.78rem", color: "#7A7670", lineHeight: 1.5 }}>
+          <p style={{ fontSize: "0.72rem", color: "#7A7670", lineHeight: 1.4 }}>
             on Google Reviews
           </p>
         </div>

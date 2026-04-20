@@ -7,12 +7,12 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
 const projects = [
-  { client: "Lone Star Capital", title: "Digital rebrand for a Texas private equity firm", bg: "#0d1a2e" },
-  { client: "Harrington Law Group", title: "Authority-first website for a regional law practice", bg: "#1a0e08" },
-  { client: "Summit Build Co.", title: "High-performance site for a construction firm", bg: "#0a1a10" },
-  { client: "Meridian Bank", title: "AI-driven lead generation system and full rebrand", bg: "#140820" },
-  { client: "Apex Ventures", title: "Growth-focused website for a venture capital firm", bg: "#1a1a0a" },
-  { client: "Bluebonnet Brands", title: "E-commerce platform and brand identity refresh", bg: "#0e0a1a" },
+  { client: "First Community Bank", title: "Modern banking experience for a Texas community bank", bg: "#0d1a2e" },
+  { client: "Roerig, Oliveira & Fisher", title: "Authority-first website for a South Texas litigation firm", bg: "#1a0e08" },
+  { client: "Nick Turk-Browne Lab", title: "Research site for a Yale cognitive neuroscience lab", bg: "#0a1a10" },
+  { client: "D. Wilson Construction", title: "High-performance site for a Texas commercial builder", bg: "#140820" },
+  { client: "Texas National Bank", title: "Full-service banking site for a Rio Grande Valley bank", bg: "#1a1a0a" },
+  { client: "Alfred T. Denham", title: "Credibility-first website for a Texas mediation practice", bg: "#0e0a1a" },
 ];
 
 const leftProjects = projects.filter((_, i) => i % 2 === 0);
@@ -134,7 +134,7 @@ function ProjectCard({ project, delay }: { project: (typeof projects)[0]; delay:
       <div style={{ width: "100%", aspectRatio: "16 / 10", background: project.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
         <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "3rem", color: "rgba(255,255,255,0.05)", letterSpacing: "0.1em", position: "relative", zIndex: 1 }}>
-          {project.client.split(" ").map((w) => w[0]).join("")}
+          {project.client.split(" ").map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).join("")}
         </span>
       </div>
       <div data-arrow style={{ position: "absolute", top: "16px", right: "16px", width: "38px", height: "38px", borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1rem", color: "#0E0E0E", transition: "background 0.2s, color 0.2s", zIndex: 2 }}>↗</div>

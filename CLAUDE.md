@@ -72,6 +72,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ---
 
+## Sitemap & Layout Inventory
+
+See [`SITEMAP.MD`](./SITEMAP.MD) for the canonical list of pages and every row layout (`gridTemplateColumns`) currently in use. **Update that file whenever a page is added, removed, or restructured, or when a new row layout is introduced.**
+
+---
+
 ## Project Structure
 
 ```

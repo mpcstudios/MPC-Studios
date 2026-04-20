@@ -117,9 +117,8 @@ export default function ResourcesPage() {
                 />
                 <button
                   type="submit"
-                  style={{ background: "#F77837", color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer", flexShrink: 0, transition: "background 0.2s" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#FF8C55")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#F77837")}
+                  className="btn-gradient"
+                  style={{ color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer", flexShrink: 0 }}
                 >
                   Subscribe ↗
                 </button>

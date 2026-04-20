@@ -108,16 +108,82 @@ body {
 .anim-marquee     { animation: marqueeScroll 28s linear infinite; white-space: nowrap; }
 .anim-scroll-pulse{ animation: scrollPulse 1.5s ease-in-out infinite; }
 
+/* ─── Hero goal/solution cards ─────────────────── */
+.hero-goal-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, z-index 0s;
+}
+.hero-goal-card:hover {
+  /* Lift to the very top of the stack — above the small bob cards too. */
+  z-index: 10 !important;
+  transform: translateY(-4px);
+}
+
 /* ─── Typography & Button ─────────────────── */
 .text-gradient {
   color: #F77837;
 }
 .btn-gradient {
-  background: linear-gradient(to right, #fe6e64 0%, #fc8446 33%, #F77837 66%, #ffc14f 100%);
-  transition: opacity 0.2s ease;
+  /* Diagonal palette, repeated so a full sweep ends where it began. */
+  background: linear-gradient(
+    135deg,
+    #ffc14f,
+    #F77837,
+    #ffc14f,
+    #F77837
+  );
+  background-size: 220% 220%;
+  background-position: 0% 0%;
+  transition: background-position 0.9s ease-out;
+  /* Lifts white text off the lighter yellow portion of the gradient. */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 .btn-gradient:hover {
-  opacity: 0.88;
+  background-position: 100% 100%;
+}
+
+/* Nav CTA — single-primary-CTA rule.
+   When another .btn-gradient is visible in the viewport, the nav CTA
+   fades to an outline so only one bright CTA competes for attention. */
+.nav-cta {
+  position: relative;
+  isolation: isolate;
+  border: 1.5px solid transparent;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  transition: color 0.35s ease, border-color 0.35s ease, text-shadow 0.35s ease;
+}
+.nav-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #ffc14f,
+    #F77837,
+    #ffc14f,
+    #F77837
+  );
+  background-size: 220% 220%;
+  background-position: 0% 0%;
+  opacity: 1;
+  transition: opacity 0.35s ease, background-position 0.9s ease-out;
+  z-index: -1;
+}
+.nav-cta:hover::before {
+  background-position: 100% 100%;
+}
+.nav-cta.is-deferred {
+  color: #0E0E0E;
+  border-color: rgba(14, 14, 14, 0.22);
+  text-shadow: none;
+}
+.nav-cta.is-deferred::before {
+  opacity: 0;
+}
+.nav-cta.is-deferred:hover {
+  color: #F77837;
+  border-color: #F77837;
 }
 
 /* ─── Client Logo Marquee ─────────────────── */
