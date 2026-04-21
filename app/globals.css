@@ -118,6 +118,61 @@ body {
   transform: translateY(-4px);
 }
 
+/* ─── Team Pills (About) ──────────────────── */
+.team-pill {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+  transform: translateZ(0) scale(1);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+.team-pill:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 28px rgba(14, 14, 14, 0.18);
+}
+.team-pill:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 4px 12px rgba(14, 14, 14, 0.14);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.1s ease,
+    transform 0.08s ease;
+}
+.team-pill.is-active {
+  box-shadow: 0 8px 24px rgba(247, 120, 55, 0.38);
+}
+.team-pill.is-active:hover {
+  box-shadow: 0 14px 32px rgba(247, 120, 55, 0.48);
+}
+
+/* ─── Service Row Title Gradient Hover ─────── */
+@keyframes serviceTitleSweep {
+  0%   { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+.service-title {
+  background-image: linear-gradient(
+    135deg,
+    #ffc14f,
+    #F77837,
+    #ffc14f,
+    #F77837
+  );
+  background-size: 220% 220%;
+  background-position: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #fff;
+  transition: -webkit-text-fill-color 0.2s ease;
+}
+.service-row:hover .service-title {
+  -webkit-text-fill-color: transparent;
+  animation: serviceTitleSweep 2.2s linear infinite;
+}
+
 /* ─── Typography & Button ─────────────────── */
 .text-gradient {
   color: #F77837;
@@ -133,12 +188,28 @@ body {
   );
   background-size: 220% 220%;
   background-position: 0% 0%;
-  transition: background-position 0.9s ease-out;
+  box-shadow: 0 4px 14px rgba(247, 120, 55, 0.28);
+  transform: translateY(0) scale(1);
+  will-change: transform;
+  transition:
+    background-position 0.9s ease-out,
+    transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    box-shadow 0.25s ease;
   /* Lifts white text off the lighter yellow portion of the gradient. */
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 .btn-gradient:hover {
   background-position: 100% 100%;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(247, 120, 55, 0.42);
+}
+.btn-gradient:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 3px 10px rgba(247, 120, 55, 0.30);
+  transition:
+    background-position 0.9s ease-out,
+    transform 0.08s ease,
+    box-shadow 0.12s ease;
 }
 
 /* Nav CTA — single-primary-CTA rule.
@@ -150,7 +221,41 @@ body {
   border: 1.5px solid transparent;
   color: #fff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
-  transition: color 0.35s ease, border-color 0.35s ease, text-shadow 0.35s ease;
+  box-shadow: 0 4px 14px rgba(247, 120, 55, 0.28);
+  transform: translateY(0) scale(1);
+  will-change: transform;
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease,
+    text-shadow 0.35s ease,
+    transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    box-shadow 0.25s ease;
+}
+.nav-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(247, 120, 55, 0.42);
+}
+.nav-cta:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 3px 10px rgba(247, 120, 55, 0.30);
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease,
+    text-shadow 0.35s ease,
+    transform 0.08s ease,
+    box-shadow 0.12s ease;
+}
+/* In the deferred/outline state, skip the glow + lift — it's a secondary CTA. */
+.nav-cta.is-deferred {
+  box-shadow: none;
+}
+.nav-cta.is-deferred:hover {
+  transform: translateY(0) scale(1);
+  box-shadow: none;
+}
+.nav-cta.is-deferred:active {
+  transform: scale(0.97);
+  box-shadow: none;
 }
 .nav-cta::before {
   content: "";
