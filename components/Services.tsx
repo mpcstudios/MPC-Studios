@@ -118,6 +118,7 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
   return (
     <div
       data-hover
+      className="service-row"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr auto",
@@ -131,8 +132,6 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
         el.style.paddingLeft = "16px";
-        const nameEl = el.querySelector<HTMLElement>("[data-name]");
-        if (nameEl) nameEl.style.color = "#F77837";
         const arrowEl = el.querySelector<HTMLElement>("[data-arrow]");
         if (arrowEl) {
           arrowEl.style.background = "#F77837";
@@ -143,8 +142,6 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement;
         el.style.paddingLeft = "0";
-        const nameEl = el.querySelector<HTMLElement>("[data-name]");
-        if (nameEl) nameEl.style.color = "#fff";
         const arrowEl = el.querySelector<HTMLElement>("[data-arrow]");
         if (arrowEl) {
           arrowEl.style.background = "transparent";
@@ -156,6 +153,7 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
       {/* Title */}
       <span
         data-name
+        className="service-title"
         style={{
           fontFamily:
             'var(--font-display, "Bricolage Grotesque", sans-serif)',
@@ -163,8 +161,6 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
           fontWeight: 800,
           letterSpacing: "-0.02em",
           lineHeight: 1.2,
-          color: "#fff",
-          transition: "color 0.2s",
         }}
       >
         {service.name}
