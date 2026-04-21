@@ -83,7 +83,7 @@ export default function About() {
                 marginBottom: "28px",
               }}
             >
-              A studio that cares about your brand &amp; results
+              A studio that cares about your business &amp; results
             </h2>
             <p
               style={{

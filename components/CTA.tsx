@@ -87,28 +87,17 @@ export default function CTA() {
         >
           <Link
             href="mailto:hello@mpcstudios.com"
+            className="btn-gradient"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
-              background: "#F77837",
               color: "#fff",
               fontSize: "0.92rem",
               fontWeight: 500,
               padding: "18px 38px",
               borderRadius: "100px",
               textDecoration: "none",
-              transition: "background 0.2s, transform 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#FF8C55";
-              el.style.transform = "scale(1.04)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = "#F77837";
-              el.style.transform = "scale(1)";
             }}
           >
             Start a project ↗

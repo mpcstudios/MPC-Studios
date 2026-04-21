@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const links = [
@@ -14,12 +15,51 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [deferred, setDeferred] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Watch every other gradient CTA on the page. When at least one is in the
+  // viewport, the nav CTA fades to an outline so only one primary CTA competes.
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+
+    // Defer a tick so the new page's CTAs are in the DOM after route changes.
+    const t = window.setTimeout(() => {
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>(".btn-gradient"),
+      ).filter((el) => !el.closest("nav"));
+
+      if (targets.length === 0) {
+        setDeferred(false);
+        return;
+      }
+
+      const visible = new Set<Element>();
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) visible.add(entry.target);
+            else visible.delete(entry.target);
+          }
+          setDeferred(visible.size > 0);
+        },
+        { threshold: 0.2, rootMargin: "-80px 0px 0px 0px" },
+      );
+
+      targets.forEach((el) => observer!.observe(el));
+    }, 50);
+
+    return () => {
+      window.clearTimeout(t);
+      observer?.disconnect();
+    };
+  }, [pathname]);
 
   return (
     <>
@@ -85,13 +125,12 @@ export default function Nav() {
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="nav-cta btn-gradient"
+          className={`nav-cta${deferred ? " is-deferred" : ""}`}
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: "8px",
-            color: "#fff",
-            fontSize: "1.1rem",
+            fontSize: "0.92rem",
             fontWeight: 700,
             padding: "11px 22px",
             borderRadius: "100px",

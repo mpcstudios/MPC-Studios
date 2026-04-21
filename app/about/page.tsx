@@ -44,7 +44,7 @@ export default function AboutPage() {
                 About us
               </p>
               <h1 style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "clamp(2.8rem, 5vw, 4.5rem)", fontWeight: 800, lineHeight: 1.12, letterSpacing: "-0.03em", color: "#0E0E0E", marginBottom: "28px" }}>
-                A studio that cares about your brand &amp; results
+                A studio that cares about your business &amp; results
               </h1>
               <p style={{ fontSize: "1.125rem", lineHeight: 1.75, color: "#7A7670", marginBottom: "20px" }}>
                 Founded in 1998, MPC Studios is a digital agency based in Harlingen, Texas. For 28 years we&apos;ve designed and built websites, applications, and digital solutions for businesses across the United States — with deep roots in the Rio Grande Valley.

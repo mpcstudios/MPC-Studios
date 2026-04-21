@@ -4,44 +4,44 @@ import Link from "next/link";
 const projects = [
   {
     id: 1,
-    client: "Lone Star Capital",
-    title: "Digital rebrand for a Texas private equity firm",
+    client: "First Community Bank",
+    title: "Modern banking experience for a Texas community bank",
     category: "Brand Identity · Web Design",
     bg: "#0d1a2e",
   },
   {
     id: 2,
-    client: "Harrington Law Group",
-    title: "Authority-first website for a regional law practice",
+    client: "Roerig, Oliveira & Fisher",
+    title: "Authority-first website for a South Texas litigation firm",
     category: "Web Design · Content Marketing",
     bg: "#1a0e08",
   },
   {
     id: 3,
-    client: "Summit Build Co.",
-    title: "High-performance site for a construction firm",
-    category: "Web Design · SEO",
+    client: "Nick Turk-Browne Lab",
+    title: "Research site for a Yale cognitive neuroscience lab",
+    category: "Web Design · Content Strategy",
     bg: "#0a1a10",
   },
   {
     id: 4,
-    client: "Meridian Bank",
-    title: "AI-driven lead generation system and full rebrand",
-    category: "AI & Automations · Brand Identity",
+    client: "D. Wilson Construction",
+    title: "High-performance site for a Texas commercial builder",
+    category: "Web Design · SEO",
     bg: "#140820",
   },
   {
     id: 5,
-    client: "Apex Ventures",
-    title: "Growth-focused website for a venture capital firm",
+    client: "Texas National Bank",
+    title: "Full-service banking site for a Rio Grande Valley bank",
     category: "Web Design · Digital Strategy",
     bg: "#1a1a0a",
   },
   {
     id: 6,
-    client: "Bluebonnet Brands",
-    title: "E-commerce platform and brand identity refresh",
-    category: "Brand Identity · Web Development",
+    client: "Alfred T. Denham",
+    title: "Credibility-first website for a Texas mediation practice",
+    category: "Web Design · Content Marketing",
     bg: "#0e0a1a",
   },
 ];
@@ -239,6 +239,7 @@ function WorkCard({
           {project.client
             .split(" ")
             .map((w) => w[0])
+            .filter((c) => /[A-Za-z]/.test(c))
             .join("")}
         </span>
       </div>

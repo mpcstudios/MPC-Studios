@@ -83,26 +83,18 @@ export default function Services() {
           </div>
           <Link
             href="#contact"
-            className="reveal reveal-d1"
+            className="reveal reveal-d1 btn-gradient"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
-              background: "#F77837",
               color: "#fff",
               fontSize: "0.92rem",
               fontWeight: 500,
               padding: "16px 34px",
               borderRadius: "100px",
               textDecoration: "none",
-              transition: "background 0.2s",
             }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#FF8C55")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#F77837")
-            }
           >
             Start a project ↗
           </Link>
