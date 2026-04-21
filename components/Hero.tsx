@@ -131,7 +131,7 @@ export default function Hero() {
         className="hero-visual-wrap anim-fi"
         style={{ position: "relative", height: "540px" }}
       >
-        {/* Primary card 1 — Website (dark, focal) */}
+        {/* Primary card 1 — Sales (dark, focal) */}
         <div
           className="hero-goal-card"
           style={{
@@ -167,7 +167,7 @@ export default function Hero() {
               lineHeight: 1.2,
             }}
           >
-            Turn visits into customers
+            Generate sales
             <span style={{ color: "#F77837" }}>.</span>
           </p>
           <div
@@ -195,17 +195,17 @@ export default function Hero() {
               lineHeight: 1.45,
             }}
           >
-            Custom design + high-performance build
+            Website Design & Development + Digital Marketing Strategy
           </p>
         </div>
 
-        {/* Primary card 2 — Content (white) */}
+        {/* Primary card 2 — Custom Software (white) */}
         <div
           className="hero-goal-card"
           style={{
             position: "absolute",
             top: "185px",
-            left: 0,
+            right: "200px",
             width: "270px",
             background: "#fff",
             borderRadius: "20px",
@@ -235,7 +235,7 @@ export default function Hero() {
               color: "#0E0E0E",
             }}
           >
-            Become the authority
+            Bring your idea to life
             <span style={{ color: "#F77837" }}>.</span>
           </p>
           <div
@@ -263,7 +263,7 @@ export default function Hero() {
               lineHeight: 1.45,
             }}
           >
-            Strategic content that converts
+            Custom Software Applications built to spec
           </p>
         </div>
 
@@ -344,17 +344,17 @@ export default function Hero() {
               lineHeight: 1.45,
             }}
           >
-            AI + automations that run themselves
+            AI + automations that empower your team
           </p>
         </div>
 
-        {/* Idle bob card — 150+ projects */}
+        {/* Idle bob card — 150+ projects (anchored right so it tracks the dark card) */}
         <div
           className="anim-float1"
           style={{
             position: "absolute",
             top: "40px",
-            left: 0,
+            right: "322px",
             width: "128px",
             textAlign: "center",
             background: "#fff",
