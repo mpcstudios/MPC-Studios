@@ -8,7 +8,13 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ProjectBody from "./ProjectBody";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  const res = await client.queries.projectConnection({ first: 500 });
+  return (res.data.projectConnection.edges ?? [])
+    .map((e) => e?.node?._sys.filename)
+    .filter((s): s is string => !!s)
+    .map((slug) => ({ slug }));
+}
 
 export default async function ProjectPage({
   params,
