@@ -1,4 +1,4 @@
-import client from "@/tina/__generated__/client";
+import client from "@/tina/__generated__/databaseClient";
 import WorkPageClient, {
   type TestimonialListItem,
   type WorkListItem,

@@ -1,4 +1,4 @@
-import client from "@/tina/__generated__/client";
+import client from "@/tina/__generated__/databaseClient";
 import WorkClient, { type WorkProject } from "./Work.client";
 
 export default async function Work() {

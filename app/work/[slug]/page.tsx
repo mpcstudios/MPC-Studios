@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import client from "@/tina/__generated__/client";
+import client from "@/tina/__generated__/databaseClient";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
 import Nav from "@/components/Nav";
