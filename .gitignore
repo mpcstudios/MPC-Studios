@@ -44,3 +44,4 @@ public/admin
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.claude/
