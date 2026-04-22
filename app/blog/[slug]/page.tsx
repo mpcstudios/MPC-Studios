@@ -8,20 +8,14 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import PostBody from "./PostBody";
 
+export const dynamic = "force-dynamic";
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
-}
-
-export async function generateStaticParams() {
-  const res = await client.queries.blogConnection({ first: 500 });
-  return (res.data.blogConnection.edges ?? [])
-    .map((e) => e?.node?._sys.filename)
-    .filter((s): s is string => !!s)
-    .map((slug) => ({ slug }));
 }
 
 export default async function BlogPostPage({
