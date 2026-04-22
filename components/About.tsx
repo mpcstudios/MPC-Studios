@@ -22,20 +22,20 @@ const team: TeamMember[] = [
 ];
 
 /* Slot 0 is the active/front position; other slots fan out behind. */
-/* depth: 3D z translation; zi: DOM stacking order. */
+/* x/y: 2D translate (transform-only for GPU compositing). z: 3D depth. zi: DOM stacking. */
 const slotPositions: Array<{
-  top: number;
-  left: number;
+  x: number;
+  y: number;
   rotate: number;
-  depth: number;
+  z: number;
   zi: number;
 }> = [
-  { top: 60, left: 30,  rotate: 0,  depth: 0,    zi: 10 },
-  { top: 30, left: -20, rotate: -9, depth: -80,  zi: 5  },
-  { top: 75, left: 90,  rotate: 9,  depth: -120, zi: 4  },
-  { top: 85, left: 10,  rotate: -5, depth: -160, zi: 3  },
-  { top: 40, left: 70,  rotate: 6,  depth: -200, zi: 2  },
-  { top: 55, left: 35,  rotate: -3, depth: -240, zi: 1  },
+  { x: 30,  y: 60, rotate: 0,  z: 0,    zi: 10 },
+  { x: -20, y: 30, rotate: -9, z: -80,  zi: 5  },
+  { x: 90,  y: 75, rotate: 9,  z: -120, zi: 4  },
+  { x: 10,  y: 85, rotate: -5, z: -160, zi: 3  },
+  { x: 70,  y: 40, rotate: 6,  z: -200, zi: 2  },
+  { x: 35,  y: 55, rotate: -3, z: -240, zi: 1  },
 ];
 
 const cardVariantFor = (i: number): "dark" | "light" | "accent" =>
@@ -111,9 +111,9 @@ export default function About() {
             .to(
               el,
               {
-                top: pos.top,
-                left: pos.left,
-                z: pos.depth,
+                x: pos.x,
+                y: pos.y,
+                z: pos.z,
                 rotation: pos.rotate,
                 rotationY: 0,
                 scale: 1,
@@ -127,9 +127,9 @@ export default function About() {
           tl.to(
             el,
             {
-              top: pos.top,
-              left: pos.left,
-              z: pos.depth,
+              x: pos.x,
+              y: pos.y,
+              z: pos.z,
               rotation: pos.rotate,
               rotationY: slot * 5,
               scale: 1 - slot * 0.035,
@@ -260,7 +260,9 @@ export default function About() {
               const slot = (i - activeIndex + team.length) % team.length;
               const pos = slotPositions[slot] ?? slotPositions[slotPositions.length - 1];
               const isActive = slot === 0;
-              /* Initial layout is set in JSX so SSR matches; GSAP takes over on interaction. */
+              const restScale = slot === 0 ? 1 : 1 - slot * 0.035;
+              const restRotY = slot === 0 ? 0 : slot * 5;
+              /* Initial transform matches GSAP's resting state so SSR and client agree. */
               return (
                 <TeamCard
                   key={member.slug}
@@ -271,12 +273,12 @@ export default function About() {
                     cardsRef.current[i] = el;
                   }}
                   style={{
-                    top: `${pos.top}px`,
-                    left: `${pos.left}px`,
+                    top: 0,
+                    left: 0,
                     width: "240px",
                     zIndex: pos.zi,
-                    transform: `rotate(${pos.rotate}deg)`,
-                    willChange: "transform, top, left",
+                    transform: `translate3d(${pos.x}px, ${pos.y}px, ${pos.z}px) rotate(${pos.rotate}deg) rotateY(${restRotY}deg) scale(${restScale})`,
+                    willChange: "transform",
                     cursor: isActive ? "default" : "pointer",
                   }}
                 />
@@ -451,8 +453,6 @@ function TeamCard({
         boxShadow: shadow,
         padding: "16px 16px 18px",
         overflow: "hidden",
-        transformStyle: "preserve-3d",
-        backfaceVisibility: "hidden",
         ...style,
       }}
     >
