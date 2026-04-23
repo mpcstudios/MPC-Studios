@@ -9,11 +9,13 @@ A living map of every page on the site and every row layout (CSS grid template) 
 | Path | File | Description |
 |------|------|-------------|
 | `/` | `app/page.tsx` | **Homepage.** Composes the full marketing narrative: `Nav` → `Hero` → `ClientLogos` → `Services` → `Work` → `About` → `Testimonials` → `CTA` → `Footer`. |
-| `/services` | `app/services/page.tsx` | **Services.** Hero intro → dark services list (Web Design & Development, Content Marketing, AI & Automations) → 4-step process → CTA. |
+| `/services` | `app/services/page.tsx` | **Services.** Hero intro → dark services list (5 services, each links to its detail page) → 4-step process → CTA. |
+| `/services/[slug]` | `app/services/[slug]/page.tsx` | **Service detail.** Hero → overview → dark deliverables grid → optional "how we work" cards → 4-step process → industries tags → next-service link → CTA. Slugs: `website-design-development`, `custom-software`, `ai-automation`, `content-creation`, `digital-marketing`. |
 | `/work` | `app/work/page.tsx` | **Work / portfolio.** Hero intro → offset 2-column project grid of 6 real clients (First Community Bank, Roerig Oliveira & Fisher, Nick Turk-Browne Lab, D. Wilson Construction, Texas National Bank, Alfred T. Denham) → testimonials → CTA. |
 | `/about` | `app/about/page.tsx` | **About.** Hero intro → stats grid → dark values grid → team grid → CTA. |
 | `/resources` | `app/resources/page.tsx` | **Resources / blog.** Hero intro → featured post → 3-column blog grid → dark newsletter signup → CTA. |
 | `/contact` | `app/contact/page.tsx` | **Contact.** Hero intro → contact form + contact info panel (no CTA; page is itself the conversion). |
+| `/client-resources` | `app/client-resources/page.tsx` | **Client Resources.** Hero intro → 3-column grid of resource cards (Webmail, Remote Support, Support Requests, Large Files, eNewsletters) → contact helper → CTA. Linked only from the footer. |
 
 All pages share `Nav` and `Footer`, plus `Cursor` and `RevealInit` for custom cursor and scroll-reveal animations.
 

@@ -2,14 +2,23 @@
 
 import Link from "next/link";
 
-const serviceLinks = [
-  "Website Design & Dev",
-  "Brand Identity",
-  "Content Marketing",
-  "AI & Automations",
-  "SEO & Growth",
+type FooterItem = { label: string; href: string };
+
+const serviceLinks: FooterItem[] = [
+  { label: "Website Design & Development", href: "/services/website-design-development" },
+  { label: "Custom Software Applications", href: "/services/custom-software" },
+  { label: "AI & Automation", href: "/services/ai-automation" },
+  { label: "Content Creation", href: "/services/content-creation" },
+  { label: "Digital Marketing Strategy", href: "/services/digital-marketing" },
+  { label: "All services →", href: "/services" },
 ];
-const companyLinks = ["About Us", "Our Work", "Blog", "Careers", "Contact"];
+const companyLinks: FooterItem[] = [
+  { label: "About Us", href: "/about" },
+  { label: "Our Work", href: "/work" },
+  { label: "Resources", href: "/resources" },
+  { label: "Client Resources", href: "/client-resources" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   return (
@@ -156,7 +165,7 @@ export default function Footer() {
   );
 }
 
-function FooterCol({ title, items }: { title: string; items: string[] }) {
+function FooterCol({ title, items }: { title: string; items: FooterItem[] }) {
   return (
     <div>
       <h4
@@ -171,10 +180,10 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
         {title}
       </h4>
       <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", padding: 0, margin: 0 }}>
-        {items.map((item) => (
-          <li key={item}>
+        {items.map(({ label, href }) => (
+          <li key={label}>
             <Link
-              href="#"
+              href={href}
               style={{
                 fontSize: "0.9rem",
                 color: "rgba(255,255,255,0.45)",
@@ -189,7 +198,7 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
                   "rgba(255,255,255,0.45)")
               }
             >
-              {item}
+              {label}
             </Link>
           </li>
         ))}

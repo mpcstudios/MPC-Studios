@@ -4,26 +4,31 @@ import Link from "next/link";
 const services = [
   {
     name: "Website Design & Development",
+    slug: "website-design-development",
     description:
       "Custom-built websites engineered for performance, security, and conversion. No templates, no shortcuts — built from scratch to match your business goals.",
   },
   {
     name: "Custom Software Applications",
+    slug: "custom-software",
     description:
       "Internal tools, portals, and full-stack applications built to solve the problems off-the-shelf software won't touch. Designed for scale and built to last.",
   },
   {
     name: "AI & Automation",
+    slug: "ai-automation",
     description:
       "Intelligent workflows, chatbots, and data-driven tools that reduce manual work and give your team a competitive edge.",
   },
   {
     name: "Content Creation",
+    slug: "content-creation",
     description:
       "Photography, video, and branded content that tells your story and connects with your audience across every platform.",
   },
   {
     name: "Digital Marketing Strategy",
+    slug: "digital-marketing",
     description:
       "SEO, paid media, and growth strategies grounded in data. We focus on results that actually move the needle for your business.",
   },
@@ -116,8 +121,9 @@ export default function Services() {
 
 function ServiceRow({ service }: { service: (typeof services)[0] }) {
   return (
-    <div
+    <Link
       data-hover
+      href={`/services/${service.slug}`}
       className="service-row"
       style={{
         display: "grid",
@@ -127,6 +133,8 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
         padding: "32px 0",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         cursor: "none",
+        textDecoration: "none",
+        color: "inherit",
         transition: "padding-left 0.3s",
       }}
       onMouseEnter={(e) => {
@@ -198,6 +206,6 @@ function ServiceRow({ service }: { service: (typeof services)[0] }) {
       >
         ↗
       </div>
-    </div>
+    </Link>
   );
 }
