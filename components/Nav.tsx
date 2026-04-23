@@ -4,8 +4,19 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const links = [
-  { label: "Services", href: "/services" },
+type NavChild = { label: string; href: string };
+type NavLink = { label: string; href: string; children?: NavChild[] };
+
+const serviceChildren: NavChild[] = [
+  { label: "Website Design & Development", href: "/services/website-design-development" },
+  { label: "Custom Software Applications", href: "/services/custom-software" },
+  { label: "AI & Automation", href: "/services/ai-automation" },
+  { label: "Content Creation", href: "/services/content-creation" },
+  { label: "Digital Marketing Strategy", href: "/services/digital-marketing" },
+];
+
+const links: NavLink[] = [
+  { label: "Services", href: "/services", children: serviceChildren },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Resources", href: "/resources" },
@@ -15,6 +26,8 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [deferred, setDeferred] = useState(false);
   const pathname = usePathname();
 
@@ -96,14 +109,22 @@ export default function Nav() {
             padding: 0,
           }}
         >
-          {links.map(({ label, href }) => (
-            <li key={label}>
+          {links.map(({ label, href, children }) => (
+            <li
+              key={label}
+              style={{ position: "relative" }}
+              onMouseEnter={() => children && setOpenMenu(label)}
+              onMouseLeave={() => children && setOpenMenu(null)}
+            >
               <Link
                 href={href}
                 style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "4px",
                   fontSize: "1.1rem",
                   fontWeight: 700,
-                  color: "#0E0E0E",
+                  color: openMenu === label ? "#F77837" : "#0E0E0E",
                   textDecoration: "none",
                   transition: "color 0.2s",
                 }}
@@ -111,11 +132,107 @@ export default function Nav() {
                   ((e.currentTarget as HTMLElement).style.color = "#F77837")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "#0E0E0E")
+                  ((e.currentTarget as HTMLElement).style.color =
+                    openMenu === label ? "#F77837" : "#0E0E0E")
                 }
               >
                 {label}
+                {children && (
+                  <span
+                    aria-hidden
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "2px",
+                      transform: openMenu === label ? "rotate(180deg)" : "none",
+                      transition: "transform 0.2s",
+                    }}
+                  >
+                    ▾
+                  </span>
+                )}
               </Link>
+
+              {children && openMenu === label && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    paddingTop: "14px",
+                  }}
+                >
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      margin: 0,
+                      padding: "10px",
+                      background: "#fff",
+                      borderRadius: "16px",
+                      boxShadow: "0 14px 40px rgba(0,0,0,0.12)",
+                      border: "1px solid rgba(0,0,0,0.05)",
+                      minWidth: "280px",
+                    }}
+                  >
+                    {children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setOpenMenu(null)}
+                          style={{
+                            display: "block",
+                            padding: "10px 14px",
+                            borderRadius: "10px",
+                            fontSize: "0.95rem",
+                            fontWeight: 600,
+                            color: "#0E0E0E",
+                            textDecoration: "none",
+                            transition:
+                              "background 0.15s, color 0.15s",
+                          }}
+                          onMouseEnter={(e) => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "#F4F3F1";
+                            el.style.color = "#F77837";
+                          }}
+                          onMouseLeave={(e) => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "transparent";
+                            el.style.color = "#0E0E0E";
+                          }}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                    <li
+                      style={{
+                        borderTop: "1px solid rgba(0,0,0,0.06)",
+                        marginTop: "6px",
+                        paddingTop: "6px",
+                      }}
+                    >
+                      <Link
+                        href="/services"
+                        onClick={() => setOpenMenu(null)}
+                        style={{
+                          display: "block",
+                          padding: "10px 14px",
+                          borderRadius: "10px",
+                          fontSize: "0.85rem",
+                          fontWeight: 700,
+                          letterSpacing: "0.04em",
+                          textTransform: "uppercase",
+                          color: "#F77837",
+                          textDecoration: "none",
+                        }}
+                      >
+                        All services →
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -185,24 +302,88 @@ export default function Nav() {
           }}
         >
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {links.map(({ label, href }) => (
+            {links.map(({ label, href, children }) => (
               <li key={label} style={{ borderBottom: "1px solid #f0f0f0" }}>
-                <Link
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
+                <div
                   style={{
-                    display: "block",
-                    fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
-                    fontSize: "2rem",
-                    fontWeight: 800,
-                    color: "#0E0E0E",
-                    textDecoration: "none",
-                    padding: "20px 0",
-                    letterSpacing: "-0.02em",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {label}
-                </Link>
+                  <Link
+                    href={href}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileServicesOpen(false);
+                    }}
+                    style={{
+                      display: "block",
+                      flex: 1,
+                      fontFamily:
+                        'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                      fontSize: "2rem",
+                      fontWeight: 800,
+                      color: "#0E0E0E",
+                      textDecoration: "none",
+                      padding: "20px 0",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {label}
+                  </Link>
+                  {children && (
+                    <button
+                      onClick={() => setMobileServicesOpen((v) => !v)}
+                      aria-label="Toggle services submenu"
+                      style={{
+                        background: "none",
+                        border: "none",
+                        padding: "12px",
+                        fontSize: "1.2rem",
+                        color: "#0E0E0E",
+                        cursor: "pointer",
+                        transform: mobileServicesOpen
+                          ? "rotate(180deg)"
+                          : "none",
+                        transition: "transform 0.2s",
+                      }}
+                    >
+                      ▾
+                    </button>
+                  )}
+                </div>
+                {children && mobileServicesOpen && (
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      padding: "0 0 16px 0",
+                      margin: 0,
+                    }}
+                  >
+                    {children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setMobileServicesOpen(false);
+                          }}
+                          style={{
+                            display: "block",
+                            fontSize: "1.05rem",
+                            fontWeight: 600,
+                            color: "#7A7670",
+                            textDecoration: "none",
+                            padding: "10px 0",
+                          }}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

@@ -285,18 +285,15 @@ export default function About() {
               );
             })}
 
-            {/* Floating pills — one per team member */}
+            {/* Team pills — one per member */}
             {team.map((member, i) => {
               const isActive = i === activeIndex;
-              const floatClass =
-                ["anim-float", "anim-float1", "anim-float2", "anim-float3", "anim-float1", "anim-float2"][i] ||
-                "anim-float";
               return (
                 <button
                   key={`pill-${member.slug}`}
                   type="button"
                   onClick={() => setActiveIndex(i)}
-                  className={`${floatClass} team-pill${isActive ? " is-active" : ""}`}
+                  className={`team-pill${isActive ? " is-active" : ""}`}
                   aria-pressed={isActive}
                   style={{
                     position: "absolute",

@@ -7,9 +7,12 @@ export default function Hero() {
     <section
       className="hero-grid"
       style={{
-        padding: "260px 0 160px",
+        padding: "130px 0 60px",
         position: "relative",
         overflow: "hidden",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
       }}
     >
       {/* Background blobs */}
@@ -40,19 +43,19 @@ export default function Hero() {
         }}
       />
 
-      <div className="content-wrap" style={{ display: "grid", gridTemplateColumns: "11fr 9fr", alignItems: "center", gap: "60px" }}>
+      <div className="content-wrap" style={{ display: "grid", gridTemplateColumns: "11fr 9fr", alignItems: "center", gap: "60px", width: "100%" }}>
       {/* Content */}
       <div style={{ position: "relative", zIndex: 1 }}>
         <h1
           className="anim-fu2"
           style={{
             fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontSize: "clamp(3.8rem, 6.5vw, 6.5rem)",
+            fontSize: "clamp(3rem, 5.5vw, 5.25rem)",
             fontWeight: 800,
             lineHeight: 1.1,
             letterSpacing: "-0.03em",
             color: "#0E0E0E",
-            marginBottom: "32px",
+            marginBottom: "24px",
           }}
         >
           Your Goals.
@@ -63,11 +66,11 @@ export default function Hero() {
         <p
           className="anim-fu3"
           style={{
-            fontSize: "1.1rem",
-            lineHeight: 1.75,
+            fontSize: "1.05rem",
+            lineHeight: 1.65,
             color: "#7A7670",
             maxWidth: "460px",
-            marginBottom: "44px",
+            marginBottom: "32px",
           }}
         >
           Custom websites. Content that connects. AI-powered solutions. Built
@@ -129,7 +132,7 @@ export default function Hero() {
       {/* Hero Visual — goal/solution cards with idle bob cards around them */}
       <div
         className="hero-visual-wrap anim-fi"
-        style={{ position: "relative", height: "540px" }}
+        style={{ position: "relative", height: "440px" }}
       >
         {/* Primary card 1 — Sales (dark, focal) */}
         <div
@@ -204,8 +207,8 @@ export default function Hero() {
           className="hero-goal-card"
           style={{
             position: "absolute",
-            top: "185px",
-            right: "200px",
+            top: "145px",
+            right: "240px",
             width: "270px",
             background: "#fff",
             borderRadius: "20px",
@@ -273,7 +276,7 @@ export default function Hero() {
           style={{
             position: "absolute",
             bottom: 0,
-            right: "20px",
+            right: "10px",
             width: "290px",
             background: "#fff",
             borderRadius: "20px",
@@ -353,8 +356,8 @@ export default function Hero() {
           className="anim-float1"
           style={{
             position: "absolute",
-            top: "40px",
-            right: "322px",
+            top: "30px",
+            right: "332px",
             width: "128px",
             textAlign: "center",
             background: "#fff",
@@ -387,8 +390,8 @@ export default function Hero() {
           className="anim-float3"
           style={{
             position: "absolute",
-            top: "310px",
-            right: "-8px",
+            top: "245px",
+            right: "-18px",
             background: "#F77837",
             color: "#fff",
             borderRadius: "16px",
@@ -416,8 +419,8 @@ export default function Hero() {
           className="anim-float2"
           style={{
             position: "absolute",
-            top: "430px",
-            left: "-15px",
+            top: "345px",
+            left: "-25px",
             width: "145px",
             background: "#fff",
             borderRadius: "18px",
