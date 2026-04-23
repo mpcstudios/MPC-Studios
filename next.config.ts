@@ -30,6 +30,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Tina's cloud databaseClient (Upstash-backed) can be slow to warm up
+  // during a cold Vercel build. The default 60s timeout was tripping
+  // /work and / at 60s before the first successful response. 180s gives
+  // enough headroom without hiding real regressions.
+  staticPageGenerationTimeout: 180,
   async rewrites() {
     return [
       {
