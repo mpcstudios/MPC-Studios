@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
 import Nav from "@/components/Nav";

@@ -8,8 +8,6 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import PostBody from "./PostBody";
 
-export const dynamic = "force-dynamic";
-
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "long",
@@ -42,7 +40,7 @@ export default async function BlogPostPage({
       <Nav />
 
       <main>
-        <section style={{ background: "#fff", padding: "200px 0 80px" }}>
+        <section className="blog-hero-pad" style={{ background: "#fff" }}>
           <div className="content-wrap" style={{ maxWidth: "760px" }}>
             <Link
               href="/resources"
@@ -102,6 +100,7 @@ export default async function BlogPostPage({
             )}
             {post.body && (
               <div
+                className="prose"
                 style={{
                   fontSize: "1.05rem",
                   lineHeight: 1.8,

@@ -1,8 +1,6 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 type TeamMember = {
   name: string;
@@ -21,21 +19,25 @@ const team: TeamMember[] = [
   { name: "Sal Yanez",     role: "Project Manager",       slug: "sal-yanez",     initials: "SY" },
 ];
 
-/* Slot 0 is the active/front position; other slots fan out behind. */
-/* x/y: 2D translate (transform-only for GPU compositing). z: 3D depth. zi: DOM stacking. */
+/* Slot 0 is the active/front position; slots 1–2 fan out behind it.
+   Slots 3+ are hidden — 6 interactive cards fan-stacked all at once just
+   adds paint cost without reading cleanly; they'd peek from behind slot 2
+   anyway. They still move (so the transition looks continuous when a hidden
+   card rotates forward) but don't render. */
 const slotPositions: Array<{
   x: number;
   y: number;
   rotate: number;
   z: number;
   zi: number;
+  opacity: number;
 }> = [
-  { x: 30,  y: 60, rotate: 0,  z: 0,    zi: 10 },
-  { x: -20, y: 30, rotate: -9, z: -80,  zi: 5  },
-  { x: 90,  y: 75, rotate: 9,  z: -120, zi: 4  },
-  { x: 10,  y: 85, rotate: -5, z: -160, zi: 3  },
-  { x: 70,  y: 40, rotate: 6,  z: -200, zi: 2  },
-  { x: 35,  y: 55, rotate: -3, z: -240, zi: 1  },
+  { x: 30,  y: 60, rotate: 0,  z: 0,    zi: 10, opacity: 1 },
+  { x: -20, y: 30, rotate: -9, z: -80,  zi: 5,  opacity: 1 },
+  { x: 90,  y: 75, rotate: 9,  z: -120, zi: 4,  opacity: 1 },
+  { x: 10,  y: 85, rotate: -5, z: -160, zi: 3,  opacity: 0 },
+  { x: 70,  y: 40, rotate: 6,  z: -200, zi: 2,  opacity: 0 },
+  { x: 35,  y: 55, rotate: -3, z: -240, zi: 1,  opacity: 0 },
 ];
 
 const cardVariantFor = (i: number): "dark" | "light" | "accent" =>
@@ -76,80 +78,6 @@ const stats = [
 
 export default function About() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const stackRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const isFirstRun = useRef(true);
-
-  useGSAP(
-    () => {
-      const tl = gsap.timeline();
-
-      team.forEach((_, i) => {
-        const slot = (i - activeIndex + team.length) % team.length;
-        const pos = slotPositions[slot];
-        const el = cardsRef.current[i];
-        if (!el) return;
-
-        // z-index updates partway through so the incoming card rises THROUGH the stack.
-        tl.set(el, { zIndex: pos.zi }, slot === 0 ? 0.45 : 0);
-
-        if (slot === 0) {
-          // Incoming card: arc forward with a pop, then settle.
-          tl
-            .to(
-              el,
-              {
-                z: 120,
-                scale: 1.08,
-                rotationY: -8,
-                rotation: pos.rotate * 0.3,
-                duration: 0.55,
-                ease: "power2.out",
-              },
-              0,
-            )
-            .to(
-              el,
-              {
-                x: pos.x,
-                y: pos.y,
-                z: pos.z,
-                rotation: pos.rotate,
-                rotationY: 0,
-                scale: 1,
-                duration: 1.1,
-                ease: "back.out(1.4)",
-              },
-              0.55,
-            );
-        } else {
-          // Back cards: sink back with depth + tilt. Earlier slots settle sooner.
-          tl.to(
-            el,
-            {
-              x: pos.x,
-              y: pos.y,
-              z: pos.z,
-              rotation: pos.rotate,
-              rotationY: slot * 5,
-              scale: 1 - slot * 0.035,
-              duration: 1.3,
-              ease: "power2.inOut",
-              delay: 0.05 + slot * 0.08,
-            },
-            0,
-          );
-        }
-      });
-
-      // First run: no animation, just set final state instantly.
-      if (isFirstRun.current) {
-        tl.progress(1);
-        isFirstRun.current = false;
-      }
-    },
-    { dependencies: [activeIndex], scope: stackRef },
-  );
 
   return (
     <section
@@ -241,7 +169,6 @@ export default function About() {
 
           {/* Right — decorative team card arrangement */}
           <div
-            ref={stackRef}
             className="about-right-col reveal reveal-d2"
             style={{
               position: "absolute",
@@ -260,25 +187,27 @@ export default function About() {
               const slot = (i - activeIndex + team.length) % team.length;
               const pos = slotPositions[slot] ?? slotPositions[slotPositions.length - 1];
               const isActive = slot === 0;
-              const restScale = slot === 0 ? 1 : 1 - slot * 0.035;
-              const restRotY = slot === 0 ? 0 : slot * 5;
-              /* Initial transform matches GSAP's resting state so SSR and client agree. */
+              /* Cap the visual progression at slot 2 — cards at slot 3+ are
+                 hidden via opacity, so letting scale/tilt keep growing just
+                 wastes range and muddies the compositor transform. */
+              const cappedSlot = Math.min(slot, 2);
+              const restScale = cappedSlot === 0 ? 1 : 1 - cappedSlot * 0.035;
+              const restRotY = cappedSlot === 0 ? 0 : cappedSlot * 5;
               return (
                 <TeamCard
                   key={member.slug}
                   member={member}
                   variant={cardVariantFor(slot)}
+                  isActive={isActive}
                   onClick={() => setActiveIndex(i)}
-                  cardRef={(el) => {
-                    cardsRef.current[i] = el;
-                  }}
                   style={{
                     top: 0,
                     left: 0,
                     width: "240px",
                     zIndex: pos.zi,
+                    opacity: pos.opacity,
+                    pointerEvents: pos.opacity === 0 ? "none" : "auto",
                     transform: `translate3d(${pos.x}px, ${pos.y}px, ${pos.z}px) rotate(${pos.rotate}deg) rotateY(${restRotY}deg) scale(${restScale})`,
-                    willChange: "transform",
                     cursor: isActive ? "default" : "pointer",
                   }}
                 />
@@ -416,13 +345,13 @@ function TeamCard({
   variant,
   style,
   onClick,
-  cardRef,
+  isActive,
 }: {
   member: TeamMember;
   variant: "dark" | "light" | "accent";
   style: React.CSSProperties;
   onClick?: () => void;
-  cardRef?: React.Ref<HTMLDivElement>;
+  isActive?: boolean;
 }) {
   const [photoFailed, setPhotoFailed] = useState(false);
 
@@ -440,8 +369,7 @@ function TeamCard({
 
   return (
     <div
-      ref={cardRef}
-      className="team-card"
+      className={`team-card${isActive ? " is-active" : ""}`}
       onClick={onClick}
       style={{
         position: "absolute",

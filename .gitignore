@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Imported blog images — hosted on S3 via the Tina media store.
+# Kept out of the repo so we don't double-store 100+ MB of assets.
+public/uploads/blog/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

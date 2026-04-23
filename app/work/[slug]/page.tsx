@@ -8,8 +8,6 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ProjectBody from "./ProjectBody";
 
-export const dynamic = "force-dynamic";
-
 export default async function ProjectPage({
   params,
 }: {

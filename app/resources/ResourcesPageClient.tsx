@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
@@ -20,9 +20,13 @@ export type BlogCardItem = {
 export default function ResourcesPageClient({
   posts,
   featured,
+  currentPage,
+  totalPages,
 }: {
   posts: BlogCardItem[];
   featured: BlogCardItem | null;
+  currentPage: number;
+  totalPages: number;
 }) {
   const [email, setEmail] = useState("");
 
@@ -34,7 +38,7 @@ export default function ResourcesPageClient({
 
       <main>
         {/* Hero */}
-        <section style={{ background: "#F4F3F1", padding: "200px 0 100px" }}>
+        <section className="resources-hero-pad" style={{ background: "#F4F3F1" }}>
           <div className="content-wrap">
             <div className="reveal" style={{ maxWidth: "720px" }}>
               <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "20px" }}>
@@ -77,7 +81,7 @@ export default function ResourcesPageClient({
         {/* Blog Grid */}
         <section style={{ background: "#fff", padding: "0 0 120px" }}>
           <div className="content-wrap">
-            <div className="reveal" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }}>
+            <div className="reveal resources-grid">
               {posts.map((post) => (
                 <Link
                   key={post.slug}
@@ -95,6 +99,10 @@ export default function ResourcesPageClient({
                 </Link>
               ))}
             </div>
+
+            {totalPages > 1 && (
+              <Pagination currentPage={currentPage} totalPages={totalPages} />
+            )}
           </div>
         </section>
 
@@ -112,20 +120,20 @@ export default function ResourcesPageClient({
                 No spam. Just practical advice on design, development, and growing your business.
               </p>
               <form
+                className="newsletter-form"
                 onSubmit={(e) => e.preventDefault()}
-                style={{ display: "flex", justifyContent: "center", gap: "12px", maxWidth: "500px", margin: "0 auto" }}
               >
                 <input
                   type="email"
                   placeholder="Your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  style={{ flex: 1, background: "#1a1a1a", border: "none", borderRadius: "100px", padding: "16px 24px", fontSize: "1rem", color: "#fff", outline: "none", fontFamily: "inherit" }}
+                  style={{ background: "#1a1a1a", border: "none", borderRadius: "100px", padding: "16px 24px", fontSize: "1rem", color: "#fff", outline: "none", fontFamily: "inherit" }}
                 />
                 <button
                   type="submit"
                   className="btn-gradient"
-                  style={{ color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer", flexShrink: 0 }}
+                  style={{ color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer" }}
                 >
                   Subscribe ↗
                 </button>
@@ -139,5 +147,115 @@ export default function ResourcesPageClient({
 
       <Footer />
     </>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Pagination                                                                */
+/* -------------------------------------------------------------------------- */
+
+function Pagination({
+  currentPage,
+  totalPages,
+}: {
+  currentPage: number;
+  totalPages: number;
+}) {
+  const pageHref = (n: number) => (n === 1 ? "/resources" : `/resources?page=${n}`);
+
+  // Show: first, last, current, neighbors (±1), with ellipses
+  const pages = new Set<number>();
+  pages.add(1);
+  pages.add(totalPages);
+  for (let p = currentPage - 1; p <= currentPage + 1; p++) {
+    if (p >= 1 && p <= totalPages) pages.add(p);
+  }
+  const ordered = Array.from(pages).sort((a, b) => a - b);
+
+  // Insert "…" where there are gaps
+  const withGaps: Array<number | "gap"> = [];
+  ordered.forEach((p, i) => {
+    if (i > 0 && p - ordered[i - 1] > 1) withGaps.push("gap");
+    withGaps.push(p);
+  });
+
+  const baseBtn: CSSProperties = {
+    minWidth: "40px",
+    height: "40px",
+    padding: "0 12px",
+    borderRadius: "10px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "0.9rem",
+    fontWeight: 600,
+    textDecoration: "none",
+    transition: "background 0.18s, color 0.18s, border-color 0.18s",
+    border: "1px solid rgba(14,14,14,0.12)",
+    color: "#0E0E0E",
+    background: "#fff",
+  };
+  const activeBtn: CSSProperties = {
+    ...baseBtn,
+    background: "#0E0E0E",
+    color: "#fff",
+    borderColor: "#0E0E0E",
+    cursor: "default",
+  };
+  const disabledBtn: CSSProperties = {
+    ...baseBtn,
+    opacity: 0.35,
+    cursor: "not-allowed",
+    pointerEvents: "none",
+  };
+
+  return (
+    <nav
+      aria-label="Blog pagination"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "8px",
+        marginTop: "64px",
+        flexWrap: "wrap",
+      }}
+    >
+      {currentPage > 1 ? (
+        <Link href={pageHref(currentPage - 1)} style={baseBtn} aria-label="Previous page">
+          ← Prev
+        </Link>
+      ) : (
+        <span style={disabledBtn} aria-hidden="true">
+          ← Prev
+        </span>
+      )}
+
+      {withGaps.map((p, i) =>
+        p === "gap" ? (
+          <span key={`gap-${i}`} style={{ padding: "0 6px", color: "#7A7670" }}>
+            …
+          </span>
+        ) : p === currentPage ? (
+          <span key={p} style={activeBtn} aria-current="page">
+            {p}
+          </span>
+        ) : (
+          <Link key={p} href={pageHref(p)} style={baseBtn}>
+            {p}
+          </Link>
+        ),
+      )}
+
+      {currentPage < totalPages ? (
+        <Link href={pageHref(currentPage + 1)} style={baseBtn} aria-label="Next page">
+          Next →
+        </Link>
+      ) : (
+        <span style={disabledBtn} aria-hidden="true">
+          Next →
+        </span>
+      )}
+    </nav>
   );
 }
