@@ -8,8 +8,6 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import PostBody from "./PostBody";
 
-export const dynamic = "force-dynamic";
-
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "long",

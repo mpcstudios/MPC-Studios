@@ -4,8 +4,6 @@ import WorkPageClient, {
   type WorkListItem,
 } from "./WorkPageClient";
 
-export const dynamic = "force-dynamic";
-
 function initialsFrom(name: string) {
   return name
     .split(" ")
