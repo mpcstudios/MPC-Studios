@@ -28,7 +28,7 @@ To run the CMS against the cloud datalayer (GitHub for content, Upstash Redis fo
 TINA_PUBLIC_IS_LOCAL=false
 GITHUB_PERSONAL_ACCESS_TOKEN=<GitHub PAT with repo scope>
 GITHUB_OWNER=mpcstudios
-GITHUB_REPO=mpcstudios
+GITHUB_REPO=MPC-Studios
 GITHUB_BRANCH=<branch to write to — e.g. mac, not main>
 KV_REST_API_URL=<Upstash Redis REST URL>
 KV_REST_API_TOKEN=<Upstash Redis REST token>
