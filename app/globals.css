@@ -205,6 +205,32 @@ body {
   box-shadow: 0 14px 32px rgba(247, 120, 55, 0.48);
 }
 
+/* ─── Team Cards (About) ──────────────────── */
+/* CSS-driven fan: transform/opacity interpolate on the compositor thread.
+   React computes the resting transform from activeIndex; the browser tweens. */
+.team-card {
+  transition:
+    transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.32s ease-out,
+    box-shadow 0.42s ease;
+  will-change: transform, opacity;
+}
+/* Tiny 1 → 1.035 → 1 blip on the card that just became active.
+   Uses the independent `scale` property so it composes with the inline
+   `transform` React sets (which drives slot position/rotation). */
+.team-card.is-active {
+  animation: team-card-pop 0.42s cubic-bezier(0.25, 0.9, 0.3, 1.15);
+}
+@keyframes team-card-pop {
+  0%   { scale: 1; }
+  45%  { scale: 1.035; }
+  100% { scale: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-card { transition: none; }
+  .team-card.is-active { animation: none; }
+}
+
 /* ─── Service Row Title Gradient Hover ─────── */
 @keyframes serviceTitleSweep {
   0%   { background-position: 100% 100%; }
