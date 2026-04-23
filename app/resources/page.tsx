@@ -2,13 +2,15 @@ import { unstable_cache } from "next/cache";
 import client from "@/tina/__generated__/databaseClient";
 import ResourcesPageClient, {
   type BlogCardItem,
+  type CategoryRow,
 } from "./ResourcesPageClient";
+import { CATEGORIES, labelToSlug } from "./categories";
 
 // Rebuild the cards list at most once an hour; individual saves in the Tina
 // admin can invalidate via the "blog" tag.
 export const revalidate = 3600;
 
-const POSTS_PER_PAGE = 12;
+const POSTS_PER_ROW = 3;
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -96,39 +98,47 @@ const fetchAllCards = unstable_cache(
   { revalidate: 3600, tags: ["blog"] },
 );
 
-export default async function ResourcesPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ page?: string }>;
-}) {
-  const sp = await searchParams;
-  const pageParam = Number(sp.page ?? "1");
-  const currentPage =
-    Number.isFinite(pageParam) && pageParam > 0 ? Math.floor(pageParam) : 1;
-
+export default async function ResourcesPage() {
   const all = await fetchAllCards();
 
-  // Page 1: featured = posts[0], grid = posts[1..12]   (12 grid cards)
-  // Page 2+: no featured,        grid = posts[13 + (N-2)*12 .. 13 + (N-1)*12]
-  const gridStart =
-    currentPage === 1 ? 1 : 1 + POSTS_PER_PAGE + (currentPage - 2) * POSTS_PER_PAGE;
-  const gridEnd = gridStart + POSTS_PER_PAGE;
+  // Bucket posts by category label; posts are already sorted newest-first
+  // from fetchAllCards, so slicing the first N gives the most-recent N.
+  const buckets = new Map<string, BlogCardItem[]>();
+  for (const post of all) {
+    const list = buckets.get(post.category) ?? [];
+    list.push(post);
+    buckets.set(post.category, list);
+  }
 
-  const featured = currentPage === 1 && all.length > 0 ? all[0] : null;
-  const posts = all.slice(gridStart, gridEnd);
+  // Build rows in the schema's canonical category order. Skip any category
+  // with zero published posts so we don't render empty rows.
+  const knownRows: CategoryRow[] = CATEGORIES
+    .map<CategoryRow | null>(({ label, slug }) => {
+      const list = buckets.get(label) ?? [];
+      if (list.length === 0) return null;
+      return {
+        label,
+        slug,
+        posts: list.slice(0, POSTS_PER_ROW),
+        totalCount: list.length,
+      };
+    })
+    .filter((r): r is CategoryRow => r !== null);
 
-  const totalGrid = Math.max(0, all.length - 1); // everything except featured
-  const totalPages = Math.max(
-    1,
-    1 + Math.ceil(Math.max(0, totalGrid - POSTS_PER_PAGE) / POSTS_PER_PAGE),
-  );
+  // Capture any legacy / unexpected category labels that exist in content
+  // but aren't in the schema enum. Shown at the end so nothing is orphaned.
+  const knownLabels = new Set(CATEGORIES.map((c) => c.label));
+  const strayRows: CategoryRow[] = Array.from(buckets.entries())
+    .filter(([label]) => !knownLabels.has(label))
+    .map(([label, list]) => ({
+      label,
+      slug: labelToSlug(label),
+      posts: list.slice(0, POSTS_PER_ROW),
+      totalCount: list.length,
+    }));
 
-  return (
-    <ResourcesPageClient
-      posts={posts}
-      featured={featured}
-      currentPage={currentPage}
-      totalPages={totalPages}
-    />
-  );
+  const rows: CategoryRow[] = [...knownRows, ...strayRows];
+  const featured = all.length > 0 ? all[0] : null;
+
+  return <ResourcesPageClient rows={rows} featured={featured} />;
 }
