@@ -15,6 +15,7 @@ export type BlogCardItem = {
   date: string;
   read: string;
   bg: string;
+  coverImage?: string | null;
 };
 
 export default function ResourcesPageClient({
@@ -62,9 +63,26 @@ export default function ResourcesPageClient({
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(-4px)")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(0)")}
               >
-                <div style={{ width: "100%", aspectRatio: "16 / 7", background: featured.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", marginBottom: "28px" }}>
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "16 / 7",
+                    background: featured.coverImage
+                      ? `#0E0E0E url(${featured.coverImage}) center/cover no-repeat`
+                      : featured.bg,
+                    borderRadius: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                    marginBottom: "28px",
+                  }}
+                >
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.1), transparent 60%)" }} />
-                  <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "2rem", color: "rgba(255,255,255,0.04)", letterSpacing: "0.1em" }}>FEATURED</span>
+                  {!featured.coverImage && (
+                    <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "2rem", color: "rgba(255,255,255,0.04)", letterSpacing: "0.1em" }}>FEATURED</span>
+                  )}
                 </div>
                 <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "12px" }}>
                   {featured.category}
@@ -90,7 +108,22 @@ export default function ResourcesPageClient({
                   onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(-6px)")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(0)")}
                 >
-                  <div style={{ width: "100%", aspectRatio: "16 / 10", background: post.bg, borderRadius: "16px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", marginBottom: "20px" }}>
+                  <div
+                    style={{
+                      width: "100%",
+                      aspectRatio: "16 / 10",
+                      background: post.coverImage
+                        ? `#0E0E0E url(${post.coverImage}) center/cover no-repeat`
+                        : post.bg,
+                      borderRadius: "16px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                      overflow: "hidden",
+                      marginBottom: "20px",
+                    }}
+                  >
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
                   </div>
                   <p style={{ fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#F77837", marginBottom: "10px" }}>{post.category}</p>

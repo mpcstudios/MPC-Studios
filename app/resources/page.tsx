@@ -32,6 +32,7 @@ type LeanBlogNode = {
   readTime?: string | null;
   bg?: string | null;
   status?: string | null;
+  coverImage?: string | null;
 };
 
 type LeanConnectionResponse = {
@@ -60,6 +61,7 @@ const fetchAllCards = unstable_cache(
                   readTime
                   bg
                   status
+                  coverImage
                 }
               }
             }
@@ -85,11 +87,12 @@ const fetchAllCards = unstable_cache(
         date: n.date ? formatDate(n.date) : "",
         read: n.readTime ?? "",
         bg: n.bg ?? "#0E0E0E",
+        coverImage: n.coverImage ?? null,
       }));
 
     return rows;
   },
-  ["resources-blog-cards-v1"],
+  ["resources-blog-cards-v2"],
   { revalidate: 3600, tags: ["blog"] },
 );
 
