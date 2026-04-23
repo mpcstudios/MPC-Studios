@@ -38,7 +38,7 @@ export default function ResourcesPageClient({
 
       <main>
         {/* Hero */}
-        <section style={{ background: "#F4F3F1", padding: "200px 0 100px" }}>
+        <section className="resources-hero-pad" style={{ background: "#F4F3F1" }}>
           <div className="content-wrap">
             <div className="reveal" style={{ maxWidth: "720px" }}>
               <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "20px" }}>
@@ -81,7 +81,7 @@ export default function ResourcesPageClient({
         {/* Blog Grid */}
         <section style={{ background: "#fff", padding: "0 0 120px" }}>
           <div className="content-wrap">
-            <div className="reveal" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }}>
+            <div className="reveal resources-grid">
               {posts.map((post) => (
                 <Link
                   key={post.slug}
@@ -120,20 +120,20 @@ export default function ResourcesPageClient({
                 No spam. Just practical advice on design, development, and growing your business.
               </p>
               <form
+                className="newsletter-form"
                 onSubmit={(e) => e.preventDefault()}
-                style={{ display: "flex", justifyContent: "center", gap: "12px", maxWidth: "500px", margin: "0 auto" }}
               >
                 <input
                   type="email"
                   placeholder="Your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  style={{ flex: 1, background: "#1a1a1a", border: "none", borderRadius: "100px", padding: "16px 24px", fontSize: "1rem", color: "#fff", outline: "none", fontFamily: "inherit" }}
+                  style={{ background: "#1a1a1a", border: "none", borderRadius: "100px", padding: "16px 24px", fontSize: "1rem", color: "#fff", outline: "none", fontFamily: "inherit" }}
                 />
                 <button
                   type="submit"
                   className="btn-gradient"
-                  style={{ color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer", flexShrink: 0 }}
+                  style={{ color: "#fff", border: "none", borderRadius: "100px", padding: "16px 28px", fontSize: "0.92rem", fontWeight: 600, cursor: "pointer" }}
                 >
                   Subscribe ↗
                 </button>
