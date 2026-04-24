@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/PageTransition";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-display",
@@ -33,6 +34,7 @@ export default function RootLayout({
         style={{ fontFamily: 'var(--font-body, "DM Sans", sans-serif)' }}
       >
         {children}
+        <PageTransition />
       </body>
     </html>
   );
