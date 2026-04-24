@@ -7,8 +7,8 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 const contactInfo = [
-  { label: "Email", value: "hello@mpcstudios.com", href: "mailto:hello@mpcstudios.com" },
-  { label: "Phone", value: "+1 (956) 335-7727", href: "tel:+19563357727" },
+  { label: "Email", value: "sales@mpcstudios.com", href: "mailto:sales@mpcstudios.com" },
+  { label: "Phone", value: "+1 (956) 423-2233", href: "tel:+19564232233" },
   { label: "Location", value: "Harlingen, Texas", href: undefined },
   { label: "Hours", value: "Mon\u2013Fri, 9am\u20135pm CST", href: undefined },
 ];

@@ -86,7 +86,7 @@ export default function CTA() {
           }}
         >
           <Link
-            href="mailto:hello@mpcstudios.com"
+            href="mailto:sales@mpcstudios.com"
             className="btn-gradient"
             style={{
               display: "inline-flex",
