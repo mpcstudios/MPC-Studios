@@ -93,7 +93,10 @@ export default function Work({ projects }: { projects: WorkProject[] }) {
           }}
         >
           {/* Left column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
+          <div
+            className="work-col-left"
+            style={{ display: "flex", flexDirection: "column", gap: "64px" }}
+          >
             {leftProjects.map((p, i) => (
               <WorkCard key={p.slug} project={p} delay={i} />
             ))}

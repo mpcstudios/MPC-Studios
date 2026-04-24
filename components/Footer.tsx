@@ -106,20 +106,78 @@ export default function Footer() {
         }}
       >
         {/* Logo + tagline */}
-        <div>
-          <Link href="/">
-            <img src="/brand/White Logo.svg" alt="MPC Studios" style={{ height: "36px", width: "auto", display: "block" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "22px",
+            maxWidth: "320px",
+          }}
+        >
+          <Link href="/" style={{ display: "inline-block" }}>
+            <img
+              src="/brand/White Logo.svg"
+              alt="MPC Studios"
+              style={{
+                height: "clamp(52px, 5vw, 68px)",
+                width: "auto",
+                display: "block",
+              }}
+            />
           </Link>
           <span
             style={{
               display: "block",
-              fontSize: "0.8rem",
-              color: "rgba(255,255,255,0.3)",
-              marginTop: "8px",
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: "rgba(255,255,255,0.35)",
             }}
           >
-            Design &amp; Digital Studio · Est. 1998 · Texas
+            Design &amp; Digital Studio · Est. 1998
           </span>
+
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "12px",
+              padding: "12px 16px 12px 14px",
+              borderRadius: "100px",
+              border: "1px solid rgba(247,120,55,0.35)",
+              background:
+                "linear-gradient(135deg, rgba(254,110,100,0.08) 0%, rgba(255,193,79,0.04) 100%)",
+              alignSelf: "flex-start",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                display: "inline-block",
+                width: "22px",
+                height: "22px",
+                flexShrink: 0,
+                background:
+                  "linear-gradient(135deg, #fe6e64 0%, #F77837 55%, #ffc14f 100%)",
+                WebkitMask:
+                  "url(/brand/texas-outline.svg) center/contain no-repeat",
+                mask: "url(/brand/texas-outline.svg) center/contain no-repeat",
+              }}
+            />
+            <span
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "0.78rem",
+                fontWeight: 700,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#fff",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Made in Texas
+            </span>
+          </div>
         </div>
 
         {/* Columns */}
@@ -146,9 +204,9 @@ export default function Footer() {
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", padding: 0, margin: 0 }}>
               {[
-                { label: "hello@mpcstudios.com", href: "mailto:hello@mpcstudios.com" },
-                { label: "+1 (512) 555-0198", href: "tel:+15125550198" },
-                { label: "Schedule a call ↗", href: "#" },
+                { label: "sales@mpcstudios.com", href: "mailto:sales@mpcstudios.com" },
+                { label: "+1 (956) 423-2233", href: "tel:+19564232233" },
+                { label: "Schedule a call ↗", href: "/contact" },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <Link
