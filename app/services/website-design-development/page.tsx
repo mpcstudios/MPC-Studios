@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   ServicePageShell,
   ServiceHero,
+  ServiceHeroBrowser,
   ServiceIntro,
   ServiceDeliverables,
   ServiceCapabilities,
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <ServicePageShell>
-      <ServiceHero {...data.hero} />
+      <ServiceHero
+        {...data.hero}
+        visual={<ServiceHeroBrowser />}
+      />
       <ServiceIntro paragraphs={data.intro} />
       <ServiceDeliverables items={data.deliverables} />
       <ServiceCapabilities items={data.capabilities} />

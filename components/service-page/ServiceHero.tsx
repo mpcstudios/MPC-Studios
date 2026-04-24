@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 export type ServiceHeroProps = {
   eyebrow: string;
@@ -8,6 +9,8 @@ export type ServiceHeroProps = {
   /** "All services" back link href. Defaults to /services. */
   backHref?: string;
   backLabel?: string;
+  /** Optional visual rendered on the right half of the hero. */
+  visual?: ReactNode;
 };
 
 export default function ServiceHero({
@@ -17,9 +20,13 @@ export default function ServiceHero({
   summary,
   backHref = "/services",
   backLabel = "← All services",
+  visual,
 }: ServiceHeroProps) {
+  const hasVisual = Boolean(visual);
+
   return (
     <section
+      className="service-hero"
       style={{
         background: "#F4F3F1",
         padding: "200px 0 100px",
@@ -57,49 +64,73 @@ export default function ServiceHero({
         >
           {backLabel}
         </Link>
-        <div className="reveal reveal-d1" style={{ maxWidth: "820px" }}>
-          <p
-            style={{
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#F77837",
-              marginBottom: "20px",
-            }}
-          >
-            {eyebrow}
-          </p>
-          <h1
-            style={{
-              fontFamily:
-                'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "clamp(2.8rem, 5vw, 4.75rem)",
-              fontWeight: 800,
-              lineHeight: 1.08,
-              letterSpacing: "-0.03em",
-              color: "#0E0E0E",
-              marginBottom: "28px",
-            }}
-          >
-            {title}
-            {titleAccent && (
-              <>
-                {" "}
-                <span style={{ color: "#F77837" }}>{titleAccent}</span>
-              </>
-            )}
-          </h1>
-          <p
-            style={{
-              fontSize: "1.2rem",
-              lineHeight: 1.6,
-              color: "#7A7670",
-              maxWidth: "680px",
-            }}
-          >
-            {summary}
-          </p>
+
+        <div
+          className="service-hero-grid"
+          style={
+            hasVisual
+              ? {
+                  display: "grid",
+                  gridTemplateColumns: "minmax(0, 11fr) minmax(0, 9fr)",
+                  gap: "60px",
+                  alignItems: "center",
+                }
+              : undefined
+          }
+        >
+          <div className="reveal reveal-d1" style={{ maxWidth: "820px" }}>
+            <p
+              style={{
+                fontSize: "0.85rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#F77837",
+                marginBottom: "20px",
+              }}
+            >
+              {eyebrow}
+            </p>
+            <h1
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(2.8rem, 5vw, 4.75rem)",
+                fontWeight: 800,
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                color: "#0E0E0E",
+                marginBottom: "28px",
+              }}
+            >
+              {title}
+              {titleAccent && (
+                <>
+                  {" "}
+                  <span style={{ color: "#F77837" }}>{titleAccent}</span>
+                </>
+              )}
+            </h1>
+            <p
+              style={{
+                fontSize: "1.2rem",
+                lineHeight: 1.6,
+                color: "#7A7670",
+                maxWidth: "680px",
+              }}
+            >
+              {summary}
+            </p>
+          </div>
+
+          {hasVisual && (
+            <div
+              className="service-hero-visual-wrap reveal reveal-d2"
+              style={{ position: "relative" }}
+            >
+              {visual}
+            </div>
+          )}
         </div>
       </div>
     </section>
