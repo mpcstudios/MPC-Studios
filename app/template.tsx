@@ -17,13 +17,13 @@ export default function Template({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          duration: 0.75,
           ease: "power3.out",
-          delay: 0.45,
+          delay: 0.1,
           clearProps: "transform,opacity",
         },
       );
