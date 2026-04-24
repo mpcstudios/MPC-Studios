@@ -255,6 +255,21 @@ body {
   -webkit-text-fill-color: transparent;
   animation: serviceTitleSweep 2.2s linear infinite;
 }
+@media (max-width: 767px) {
+  .service-row {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+    padding: 24px 0 !important;
+  }
+  .service-row [data-arrow] {
+    display: none !important;
+  }
+  .service-row p {
+    font-size: 1rem !important;
+    max-width: none !important;
+  }
+}
 
 /* ─── Typography & Button ─────────────────── */
 .text-gradient {
@@ -551,8 +566,18 @@ body {
   .service-tags-wrap { display: none !important; }
 
   /* Work */
-  .work-grid-offset { grid-template-columns: 1fr !important; }
-  .work-col-right { margin-top: 0 !important; }
+  .work-grid-offset { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .work-col-left, .work-col-right {
+    display: contents !important;
+    margin-top: 0 !important;
+  }
+  /* Reorder cards on mobile: bank, legal, construction, bank, legal, research */
+  .work-col-left > :nth-child(1)  { order: 1; } /* First Community Bank */
+  .work-col-right > :nth-child(1) { order: 2; } /* Roerig, Oliveira & Fisher */
+  .work-col-right > :nth-child(2) { order: 3; } /* D. Wilson Construction */
+  .work-col-left > :nth-child(3)  { order: 4; } /* Texas National Bank */
+  .work-col-right > :nth-child(3) { order: 5; } /* Alfred T. Denham */
+  .work-col-left > :nth-child(2)  { order: 6; } /* Nick Turk-Browne Lab */
 
   /* Footer */
   .footer-top { flex-direction: column !important; gap: 40px !important; }
