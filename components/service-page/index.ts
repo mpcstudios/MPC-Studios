@@ -1,5 +1,10 @@
 export { default as ServicePageShell } from "./ServicePageShell";
 export { default as ServiceHero } from "./ServiceHero";
+export { default as ServiceHeroBrowser } from "./ServiceHeroBrowser";
+export { default as ServiceHeroPhone } from "./ServiceHeroPhone";
+export { default as ServiceHeroChat } from "./ServiceHeroChat";
+export { default as ServiceHeroGallery } from "./ServiceHeroGallery";
+export { default as ServiceHeroAnalytics } from "./ServiceHeroAnalytics";
 export { default as ServiceIntro } from "./ServiceIntro";
 export { default as ServiceDeliverables } from "./ServiceDeliverables";
 export { default as ServiceCapabilities } from "./ServiceCapabilities";

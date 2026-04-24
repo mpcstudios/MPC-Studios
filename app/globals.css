@@ -550,6 +550,13 @@ body {
     gap: 0 !important;
   }
 
+  /* Service hero — hide right-side visual, let text column take full width */
+  .service-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .service-hero-visual-wrap { display: none !important; }
+
   /* Sections — reduce padding */
   .section-pad { padding: 72px 0 !important; }
   .content-wrap { padding: 0 20px !important; }
