@@ -6,6 +6,7 @@ export type WorkProject = {
   client: string;
   title: string;
   bg: string;
+  coverImage?: string;
 };
 
 export default function Work({ projects }: { projects: WorkProject[] }) {
@@ -170,12 +171,14 @@ function WorkCard({
         }
       }}
     >
-      {/* Image placeholder */}
+      {/* Image / placeholder */}
       <div
         style={{
           width: "100%",
           aspectRatio: "16 / 10",
-          background: project.bg,
+          background: project.coverImage
+            ? `linear-gradient(180deg, rgba(13,26,46,0.15) 0%, rgba(13,26,46,0.45) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}`
+            : project.bg,
           borderRadius: "20px",
           display: "flex",
           alignItems: "center",
@@ -184,32 +187,36 @@ function WorkCard({
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)",
-          }}
-        />
-        <span
-          style={{
-            fontFamily:
-              'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontWeight: 800,
-            fontSize: "3rem",
-            color: "rgba(255,255,255,0.05)",
-            letterSpacing: "0.1em",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          {project.client
-            .split(" ")
-            .map((w) => w[0])
-            .filter((c) => /[A-Za-z]/.test(c))
-            .join("")}
-        </span>
+        {!project.coverImage && (
+          <>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)",
+              }}
+            />
+            <span
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontWeight: 800,
+                fontSize: "3rem",
+                color: "rgba(255,255,255,0.05)",
+                letterSpacing: "0.1em",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              {project.client
+                .split(" ")
+                .map((w) => w[0])
+                .filter((c) => /[A-Za-z]/.test(c))
+                .join("")}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Arrow button */}

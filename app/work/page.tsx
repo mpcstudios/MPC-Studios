@@ -38,6 +38,7 @@ const getWorkPageData = unstable_cache(
         client: n.client,
         title: n.title,
         bg: n.bg ?? "#0E0E0E",
+        coverImage: n.coverImage ?? undefined,
       }));
 
     const testimonials: TestimonialListItem[] = (
@@ -55,7 +56,7 @@ const getWorkPageData = unstable_cache(
 
     return { projects, testimonials };
   },
-  ["work-page-data-v1"],
+  ["work-page-data-v2"],
   { revalidate: 3600, tags: ["project", "testimonial"] },
 );
 

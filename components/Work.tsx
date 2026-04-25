@@ -18,9 +18,10 @@ const getFeaturedProjects = unstable_cache(
         client: n.client,
         title: n.title,
         bg: n.bg ?? "#0E0E0E",
+        coverImage: n.coverImage ?? undefined,
       }));
   },
-  ["home-featured-projects-v1"],
+  ["home-featured-projects-v2"],
   { revalidate: 3600, tags: ["project"] },
 );
 
