@@ -12,6 +12,7 @@ export type WorkListItem = {
   client: string;
   title: string;
   bg: string;
+  coverImage?: string;
 };
 
 export type TestimonialListItem = {
@@ -128,11 +129,15 @@ function ProjectCard({ project, delay }: { project: WorkListItem; delay: number 
         if (arrow) { arrow.style.background = "rgba(255,255,255,0.9)"; arrow.style.color = "#0E0E0E"; }
       }}
     >
-      <div style={{ width: "100%", aspectRatio: "16 / 10", background: project.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
-        <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "3rem", color: "rgba(255,255,255,0.05)", letterSpacing: "0.1em", position: "relative", zIndex: 1 }}>
-          {project.client.split(" ").map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).join("")}
-        </span>
+      <div style={{ width: "100%", aspectRatio: "16 / 10", background: project.coverImage ? `linear-gradient(180deg, rgba(13,26,46,0.15) 0%, rgba(13,26,46,0.45) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}` : project.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+        {!project.coverImage && (
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
+        )}
+        {!project.coverImage && (
+          <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "3rem", color: "rgba(255,255,255,0.05)", letterSpacing: "0.1em", position: "relative", zIndex: 1 }}>
+            {project.client.split(" ").map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).join("")}
+          </span>
+        )}
       </div>
       <div data-arrow style={{ position: "absolute", top: "16px", right: "16px", width: "38px", height: "38px", borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1rem", color: "#0E0E0E", transition: "background 0.2s, color 0.2s", zIndex: 2 }}>↗</div>
       <div style={{ padding: "20px 4px" }}>

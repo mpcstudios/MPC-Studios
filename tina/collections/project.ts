@@ -67,6 +67,31 @@ export const ProjectCollection: Collection = {
       label: "Live Site URL",
     },
     {
+      type: "string",
+      name: "monogram",
+      label: "Hero Monogram",
+      description: "Optional 2–4 letters shown faintly inside the hero card (e.g. FCB).",
+    },
+    {
+      type: "string",
+      name: "heroLabel",
+      label: "Hero Label",
+      description: "Optional small uppercase label in the hero card (e.g. 'Case Study · 2004 – Present').",
+    },
+    {
+      type: "object",
+      name: "stats",
+      label: "Hero Stats",
+      list: true,
+      ui: {
+        itemProps: (item) => ({ label: item?.value && item?.label ? `${item.value} — ${item.label}` : "Stat" }),
+      },
+      fields: [
+        { type: "string", name: "value", label: "Value (e.g. 20+, $760M+)" },
+        { type: "string", name: "label", label: "Label (e.g. Years Partnered)" },
+      ],
+    },
+    {
       type: "rich-text",
       name: "body",
       label: "Case Study",
