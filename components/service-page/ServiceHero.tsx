@@ -126,7 +126,12 @@ export default function ServiceHero({
           {hasVisual && (
             <div
               className="service-hero-visual-wrap reveal reveal-d2"
-              style={{ position: "relative" }}
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "480px",
+                marginLeft: "auto",
+              }}
             >
               {visual}
             </div>
