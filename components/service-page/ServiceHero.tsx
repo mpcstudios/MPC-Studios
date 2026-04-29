@@ -9,8 +9,10 @@ export type ServiceHeroProps = {
   /** "All services" back link href. Defaults to /services. */
   backHref?: string;
   backLabel?: string;
-  /** Optional visual rendered on the right half of the hero. */
+  /** Optional visual rendered alongside the hero copy. */
   visual?: ReactNode;
+  /** Which side of the grid the visual sits on. Defaults to "right". */
+  visualSide?: "left" | "right";
 };
 
 export default function ServiceHero({
@@ -21,8 +23,10 @@ export default function ServiceHero({
   backHref = "/services",
   backLabel = "← All services",
   visual,
+  visualSide = "right",
 }: ServiceHeroProps) {
   const hasVisual = Boolean(visual);
+  const visualOnLeft = visualSide === "left";
 
   return (
     <section
@@ -71,13 +75,32 @@ export default function ServiceHero({
             hasVisual
               ? {
                   display: "grid",
-                  gridTemplateColumns: "minmax(0, 11fr) minmax(0, 9fr)",
+                  gridTemplateColumns: visualOnLeft
+                    ? "minmax(0, 9fr) minmax(0, 11fr)"
+                    : "minmax(0, 11fr) minmax(0, 9fr)",
                   gap: "60px",
                   alignItems: "center",
                 }
               : undefined
           }
         >
+          {hasVisual && visualOnLeft && (
+            <div
+              className="service-hero-visual-wrap reveal reveal-d2"
+              style={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "flex-start",
+                /* Reserve space so the accent card can poke out below
+                   the primary without forcing the section to grow. */
+                paddingBottom: "40px",
+                paddingRight: "60px",
+              }}
+            >
+              {visual}
+            </div>
+          )}
+
           <div className="reveal reveal-d1" style={{ maxWidth: "820px" }}>
             <p
               style={{
@@ -123,7 +146,7 @@ export default function ServiceHero({
             </p>
           </div>
 
-          {hasVisual && (
+          {hasVisual && !visualOnLeft && (
             <div
               className="service-hero-visual-wrap reveal reveal-d2"
               style={{
