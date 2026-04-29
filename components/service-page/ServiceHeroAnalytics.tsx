@@ -29,16 +29,14 @@ export default function ServiceHeroAnalytics({
   return (
     <div
       className="service-hero-visual"
-      style={{ position: "relative", width: "100%", height: "380px" }}
+      style={{ position: "relative", display: "inline-block" }}
     >
       {/* Dashboard card */}
       <div
         className="anim-float1"
         style={{
-          position: "absolute",
-          top: "10px",
-          right: "0",
-          width: "min(440px, 100%)",
+          position: "relative",
+          width: "440px",
           background: "#0E0E0E",
           color: "#fff",
           borderRadius: "22px",
@@ -257,8 +255,8 @@ export default function ServiceHeroAnalytics({
         className="anim-float3"
         style={{
           position: "absolute",
-          bottom: "30px",
-          left: "0",
+          bottom: "-20px",
+          left: "-40px",
           background: "#fff",
           borderRadius: "16px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.10)",

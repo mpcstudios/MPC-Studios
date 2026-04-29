@@ -128,9 +128,12 @@ export default function ServiceHero({
               className="service-hero-visual-wrap reveal reveal-d2"
               style={{
                 position: "relative",
-                width: "100%",
-                maxWidth: "480px",
-                marginLeft: "auto",
+                display: "flex",
+                justifyContent: "flex-end",
+                /* Reserve space so the accent card can poke out below
+                   the primary without forcing the section to grow. */
+                paddingBottom: "40px",
+                paddingLeft: "60px",
               }}
             >
               {visual}
