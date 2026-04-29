@@ -208,7 +208,7 @@ export default function ServiceHeroChat({
         className="anim-float3"
         style={{
           position: "absolute",
-          bottom: "0",
+          bottom: "30px",
           left: "0",
           background: "#fff",
           borderRadius: "16px",

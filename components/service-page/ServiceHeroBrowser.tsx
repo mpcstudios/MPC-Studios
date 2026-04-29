@@ -162,7 +162,7 @@ export default function ServiceHeroPlaceholder({
         className="anim-float3"
         style={{
           position: "absolute",
-          bottom: "0",
+          bottom: "90px",
           left: "0",
           background: "#fff",
           borderRadius: "16px",
