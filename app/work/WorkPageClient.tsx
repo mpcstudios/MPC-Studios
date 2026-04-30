@@ -12,6 +12,9 @@ export type WorkListItem = {
   title: string;
   bg: string;
   coverImage?: string;
+  industry?: string;
+  description?: string;
+  stat?: { value: string; label: string };
 };
 
 export type TestimonialListItem = {
@@ -67,7 +70,6 @@ export default function WorkPageClient({
                 <ProjectRow
                   key={p.slug}
                   project={p}
-                  index={i + 1}
                   /* Alternate image side per row for editorial rhythm. */
                   imageSide={i % 2 === 0 ? "left" : "right"}
                 />
@@ -122,14 +124,11 @@ export default function WorkPageClient({
 
 function ProjectRow({
   project,
-  index,
   imageSide,
 }: {
   project: WorkListItem;
-  index: number;
   imageSide: "left" | "right";
 }) {
-  const indexLabel = String(index).padStart(2, "0");
   const imageOnLeft = imageSide === "left";
 
   return (
@@ -159,8 +158,6 @@ function ProjectRow({
           arrow.style.color = "#fff";
           arrow.style.transform = "translateX(6px)";
         }
-        const idx = e.currentTarget.querySelector<HTMLElement>("[data-index]");
-        if (idx) idx.style.color = "#F77837";
       }}
       onMouseLeave={(e) => {
         const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
@@ -171,8 +168,6 @@ function ProjectRow({
           arrow.style.color = "#0E0E0E";
           arrow.style.transform = "translateX(0)";
         }
-        const idx = e.currentTarget.querySelector<HTMLElement>("[data-index]");
-        if (idx) idx.style.color = "rgba(14,14,14,0.08)";
       }}
     >
       {/* Image */}
@@ -231,37 +226,45 @@ function ProjectRow({
           gridRow: 1,
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
+          gap: "18px",
         }}
       >
-        <div
-          data-index
+        {/* Industry badge */}
+        {project.industry && (
+          <span
+            style={{
+              alignSelf: "flex-start",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              padding: "8px 14px",
+              borderRadius: "100px",
+              background: "rgba(247,120,55,0.10)",
+              color: "#F77837",
+              border: "1px solid rgba(247,120,55,0.25)",
+            }}
+          >
+            {project.industry}
+          </span>
+        )}
+
+        {/* Client name */}
+        <p
           style={{
             fontFamily:
               'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontSize: "clamp(2.4rem, 4vw, 4rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            color: "rgba(14,14,14,0.08)",
-            lineHeight: 1,
-            transition: "color 0.3s",
-          }}
-        >
-          {indexLabel}
-        </div>
-
-        <p
-          style={{
-            fontSize: "0.85rem",
-            fontWeight: 600,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#F77837",
+            fontSize: "1.1rem",
+            fontWeight: 700,
+            letterSpacing: "-0.01em",
+            color: "#0E0E0E",
+            margin: 0,
           }}
         >
           {project.client}
         </p>
 
+        {/* Title */}
         <h3
           style={{
             fontFamily:
@@ -271,18 +274,73 @@ function ProjectRow({
             letterSpacing: "-0.02em",
             color: "#0E0E0E",
             lineHeight: 1.2,
+            margin: 0,
           }}
         >
           {project.title}
         </h3>
 
+        {/* Description / services line */}
+        {project.description && (
+          <p
+            style={{
+              fontSize: "1rem",
+              lineHeight: 1.6,
+              color: "#7A7670",
+              margin: 0,
+            }}
+          >
+            {project.description}
+          </p>
+        )}
+
+        {/* Featured stat */}
+        {project.stat && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: "14px",
+              marginTop: "4px",
+              paddingTop: "18px",
+              borderTop: "1px solid rgba(14,14,14,0.08)",
+            }}
+          >
+            <span
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.02em",
+                color: "#F77837",
+                lineHeight: 1,
+              }}
+            >
+              {project.stat.value}
+            </span>
+            <span
+              style={{
+                fontSize: "0.78rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#7A7670",
+              }}
+            >
+              {project.stat.label}
+            </span>
+          </div>
+        )}
+
+        {/* CTA */}
         <div
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: "12px",
-            marginTop: "8px",
-            fontSize: "0.95rem",
+            marginTop: "12px",
+            fontSize: "0.92rem",
             fontWeight: 700,
             letterSpacing: "0.04em",
             textTransform: "uppercase",

@@ -39,6 +39,16 @@ const getWorkPageData = unstable_cache(
         title: n.title,
         bg: n.bg ?? "#0E0E0E",
         coverImage: n.coverImage ?? undefined,
+        industry: n.industry ?? undefined,
+        description: n.description ?? undefined,
+        stat: (() => {
+          for (const s of n.stats ?? []) {
+            if (s && s.value && s.label) {
+              return { value: s.value, label: s.label };
+            }
+          }
+          return undefined;
+        })(),
       }));
 
     const testimonials: TestimonialListItem[] = (
@@ -56,7 +66,7 @@ const getWorkPageData = unstable_cache(
 
     return { projects, testimonials };
   },
-  ["work-page-data-v2"],
+  ["work-page-data-v3"],
   { revalidate: 3600, tags: ["project", "testimonial"] },
 );
 
