@@ -188,17 +188,6 @@ export default function Footer() {
 
           {/* Contact block — sits beneath the Made in Texas badge */}
           <div style={{ marginTop: "12px" }}>
-            <h4
-              style={{
-                fontSize: "0.72rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "rgba(255,255,255,0.25)",
-                marginBottom: "16px",
-              }}
-            >
-              Contact
-            </h4>
             <ul
               style={{
                 listStyle: "none",
