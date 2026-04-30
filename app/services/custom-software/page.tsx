@@ -21,8 +21,8 @@ export default function Page() {
     <ServicePageShell>
       <ServiceHero
         {...data.hero}
-        visualSide="left"
-        visual={<ServiceHeroPhone accentSide="right" />}
+        visualAlign="start"
+        visual={<ServiceHeroPhone />}
       />
       <ServiceIntro paragraphs={data.intro} />
       <ServiceDeliverables items={data.deliverables} />

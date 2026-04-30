@@ -10,12 +10,6 @@ export type ServiceHeroPhoneProps = {
   accentLabel?: string;
   accentValue?: string;
   accentSubLabel?: string;
-  /**
-   * Which corner of the phone the accent card overhangs from. Use
-   * "right" when the phone is positioned on the left side of the
-   * layout so the accent pokes out toward the text column.
-   */
-  accentSide?: "left" | "right";
 };
 
 export default function ServiceHeroPhone({
@@ -28,9 +22,7 @@ export default function ServiceHeroPhone({
   accentLabel = "Always on",
   accentValue = "99.9%",
   accentSubLabel = "Uptime / 12 mo",
-  accentSide = "left",
 }: ServiceHeroPhoneProps) {
-  const accentOnRight = accentSide === "right";
   return (
     <div
       className="service-hero-visual"
@@ -262,9 +254,7 @@ export default function ServiceHeroPhone({
         style={{
           position: "absolute",
           bottom: "-20px",
-          ...(accentOnRight
-            ? { right: "-40px" }
-            : { left: "-40px" }),
+          left: "-40px",
           background: "#fff",
           borderRadius: "16px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.10)",

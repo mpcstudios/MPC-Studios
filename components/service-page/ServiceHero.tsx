@@ -9,10 +9,14 @@ export type ServiceHeroProps = {
   /** "All services" back link href. Defaults to /services. */
   backHref?: string;
   backLabel?: string;
-  /** Optional visual rendered alongside the hero copy. */
+  /** Optional visual rendered on the right half of the hero. */
   visual?: ReactNode;
-  /** Which side of the grid the visual sits on. Defaults to "right". */
-  visualSide?: "left" | "right";
+  /**
+   * How the visual aligns inside its column. Defaults to "end" (the
+   * visual hugs the right edge of the column). Use "start" or "center"
+   * to pull the visual closer to the text column.
+   */
+  visualAlign?: "start" | "center" | "end";
 };
 
 export default function ServiceHero({
@@ -23,10 +27,15 @@ export default function ServiceHero({
   backHref = "/services",
   backLabel = "← All services",
   visual,
-  visualSide = "right",
+  visualAlign = "end",
 }: ServiceHeroProps) {
   const hasVisual = Boolean(visual);
-  const visualOnLeft = visualSide === "left";
+  const justifyContent =
+    visualAlign === "start"
+      ? "flex-start"
+      : visualAlign === "center"
+        ? "center"
+        : "flex-end";
 
   return (
     <section
@@ -75,32 +84,13 @@ export default function ServiceHero({
             hasVisual
               ? {
                   display: "grid",
-                  gridTemplateColumns: visualOnLeft
-                    ? "minmax(0, 9fr) minmax(0, 11fr)"
-                    : "minmax(0, 11fr) minmax(0, 9fr)",
+                  gridTemplateColumns: "minmax(0, 11fr) minmax(0, 9fr)",
                   gap: "60px",
                   alignItems: "center",
                 }
               : undefined
           }
         >
-          {hasVisual && visualOnLeft && (
-            <div
-              className="service-hero-visual-wrap reveal reveal-d2"
-              style={{
-                position: "relative",
-                display: "flex",
-                justifyContent: "flex-start",
-                /* Reserve space so the accent card can poke out below
-                   the primary without forcing the section to grow. */
-                paddingBottom: "40px",
-                paddingRight: "60px",
-              }}
-            >
-              {visual}
-            </div>
-          )}
-
           <div className="reveal reveal-d1" style={{ maxWidth: "820px" }}>
             <p
               style={{
@@ -146,13 +136,13 @@ export default function ServiceHero({
             </p>
           </div>
 
-          {hasVisual && !visualOnLeft && (
+          {hasVisual && (
             <div
               className="service-hero-visual-wrap reveal reveal-d2"
               style={{
                 position: "relative",
                 display: "flex",
-                justifyContent: "flex-end",
+                justifyContent,
                 /* Reserve space so the accent card can poke out below
                    the primary without forcing the section to grow. */
                 paddingBottom: "40px",
