@@ -139,7 +139,11 @@ function ProjectRow({
       data-hover
       style={{
         display: "grid",
-        gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
+        /* Image side is always the wider 1.4fr column so left/right
+           rows render with identical image dimensions. */
+        gridTemplateColumns: imageOnLeft
+          ? "minmax(0, 1.4fr) minmax(0, 1fr)"
+          : "minmax(0, 1fr) minmax(0, 1.4fr)",
         gap: "clamp(40px, 6vw, 100px)",
         alignItems: "center",
         cursor: "none",
