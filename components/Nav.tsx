@@ -112,7 +112,7 @@ export default function Nav() {
           {links.map(({ label, href, children }) => {
             const isActive =
               pathname === href ||
-              (href !== "/" && pathname.startsWith(`${href}/`));
+              (href !== "/" && (pathname?.startsWith(`${href}/`) ?? false));
             const restingColor = isActive ? "#F77837" : "#0E0E0E";
             return (
             <li
@@ -316,7 +316,7 @@ export default function Nav() {
             {links.map(({ label, href, children }) => {
               const isActive =
                 pathname === href ||
-                (href !== "/" && pathname.startsWith(`${href}/`));
+                (href !== "/" && (pathname?.startsWith(`${href}/`) ?? false));
               return (
               <li key={label} style={{ borderBottom: "1px solid #f0f0f0" }}>
                 <div
