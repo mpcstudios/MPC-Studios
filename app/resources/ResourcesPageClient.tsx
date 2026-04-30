@@ -83,7 +83,7 @@ export default function ResourcesPageClient({
                   <div
                     style={{
                       width: "100%",
-                      aspectRatio: "16 / 11",
+                      aspectRatio: "16 / 9",
                       background: featured.coverImage
                         ? `#0E0E0E url(${featured.coverImage}) center/cover no-repeat`
                         : featured.bg,
