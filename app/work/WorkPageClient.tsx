@@ -28,8 +28,6 @@ export default function WorkPageClient({
   projects: WorkListItem[];
   testimonials: TestimonialListItem[];
 }) {
-  const heroProject = projects[0];
-  const restProjects = projects.slice(1);
 
   return (
     <>
@@ -54,15 +52,6 @@ export default function WorkPageClient({
           </div>
         </section>
 
-        {/* Featured project — full-width editorial hero */}
-        {heroProject && (
-          <section style={{ background: "#fff", padding: "60px 0 0" }}>
-            <div className="content-wrap">
-              <FeaturedProjectCard project={heroProject} />
-            </div>
-          </section>
-        )}
-
         {/* Project rows — each project gets its own full-width editorial row */}
         <section className="section-pad" style={{ background: "#fff" }}>
           <div className="content-wrap">
@@ -74,12 +63,11 @@ export default function WorkPageClient({
                 gap: "120px",
               }}
             >
-              {restProjects.map((p, i) => (
+              {projects.map((p, i) => (
                 <ProjectRow
                   key={p.slug}
                   project={p}
-                  /* Index 0 in this list = project #02 overall (featured was #01). */
-                  index={i + 2}
+                  index={i + 1}
                   /* Alternate image side per row for editorial rhythm. */
                   imageSide={i % 2 === 0 ? "left" : "right"}
                 />
@@ -323,141 +311,3 @@ function ProjectRow({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Featured project — full-width editorial card with overlay copy            */
-/* -------------------------------------------------------------------------- */
-
-function FeaturedProjectCard({ project }: { project: WorkListItem }) {
-  return (
-    <Link
-      href={`/work/${project.slug}`}
-      className="reveal"
-      data-hover
-      style={{
-        position: "relative",
-        display: "block",
-        cursor: "none",
-        textDecoration: "none",
-        color: "inherit",
-        borderRadius: "24px",
-        overflow: "hidden",
-        transition: "transform 0.3s",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
-        if (img) img.style.transform = "scale(1.04)";
-        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
-        if (arrow) { arrow.style.background = "#F77837"; arrow.style.color = "#fff"; }
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
-        if (img) img.style.transform = "scale(1)";
-        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
-        if (arrow) { arrow.style.background = "rgba(255,255,255,0.95)"; arrow.style.color = "#0E0E0E"; }
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          aspectRatio: "21 / 9",
-          position: "relative",
-          overflow: "hidden",
-          background: project.bg,
-        }}
-      >
-        <div
-          data-image
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: project.coverImage
-              ? `linear-gradient(180deg, rgba(13,26,46,0.25) 0%, rgba(13,26,46,0.75) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}`
-              : project.bg,
-            transition: "transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1)",
-          }}
-        />
-        {/* Featured pill */}
-        <span
-          style={{
-            position: "absolute",
-            top: "24px",
-            left: "24px",
-            fontSize: "0.72rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            padding: "8px 14px",
-            borderRadius: "100px",
-            background: "rgba(255,255,255,0.95)",
-            color: "#0E0E0E",
-            zIndex: 2,
-          }}
-        >
-          Featured · Most recent
-        </span>
-        {/* Arrow CTA */}
-        <div
-          data-arrow
-          style={{
-            position: "absolute",
-            top: "24px",
-            right: "24px",
-            width: "52px",
-            height: "52px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.95)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "1.4rem",
-            color: "#0E0E0E",
-            transition: "background 0.2s, color 0.2s",
-            zIndex: 2,
-          }}
-        >
-          ↗
-        </div>
-        {/* Bottom overlay copy */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            padding: "40px clamp(24px, 4vw, 56px)",
-            zIndex: 2,
-          }}
-        >
-          <p
-            style={{
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.7)",
-              marginBottom: "12px",
-            }}
-          >
-            {project.client}
-          </p>
-          <p
-            style={{
-              fontFamily:
-                'var(--font-display, "Bricolage Grotesque", sans-serif)',
-              fontSize: "clamp(1.6rem, 2.6vw, 2.6rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              color: "#fff",
-              lineHeight: 1.18,
-              maxWidth: "780px",
-            }}
-          >
-            {project.title}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
