@@ -52,7 +52,7 @@ export default function Work({ projects }: { projects: WorkProject[] }) {
             </h2>
           </div>
           <Link
-            href="#"
+            href="/work"
             className="reveal reveal-d1"
             style={{
               display: "inline-flex",
