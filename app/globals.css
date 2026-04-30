@@ -293,8 +293,12 @@ body {
     background-position 0.9s ease-out,
     transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2),
     box-shadow 0.25s ease;
-  /* Lifts white text off the lighter yellow portion of the gradient. */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  /* Lifts white text off the lighter yellow portion of the gradient.
+     Stacked tight + soft drop so the label stays legible across the
+     full sweep, including the brightest yellow part. */
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.25);
 }
 .btn-gradient:hover {
   background-position: 100% 100%;
@@ -318,7 +322,9 @@ body {
   isolation: isolate;
   border: 1.5px solid transparent;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.25);
   box-shadow: 0 4px 14px rgba(247, 120, 55, 0.28);
   transform: translateY(0) scale(1);
   will-change: transform;
