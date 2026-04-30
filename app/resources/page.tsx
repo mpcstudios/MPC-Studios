@@ -138,7 +138,44 @@ export default async function ResourcesPage() {
     }));
 
   const rows: CategoryRow[] = [...knownRows, ...strayRows];
-  const featured = all.length > 0 ? all[0] : null;
 
-  return <ResourcesPageClient rows={rows} featured={featured} />;
+  // Featured rail — pull the most recent post from each of these categories
+  // in this order. Skip any category with no posts; fall back to the latest
+  // overall posts to keep the rail full if a category is empty.
+  const FEATURED_CATEGORY_ORDER = [
+    "Digital Marketing",
+    "Web Design",
+    "AI & Automation",
+    "Branding",
+    "Content",
+  ];
+
+  const seenSlugs = new Set<string>();
+  const featuredOrdered: BlogCardItem[] = [];
+  for (const label of FEATURED_CATEGORY_ORDER) {
+    const first = (buckets.get(label) ?? [])[0];
+    if (first && !seenSlugs.has(first.slug)) {
+      featuredOrdered.push(first);
+      seenSlugs.add(first.slug);
+    }
+  }
+  // Backfill from the global newest-first list if any slot is empty.
+  for (const post of all) {
+    if (featuredOrdered.length >= 5) break;
+    if (!seenSlugs.has(post.slug)) {
+      featuredOrdered.push(post);
+      seenSlugs.add(post.slug);
+    }
+  }
+
+  const featured = featuredOrdered[0] ?? null;
+  const featuredStack = featuredOrdered.slice(1, 5);
+
+  return (
+    <ResourcesPageClient
+      rows={rows}
+      featured={featured}
+      featuredStack={featuredStack}
+    />
+  );
 }

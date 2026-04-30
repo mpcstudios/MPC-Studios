@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/Nav";
 import PageTransition from "@/components/PageTransition";
 
 const bricolage = Bricolage_Grotesque({
@@ -33,6 +34,7 @@ export default function RootLayout({
         className="antialiased"
         style={{ fontFamily: 'var(--font-body, "DM Sans", sans-serif)' }}
       >
+        <Nav />
         {children}
         <PageTransition />
       </body>

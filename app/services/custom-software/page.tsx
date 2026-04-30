@@ -19,7 +19,11 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <ServicePageShell>
-      <ServiceHero {...data.hero} visual={<ServiceHeroPhone />} />
+      <ServiceHero
+        {...data.hero}
+        visualAlign="start"
+        visual={<ServiceHeroPhone />}
+      />
       <ServiceIntro paragraphs={data.intro} />
       <ServiceDeliverables items={data.deliverables} />
       <ServiceProcess steps={data.process} />

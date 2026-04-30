@@ -95,7 +95,9 @@ export default function PageTransition() {
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 9999,
+        /* Stay below the fixed nav (z-index: 100) so the header
+           remains visible during the white-fade transition. */
+        zIndex: 90,
         pointerEvents: "none",
       }}
     >

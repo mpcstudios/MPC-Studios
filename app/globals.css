@@ -592,6 +592,10 @@ body {
 
   /* Resources / Blog */
   .resources-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+  .resources-featured-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
   .resources-hero-pad { padding: 140px 0 60px !important; }
   .blog-hero-pad      { padding: 140px 0 50px !important; }
 }

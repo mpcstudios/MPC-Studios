@@ -3,7 +3,6 @@ import Link from "next/link";
 import client from "@/tina/__generated__/databaseClient";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ProjectBody from "./ProjectBody";
@@ -29,7 +28,6 @@ export default async function ProjectPage({
     <>
       <Cursor />
       <RevealInit />
-      <Nav />
 
       <main>
         <section style={{ background: "#fff", padding: "200px 0 80px" }}>

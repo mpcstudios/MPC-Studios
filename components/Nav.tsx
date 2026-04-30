@@ -109,7 +109,12 @@ export default function Nav() {
             padding: 0,
           }}
         >
-          {links.map(({ label, href, children }) => (
+          {links.map(({ label, href, children }) => {
+            const isActive =
+              pathname === href ||
+              (href !== "/" && (pathname?.startsWith(`${href}/`) ?? false));
+            const restingColor = isActive ? "#F77837" : "#0E0E0E";
+            return (
             <li
               key={label}
               style={{ position: "relative" }}
@@ -118,22 +123,27 @@ export default function Nav() {
             >
               <Link
                 href={href}
+                aria-current={isActive ? "page" : undefined}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
                   fontSize: "1.1rem",
                   fontWeight: 700,
-                  color: openMenu === label ? "#F77837" : "#0E0E0E",
+                  color: openMenu === label ? "#F77837" : restingColor,
                   textDecoration: "none",
                   transition: "color 0.2s",
+                  paddingBottom: "4px",
+                  borderBottom: `2px solid ${
+                    isActive ? "#F77837" : "transparent"
+                  }`,
                 }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLElement).style.color = "#F77837")
                 }
                 onMouseLeave={(e) =>
                   ((e.currentTarget as HTMLElement).style.color =
-                    openMenu === label ? "#F77837" : "#0E0E0E")
+                    openMenu === label ? "#F77837" : restingColor)
                 }
               >
                 {label}
@@ -234,7 +244,8 @@ export default function Nav() {
                 </div>
               )}
             </li>
-          ))}
+            );
+          })}
         </ul>
 
         {/* Desktop CTA */}
@@ -302,7 +313,11 @@ export default function Nav() {
           }}
         >
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {links.map(({ label, href, children }) => (
+            {links.map(({ label, href, children }) => {
+              const isActive =
+                pathname === href ||
+                (href !== "/" && (pathname?.startsWith(`${href}/`) ?? false));
+              return (
               <li key={label} style={{ borderBottom: "1px solid #f0f0f0" }}>
                 <div
                   style={{
@@ -313,6 +328,7 @@ export default function Nav() {
                 >
                   <Link
                     href={href}
+                    aria-current={isActive ? "page" : undefined}
                     onClick={() => {
                       setMenuOpen(false);
                       setMobileServicesOpen(false);
@@ -324,7 +340,7 @@ export default function Nav() {
                         'var(--font-display, "Bricolage Grotesque", sans-serif)',
                       fontSize: "2rem",
                       fontWeight: 800,
-                      color: "#0E0E0E",
+                      color: isActive ? "#F77837" : "#0E0E0E",
                       textDecoration: "none",
                       padding: "20px 0",
                       letterSpacing: "-0.02em",
@@ -361,10 +377,13 @@ export default function Nav() {
                       margin: 0,
                     }}
                   >
-                    {children.map((child) => (
+                    {children.map((child) => {
+                      const childActive = pathname === child.href;
+                      return (
                       <li key={child.href}>
                         <Link
                           href={child.href}
+                          aria-current={childActive ? "page" : undefined}
                           onClick={() => {
                             setMenuOpen(false);
                             setMobileServicesOpen(false);
@@ -373,7 +392,7 @@ export default function Nav() {
                             display: "block",
                             fontSize: "1.05rem",
                             fontWeight: 600,
-                            color: "#7A7670",
+                            color: childActive ? "#F77837" : "#7A7670",
                             textDecoration: "none",
                             padding: "10px 0",
                           }}
@@ -381,11 +400,13 @@ export default function Nav() {
                           {child.label}
                         </Link>
                       </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 )}
               </li>
-            ))}
+              );
+            })}
           </ul>
           <Link
             href="/contact"

@@ -11,6 +11,12 @@ export type ServiceHeroProps = {
   backLabel?: string;
   /** Optional visual rendered on the right half of the hero. */
   visual?: ReactNode;
+  /**
+   * How the visual aligns inside its column. Defaults to "end" (the
+   * visual hugs the right edge of the column). Use "start" or "center"
+   * to pull the visual closer to the text column.
+   */
+  visualAlign?: "start" | "center" | "end";
 };
 
 export default function ServiceHero({
@@ -21,8 +27,15 @@ export default function ServiceHero({
   backHref = "/services",
   backLabel = "← All services",
   visual,
+  visualAlign = "end",
 }: ServiceHeroProps) {
   const hasVisual = Boolean(visual);
+  const justifyContent =
+    visualAlign === "start"
+      ? "flex-start"
+      : visualAlign === "center"
+        ? "center"
+        : "flex-end";
 
   return (
     <section
@@ -126,7 +139,15 @@ export default function ServiceHero({
           {hasVisual && (
             <div
               className="service-hero-visual-wrap reveal reveal-d2"
-              style={{ position: "relative" }}
+              style={{
+                position: "relative",
+                display: "flex",
+                justifyContent,
+                /* Reserve space so the accent card can poke out below
+                   the primary without forcing the section to grow. */
+                paddingBottom: "40px",
+                paddingLeft: "60px",
+              }}
             >
               {visual}
             </div>

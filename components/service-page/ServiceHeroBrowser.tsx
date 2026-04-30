@@ -24,18 +24,15 @@ export default function ServiceHeroPlaceholder({
       className="service-hero-visual"
       style={{
         position: "relative",
-        width: "100%",
-        height: "380px",
+        display: "inline-block",
       }}
     >
       {/* Primary card — mock browser window, bobs gently */}
       <div
         className="anim-float1"
         style={{
-          position: "absolute",
-          top: "20px",
-          right: "0",
-          width: "min(420px, 100%)",
+          position: "relative",
+          width: "420px",
           background: "#0E0E0E",
           color: "#fff",
           borderRadius: "20px",
@@ -162,8 +159,8 @@ export default function ServiceHeroPlaceholder({
         className="anim-float3"
         style={{
           position: "absolute",
-          bottom: "0",
-          left: "0",
+          bottom: "-20px",
+          left: "-40px",
           background: "#fff",
           borderRadius: "16px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.10)",

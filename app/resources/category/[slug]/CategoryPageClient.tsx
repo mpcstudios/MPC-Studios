@@ -4,7 +4,6 @@ import { type CSSProperties } from "react";
 import Link from "next/link";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -37,7 +36,6 @@ export default function CategoryPageClient({
     <>
       <Cursor />
       <RevealInit />
-      <Nav />
 
       <main>
         {/* Hero */}

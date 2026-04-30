@@ -3,7 +3,6 @@ import Link from "next/link";
 import client from "@/tina/__generated__/databaseClient";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import PostBody from "./PostBody";
@@ -37,7 +36,6 @@ export default async function BlogPostPage({
     <>
       <Cursor />
       <RevealInit />
-      <Nav />
 
       <main>
         <section className="blog-hero-pad" style={{ background: "#fff" }}>

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 const contactInfo = [
@@ -36,7 +35,6 @@ export default function ContactPage() {
     <>
       <Cursor />
       <RevealInit />
-      <Nav />
 
       <main>
         {/* Hero */}
