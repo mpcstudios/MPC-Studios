@@ -77,6 +77,13 @@ const serviceLinks: FooterItem[] = [
   { label: "Digital Marketing Strategy", href: "/services/digital-marketing" },
   { label: "All services →", href: "/services" },
 ];
+const industryLinks: FooterItem[] = [
+  { label: "Banking", href: "/industries/banking" },
+  { label: "Legal", href: "/industries/legal" },
+  { label: "Construction", href: "/industries/construction" },
+  { label: "Research", href: "/industries/research" },
+  { label: "All industries →", href: "/industries" },
+];
 const companyLinks: FooterItem[] = [
   { label: "About Us", href: "/about" },
   { label: "Our Work", href: "/work" },
@@ -178,31 +185,30 @@ export default function Footer() {
               Made in Texas
             </span>
           </div>
-        </div>
 
-        {/* Columns */}
-        <div
-          style={{
-            display: "flex",
-            gap: "64px",
-            flexWrap: "wrap",
-          }}
-        >
-          <FooterCol title="Services" items={serviceLinks} />
-          <FooterCol title="Company" items={companyLinks} />
-          <div>
+          {/* Contact block — sits beneath the Made in Texas badge */}
+          <div style={{ marginTop: "12px" }}>
             <h4
               style={{
                 fontSize: "0.72rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 color: "rgba(255,255,255,0.25)",
-                marginBottom: "20px",
+                marginBottom: "16px",
               }}
             >
               Contact
             </h4>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", padding: 0, margin: 0 }}>
+            <ul
+              style={{
+                listStyle: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                padding: 0,
+                margin: 0,
+              }}
+            >
               {[
                 { label: "sales@mpcstudios.com", href: "mailto:sales@mpcstudios.com" },
                 { label: "+1 (956) 423-2233", href: "tel:+19564232233" },
@@ -231,6 +237,19 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Columns */}
+        <div
+          style={{
+            display: "flex",
+            gap: "64px",
+            flexWrap: "wrap",
+          }}
+        >
+          <FooterCol title="Services" items={serviceLinks} />
+          <FooterCol title="Industries" items={industryLinks} />
+          <FooterCol title="Company" items={companyLinks} />
         </div>
       </div>
 
