@@ -28,8 +28,8 @@ export default function WorkPageClient({
   projects: WorkListItem[];
   testimonials: TestimonialListItem[];
 }) {
-  const leftProjects = projects.filter((_, i) => i % 2 === 0);
-  const rightProjects = projects.filter((_, i) => i % 2 === 1);
+  const heroProject = projects[0];
+  const restProjects = projects.slice(1);
 
   return (
     <>
@@ -54,20 +54,36 @@ export default function WorkPageClient({
           </div>
         </section>
 
-        {/* Project Grid */}
+        {/* Featured project — full-width editorial hero */}
+        {heroProject && (
+          <section style={{ background: "#fff", padding: "60px 0 0" }}>
+            <div className="content-wrap">
+              <FeaturedProjectCard project={heroProject} />
+            </div>
+          </section>
+        )}
+
+        {/* Project rows — each project gets its own full-width editorial row */}
         <section className="section-pad" style={{ background: "#fff" }}>
           <div className="content-wrap">
-            <div className="work-grid-offset" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "start" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
-                {leftProjects.map((p, i) => (
-                  <ProjectCard key={p.slug} project={p} delay={i} />
-                ))}
-              </div>
-              <div className="work-col-right" style={{ display: "flex", flexDirection: "column", gap: "64px", marginTop: "96px" }}>
-                {rightProjects.map((p, i) => (
-                  <ProjectCard key={p.slug} project={p} delay={i + 1} />
-                ))}
-              </div>
+            <div
+              className="work-rows"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "120px",
+              }}
+            >
+              {restProjects.map((p, i) => (
+                <ProjectRow
+                  key={p.slug}
+                  project={p}
+                  /* Index 0 in this list = project #02 overall (featured was #01). */
+                  index={i + 2}
+                  /* Alternate image side per row for editorial rhythm. */
+                  imageSide={i % 2 === 0 ? "left" : "right"}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -112,35 +128,335 @@ export default function WorkPageClient({
   );
 }
 
-function ProjectCard({ project, delay }: { project: WorkListItem; delay: number }) {
-  const delayClass = delay === 0 ? "reveal" : delay === 1 ? "reveal reveal-d1" : delay === 2 ? "reveal reveal-d2" : "reveal reveal-d3";
+/* -------------------------------------------------------------------------- */
+/*  ProjectRow — a single project as its own full-width editorial row         */
+/* -------------------------------------------------------------------------- */
+
+function ProjectRow({
+  project,
+  index,
+  imageSide,
+}: {
+  project: WorkListItem;
+  index: number;
+  imageSide: "left" | "right";
+}) {
+  const indexLabel = String(index).padStart(2, "0");
+  const imageOnLeft = imageSide === "left";
+
   return (
-    <Link href={`/work/${project.slug}`} className={delayClass} data-hover style={{ overflow: "hidden", position: "relative", cursor: "none", transition: "transform 0.3s", textDecoration: "none", color: "inherit", display: "block" }}
+    <Link
+      href={`/work/${project.slug}`}
+      className="reveal work-row"
+      data-hover
+      style={{
+        display: "grid",
+        gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
+        gap: "clamp(40px, 6vw, 100px)",
+        alignItems: "center",
+        cursor: "none",
+        textDecoration: "none",
+        color: "inherit",
+      }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1.04)";
+        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
+        if (arrow) {
+          arrow.style.background = "#F77837";
+          arrow.style.color = "#fff";
+          arrow.style.transform = "translateX(6px)";
+        }
+        const idx = e.currentTarget.querySelector<HTMLElement>("[data-index]");
+        if (idx) idx.style.color = "#F77837";
+      }}
+      onMouseLeave={(e) => {
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1)";
+        const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
+        if (arrow) {
+          arrow.style.background = "transparent";
+          arrow.style.color = "#0E0E0E";
+          arrow.style.transform = "translateX(0)";
+        }
+        const idx = e.currentTarget.querySelector<HTMLElement>("[data-index]");
+        if (idx) idx.style.color = "rgba(14,14,14,0.08)";
+      }}
+    >
+      {/* Image */}
+      <div
+        className="work-row-image"
+        style={{
+          gridColumn: imageOnLeft ? 1 : 2,
+          gridRow: 1,
+          width: "100%",
+          aspectRatio: "5 / 4",
+          borderRadius: "24px",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <div
+          data-image
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: project.coverImage
+              ? `linear-gradient(180deg, rgba(13,26,46,0.10) 0%, rgba(13,26,46,0.35) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}`
+              : project.bg,
+            transition: "transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1)",
+          }}
+        />
+        {!project.coverImage && (
+          <span
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              fontFamily:
+                'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontWeight: 800,
+              fontSize: "4rem",
+              color: "rgba(255,255,255,0.06)",
+              letterSpacing: "0.1em",
+            }}
+          >
+            {project.client
+              .split(" ")
+              .map((w) => w[0])
+              .filter((c) => /[A-Za-z]/.test(c))
+              .join("")}
+          </span>
+        )}
+      </div>
+
+      {/* Text column */}
+      <div
+        className="work-row-text"
+        style={{
+          gridColumn: imageOnLeft ? 2 : 1,
+          gridRow: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+        }}
+      >
+        <div
+          data-index
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "clamp(2.4rem, 4vw, 4rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            color: "rgba(14,14,14,0.08)",
+            lineHeight: 1,
+            transition: "color 0.3s",
+          }}
+        >
+          {indexLabel}
+        </div>
+
+        <p
+          style={{
+            fontSize: "0.85rem",
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "#F77837",
+          }}
+        >
+          {project.client}
+        </p>
+
+        <h3
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.02em",
+            color: "#0E0E0E",
+            lineHeight: 1.2,
+          }}
+        >
+          {project.title}
+        </h3>
+
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
+            marginTop: "8px",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            color: "#0E0E0E",
+          }}
+        >
+          View case study
+          <span
+            data-arrow
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              border: "1.5px solid #0E0E0E",
+              background: "transparent",
+              color: "#0E0E0E",
+              fontSize: "1.05rem",
+              transition:
+                "background 0.25s, color 0.25s, transform 0.25s",
+            }}
+          >
+            →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Featured project — full-width editorial card with overlay copy            */
+/* -------------------------------------------------------------------------- */
+
+function FeaturedProjectCard({ project }: { project: WorkListItem }) {
+  return (
+    <Link
+      href={`/work/${project.slug}`}
+      className="reveal"
+      data-hover
+      style={{
+        position: "relative",
+        display: "block",
+        cursor: "none",
+        textDecoration: "none",
+        color: "inherit",
+        borderRadius: "24px",
+        overflow: "hidden",
+        transition: "transform 0.3s",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1.04)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
         if (arrow) { arrow.style.background = "#F77837"; arrow.style.color = "#fff"; }
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
-        if (arrow) { arrow.style.background = "rgba(255,255,255,0.9)"; arrow.style.color = "#0E0E0E"; }
+        if (arrow) { arrow.style.background = "rgba(255,255,255,0.95)"; arrow.style.color = "#0E0E0E"; }
       }}
     >
-      <div style={{ width: "100%", aspectRatio: "16 / 10", background: project.coverImage ? `linear-gradient(180deg, rgba(13,26,46,0.15) 0%, rgba(13,26,46,0.45) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}` : project.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-        {!project.coverImage && (
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
-        )}
-        {!project.coverImage && (
-          <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "3rem", color: "rgba(255,255,255,0.05)", letterSpacing: "0.1em", position: "relative", zIndex: 1 }}>
-            {project.client.split(" ").map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).join("")}
-          </span>
-        )}
-      </div>
-      <div data-arrow style={{ position: "absolute", top: "16px", right: "16px", width: "38px", height: "38px", borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1rem", color: "#0E0E0E", transition: "background 0.2s, color 0.2s", zIndex: 2 }}>↗</div>
-      <div style={{ padding: "20px 4px" }}>
-        <p style={{ fontSize: "1.125rem", fontWeight: 600, color: "#7A7670", marginBottom: "8px" }}>{project.client}</p>
-        <p style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.01em", color: "#0E0E0E", lineHeight: 1.3 }}>{project.title}</p>
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: "21 / 9",
+          position: "relative",
+          overflow: "hidden",
+          background: project.bg,
+        }}
+      >
+        <div
+          data-image
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: project.coverImage
+              ? `linear-gradient(180deg, rgba(13,26,46,0.25) 0%, rgba(13,26,46,0.75) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}`
+              : project.bg,
+            transition: "transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1)",
+          }}
+        />
+        {/* Featured pill */}
+        <span
+          style={{
+            position: "absolute",
+            top: "24px",
+            left: "24px",
+            fontSize: "0.72rem",
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            padding: "8px 14px",
+            borderRadius: "100px",
+            background: "rgba(255,255,255,0.95)",
+            color: "#0E0E0E",
+            zIndex: 2,
+          }}
+        >
+          Featured · Most recent
+        </span>
+        {/* Arrow CTA */}
+        <div
+          data-arrow
+          style={{
+            position: "absolute",
+            top: "24px",
+            right: "24px",
+            width: "52px",
+            height: "52px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.95)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "1.4rem",
+            color: "#0E0E0E",
+            transition: "background 0.2s, color 0.2s",
+            zIndex: 2,
+          }}
+        >
+          ↗
+        </div>
+        {/* Bottom overlay copy */}
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            padding: "40px clamp(24px, 4vw, 56px)",
+            zIndex: 2,
+          }}
+        >
+          <p
+            style={{
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.7)",
+              marginBottom: "12px",
+            }}
+          >
+            {project.client}
+          </p>
+          <p
+            style={{
+              fontFamily:
+                'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontSize: "clamp(1.6rem, 2.6vw, 2.6rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              color: "#fff",
+              lineHeight: 1.18,
+              maxWidth: "780px",
+            }}
+          >
+            {project.title}
+          </p>
+        </div>
       </div>
     </Link>
   );
