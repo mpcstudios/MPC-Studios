@@ -103,7 +103,7 @@ export default function CTA() {
             Start a project ↗
           </Link>
           <Link
-            href="#work"
+            href="/work"
             style={{
               display: "inline-flex",
               alignItems: "center",
