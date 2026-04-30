@@ -88,7 +88,7 @@ export default function Hero() {
           }}
         >
           <Link
-            href="#contact"
+            href="/contact"
             className="btn-gradient"
             style={{
               display: "inline-flex",
@@ -105,7 +105,7 @@ export default function Hero() {
             Book a Strategy Call ↗
           </Link>
           <Link
-            href="#work"
+            href="/work"
             style={{
               display: "inline-flex",
               alignItems: "center",
