@@ -27,9 +27,11 @@ export type CategoryRow = {
 export default function ResourcesPageClient({
   rows,
   featured,
+  featuredStack = [],
 }: {
   rows: CategoryRow[];
   featured: BlogCardItem | null;
+  featuredStack?: BlogCardItem[];
 }) {
   const [email, setEmail] = useState("");
 
@@ -56,46 +58,75 @@ export default function ResourcesPageClient({
           </div>
         </section>
 
-        {/* Featured Post (across all categories) */}
+        {/* Featured Post — large hero on left, stacked recent posts on right */}
         {featured && (
           <section className="section-pad" style={{ background: "#fff" }}>
             <div className="content-wrap">
-              <Link
-                href={`/blog/${featured.slug}`}
-                className="reveal"
-                style={{ display: "block", textDecoration: "none", color: "inherit", cursor: "pointer", transition: "transform 0.3s" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(-4px)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(0)")}
+              <div
+                className="resources-featured-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    featuredStack.length > 0 ? "minmax(0, 3fr) minmax(0, 2fr)" : "minmax(0, 1fr)",
+                  gap: "48px",
+                  alignItems: "stretch",
+                }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "16 / 7",
-                    background: featured.coverImage
-                      ? `#0E0E0E url(${featured.coverImage}) center/cover no-repeat`
-                      : featured.bg,
-                    borderRadius: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "relative",
-                    overflow: "hidden",
-                    marginBottom: "28px",
-                  }}
+                {/* Hero (most recent) */}
+                <Link
+                  href={`/blog/${featured.slug}`}
+                  className="reveal"
+                  style={{ display: "block", textDecoration: "none", color: "inherit", cursor: "pointer", transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(-4px)")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "translateY(0)")}
                 >
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.1), transparent 60%)" }} />
-                  {!featured.coverImage && (
-                    <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "2rem", color: "rgba(255,255,255,0.04)", letterSpacing: "0.1em" }}>FEATURED</span>
-                  )}
-                </div>
-                <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "12px" }}>
-                  {featured.category}
-                </p>
-                <h2 style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "clamp(1.8rem, 3vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#0E0E0E", marginBottom: "12px", lineHeight: 1.2 }}>
-                  {featured.title}
-                </h2>
-                <p style={{ fontSize: "0.85rem", color: "#7A7670" }}>{featured.date} · {featured.read} read</p>
-              </Link>
+                  <div
+                    style={{
+                      width: "100%",
+                      aspectRatio: "4 / 3",
+                      background: featured.coverImage
+                        ? `#0E0E0E url(${featured.coverImage}) center/cover no-repeat`
+                        : featured.bg,
+                      borderRadius: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                      overflow: "hidden",
+                      marginBottom: "28px",
+                    }}
+                  >
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.1), transparent 60%)" }} />
+                    {!featured.coverImage && (
+                      <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "2rem", color: "rgba(255,255,255,0.04)", letterSpacing: "0.1em" }}>FEATURED</span>
+                    )}
+                  </div>
+                  <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "12px" }}>
+                    {featured.category}
+                  </p>
+                  <h2 style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "clamp(1.8rem, 3vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#0E0E0E", marginBottom: "12px", lineHeight: 1.2 }}>
+                    {featured.title}
+                  </h2>
+                  <p style={{ fontSize: "0.85rem", color: "#7A7670" }}>{featured.date} · {featured.read} read</p>
+                </Link>
+
+                {/* Stacked secondary posts */}
+                {featuredStack.length > 0 && (
+                  <div
+                    className="resources-featured-stack"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "24px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {featuredStack.map((post) => (
+                      <FeaturedStackItem key={post.slug} post={post} />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </section>
         )}
@@ -150,6 +181,88 @@ export default function ResourcesPageClient({
 
       <Footer />
     </>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Featured stack item — compact horizontal card next to the hero featured   */
+/* -------------------------------------------------------------------------- */
+
+function FeaturedStackItem({ post }: { post: BlogCardItem }) {
+  return (
+    <Link
+      href={`/blog/${post.slug}`}
+      className="resources-featured-stack-item"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "140px 1fr",
+        gap: "20px",
+        alignItems: "center",
+        textDecoration: "none",
+        color: "inherit",
+        transition: "transform 0.3s",
+      }}
+      onMouseEnter={(e) =>
+        ((e.currentTarget as HTMLElement).style.transform = "translateX(4px)")
+      }
+      onMouseLeave={(e) =>
+        ((e.currentTarget as HTMLElement).style.transform = "translateX(0)")
+      }
+    >
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: "4 / 3",
+          background: post.coverImage
+            ? `#0E0E0E url(${post.coverImage}) center/cover no-repeat`
+            : post.bg,
+          borderRadius: "12px",
+          position: "relative",
+          overflow: "hidden",
+          flexShrink: 0,
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)",
+          }}
+        />
+      </div>
+      <div style={{ minWidth: 0 }}>
+        <p
+          style={{
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "#F77837",
+            marginBottom: "6px",
+          }}
+        >
+          {post.category}
+        </p>
+        <h3
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "1.05rem",
+            fontWeight: 700,
+            letterSpacing: "-0.01em",
+            color: "#0E0E0E",
+            lineHeight: 1.3,
+            marginBottom: "6px",
+          }}
+        >
+          {post.title}
+        </h3>
+        <p style={{ fontSize: "0.78rem", color: "#7A7670" }}>
+          {post.date} · {post.read} read
+        </p>
+      </div>
+    </Link>
   );
 }
 

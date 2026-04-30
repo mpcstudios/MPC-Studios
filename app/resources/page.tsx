@@ -139,6 +139,13 @@ export default async function ResourcesPage() {
 
   const rows: CategoryRow[] = [...knownRows, ...strayRows];
   const featured = all.length > 0 ? all[0] : null;
+  const featuredStack = all.length > 1 ? all.slice(1, 4) : [];
 
-  return <ResourcesPageClient rows={rows} featured={featured} />;
+  return (
+    <ResourcesPageClient
+      rows={rows}
+      featured={featured}
+      featuredStack={featuredStack}
+    />
+  );
 }
