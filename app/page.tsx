@@ -1,6 +1,5 @@
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ClientLogos from "@/components/ClientLogos";
 import Services from "@/components/Services";
@@ -16,9 +15,6 @@ export default function Home() {
       {/* Client-side utilities */}
       <Cursor />
       <RevealInit />
-
-      {/* Navigation */}
-      <Nav />
 
       {/* Page sections */}
       <main>

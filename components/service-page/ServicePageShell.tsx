@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
-import Nav from "@/components/Nav";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -20,7 +19,6 @@ export default function ServicePageShell({
     <>
       <Cursor />
       <RevealInit />
-      <Nav />
       <main>
         {children}
         {showCTA && <CTA />}
