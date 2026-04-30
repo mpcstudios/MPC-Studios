@@ -37,11 +37,30 @@ MPC Studios is a Texas-based agency with over 25 years of experience serving cli
 
 ## Tech Stack
 
-- [Next.js 16](https://nextjs.org/) — App Router
+- [Next.js 15](https://nextjs.org/) — App Router
 - [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS v4](https://tailwindcss.com/) — CSS-first config in `globals.css`
-- Package manager: npm
+- [TinaCMS](https://tina.io/) — self-hosted, GitHub App-authenticated commits
+- Package manager: pnpm (required for ESM patches)
+
+---
+
+## Infrastructure & Secrets (v2)
+
+This site is on the MPC v2 pattern: GitHub App auth + Infisical-managed secrets.
+
+- **GitHub App:** "MPC Studios CMS" — commits content edits as `mpc-studios-cms[bot]`
+- **Infisical:** project `websites`, env `prod`, per-site folder `/sites/mpc-studios/`
+  - Per-site keys live at `/sites/mpc-studios/`
+  - Shared keys (`GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY`, `S3_*`) live at `/shared/` and are referenced as `${prod.shared.KEY}`
+- **Vercel sync:** one Secret Sync from `websites/prod/sites/mpc-studios/` → Vercel project `mpc-studios` → Production
+- **Media:** S3 bucket `mpcstudios-media`, prefix `mpc-studios/`
+
+### Local dev
+
+- `pnpm dev` — local mode (no auth, no real commits, content writes to disk on `/admin` save)
+- `pnpm dev:prod` — prod mode (real auth, Redis, real commits via the App). Requires `infisical login` + write access to the `websites` project's `prod` env.
 
 ---
 
