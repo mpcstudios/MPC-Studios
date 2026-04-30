@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
-    "dev:prod": "TINA_PUBLIC_IS_LOCAL=false infisical run --env=prod --path=/sites/mpc-studios -- tinacms dev -c \"next dev\"",
+    "dev:prod": "TINA_PUBLIC_IS_LOCAL=false infisical run --env=prod --path=//sites/mpc-studios -- tinacms dev -c \"next dev\"",
     "build": "tinacms build && bash scripts/patch-admin.sh && next build",
     "start": "next start",
     "lint": "eslint"
