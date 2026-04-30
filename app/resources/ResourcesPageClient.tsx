@@ -83,7 +83,7 @@ export default function ResourcesPageClient({
                   <div
                     style={{
                       width: "100%",
-                      aspectRatio: "4 / 3",
+                      aspectRatio: "16 / 11",
                       background: featured.coverImage
                         ? `#0E0E0E url(${featured.coverImage}) center/cover no-repeat`
                         : featured.bg,
@@ -93,7 +93,7 @@ export default function ResourcesPageClient({
                       justifyContent: "center",
                       position: "relative",
                       overflow: "hidden",
-                      marginBottom: "28px",
+                      marginBottom: "24px",
                     }}
                   >
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.1), transparent 60%)" }} />
@@ -117,8 +117,8 @@ export default function ResourcesPageClient({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "24px",
-                      justifyContent: "space-between",
+                      gap: "18px",
+                      justifyContent: "flex-start",
                     }}
                   >
                     {featuredStack.map((post) => (
@@ -195,8 +195,8 @@ function FeaturedStackItem({ post }: { post: BlogCardItem }) {
       className="resources-featured-stack-item"
       style={{
         display: "grid",
-        gridTemplateColumns: "140px 1fr",
-        gap: "20px",
+        gridTemplateColumns: "120px 1fr",
+        gap: "16px",
         alignItems: "center",
         textDecoration: "none",
         color: "inherit",
