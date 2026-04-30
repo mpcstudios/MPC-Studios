@@ -12,6 +12,9 @@ export type WorkListItem = {
   title: string;
   bg: string;
   coverImage?: string;
+  industry?: string;
+  description?: string;
+  stat?: { value: string; label: string };
 };
 
 export type TestimonialListItem = {
@@ -28,8 +31,6 @@ export default function WorkPageClient({
   projects: WorkListItem[];
   testimonials: TestimonialListItem[];
 }) {
-  const leftProjects = projects.filter((_, i) => i % 2 === 0);
-  const rightProjects = projects.filter((_, i) => i % 2 === 1);
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function WorkPageClient({
 
       <main>
         {/* Hero */}
-        <section style={{ background: "#fff", padding: "200px 0 100px" }}>
+        <section style={{ background: "#F4F3F1", padding: "200px 0 100px" }}>
           <div className="content-wrap">
             <div className="reveal" style={{ maxWidth: "720px" }}>
               <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "20px" }}>
@@ -54,20 +55,25 @@ export default function WorkPageClient({
           </div>
         </section>
 
-        {/* Project Grid */}
+        {/* Project rows — each project gets its own full-width editorial row */}
         <section className="section-pad" style={{ background: "#fff" }}>
           <div className="content-wrap">
-            <div className="work-grid-offset" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "start" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
-                {leftProjects.map((p, i) => (
-                  <ProjectCard key={p.slug} project={p} delay={i} />
-                ))}
-              </div>
-              <div className="work-col-right" style={{ display: "flex", flexDirection: "column", gap: "64px", marginTop: "96px" }}>
-                {rightProjects.map((p, i) => (
-                  <ProjectCard key={p.slug} project={p} delay={i + 1} />
-                ))}
-              </div>
+            <div
+              className="work-rows"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "120px",
+              }}
+            >
+              {projects.map((p, i) => (
+                <ProjectRow
+                  key={p.slug}
+                  project={p}
+                  /* Alternate image side per row for editorial rhythm. */
+                  imageSide={i % 2 === 0 ? "left" : "right"}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -112,36 +118,258 @@ export default function WorkPageClient({
   );
 }
 
-function ProjectCard({ project, delay }: { project: WorkListItem; delay: number }) {
-  const delayClass = delay === 0 ? "reveal" : delay === 1 ? "reveal reveal-d1" : delay === 2 ? "reveal reveal-d2" : "reveal reveal-d3";
+/* -------------------------------------------------------------------------- */
+/*  ProjectRow — a single project as its own full-width editorial row         */
+/* -------------------------------------------------------------------------- */
+
+function ProjectRow({
+  project,
+  imageSide,
+}: {
+  project: WorkListItem;
+  imageSide: "left" | "right";
+}) {
+  const imageOnLeft = imageSide === "left";
+
   return (
-    <Link href={`/work/${project.slug}`} className={delayClass} data-hover style={{ overflow: "hidden", position: "relative", cursor: "none", transition: "transform 0.3s", textDecoration: "none", color: "inherit", display: "block" }}
+    <Link
+      href={`/work/${project.slug}`}
+      className="reveal work-row"
+      data-hover
+      style={{
+        display: "grid",
+        /* Image side is always the wider 1.4fr column so left/right
+           rows render with identical image dimensions. */
+        gridTemplateColumns: imageOnLeft
+          ? "minmax(0, 1.4fr) minmax(0, 1fr)"
+          : "minmax(0, 1fr) minmax(0, 1.4fr)",
+        gap: "clamp(40px, 6vw, 100px)",
+        alignItems: "center",
+        cursor: "none",
+        textDecoration: "none",
+        color: "inherit",
+      }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1.04)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
-        if (arrow) { arrow.style.background = "#F77837"; arrow.style.color = "#fff"; }
+        if (arrow) {
+          arrow.style.background = "#F77837";
+          arrow.style.color = "#fff";
+          arrow.style.transform = "translateX(6px)";
+        }
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
+        if (img) img.style.transform = "scale(1)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
-        if (arrow) { arrow.style.background = "rgba(255,255,255,0.9)"; arrow.style.color = "#0E0E0E"; }
+        if (arrow) {
+          arrow.style.background = "transparent";
+          arrow.style.color = "#0E0E0E";
+          arrow.style.transform = "translateX(0)";
+        }
       }}
     >
-      <div style={{ width: "100%", aspectRatio: "16 / 10", background: project.coverImage ? `linear-gradient(180deg, rgba(13,26,46,0.15) 0%, rgba(13,26,46,0.45) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}` : project.bg, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+      {/* Image */}
+      <div
+        className="work-row-image"
+        style={{
+          gridColumn: imageOnLeft ? 1 : 2,
+          gridRow: 1,
+          width: "100%",
+          aspectRatio: "5 / 4",
+          borderRadius: "24px",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <div
+          data-image
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: project.coverImage
+              ? `linear-gradient(180deg, rgba(13,26,46,0.10) 0%, rgba(13,26,46,0.35) 100%), url('${project.coverImage}') center top / cover no-repeat, ${project.bg}`
+              : project.bg,
+            transition: "transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1)",
+          }}
+        />
         {!project.coverImage && (
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,107,43,0.08), transparent 60%)" }} />
-        )}
-        {!project.coverImage && (
-          <span style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontWeight: 800, fontSize: "3rem", color: "rgba(255,255,255,0.05)", letterSpacing: "0.1em", position: "relative", zIndex: 1 }}>
-            {project.client.split(" ").map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).join("")}
+          <span
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              fontFamily:
+                'var(--font-display, "Bricolage Grotesque", sans-serif)',
+              fontWeight: 800,
+              fontSize: "4rem",
+              color: "rgba(255,255,255,0.06)",
+              letterSpacing: "0.1em",
+            }}
+          >
+            {project.client
+              .split(" ")
+              .map((w) => w[0])
+              .filter((c) => /[A-Za-z]/.test(c))
+              .join("")}
           </span>
         )}
       </div>
-      <div data-arrow style={{ position: "absolute", top: "16px", right: "16px", width: "38px", height: "38px", borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1rem", color: "#0E0E0E", transition: "background 0.2s, color 0.2s", zIndex: 2 }}>↗</div>
-      <div style={{ padding: "20px 4px" }}>
-        <p style={{ fontSize: "1.125rem", fontWeight: 600, color: "#7A7670", marginBottom: "8px" }}>{project.client}</p>
-        <p style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.01em", color: "#0E0E0E", lineHeight: 1.3 }}>{project.title}</p>
+
+      {/* Text column */}
+      <div
+        className="work-row-text"
+        style={{
+          gridColumn: imageOnLeft ? 2 : 1,
+          gridRow: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "18px",
+        }}
+      >
+        {/* Industry badge */}
+        {project.industry && (
+          <span
+            style={{
+              alignSelf: "flex-start",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              padding: "8px 14px",
+              borderRadius: "100px",
+              background: "rgba(247,120,55,0.10)",
+              color: "#F77837",
+              border: "1px solid rgba(247,120,55,0.25)",
+            }}
+          >
+            {project.industry}
+          </span>
+        )}
+
+        {/* Client name */}
+        <p
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "1.1rem",
+            fontWeight: 700,
+            letterSpacing: "-0.01em",
+            color: "#0E0E0E",
+            margin: 0,
+          }}
+        >
+          {project.client}
+        </p>
+
+        {/* Title */}
+        <h3
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.02em",
+            color: "#0E0E0E",
+            lineHeight: 1.2,
+            margin: 0,
+          }}
+        >
+          {project.title}
+        </h3>
+
+        {/* Description / services line */}
+        {project.description && (
+          <p
+            style={{
+              fontSize: "1rem",
+              lineHeight: 1.6,
+              color: "#7A7670",
+              margin: 0,
+            }}
+          >
+            {project.description}
+          </p>
+        )}
+
+        {/* Featured stat */}
+        {project.stat && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: "14px",
+              marginTop: "4px",
+              paddingTop: "18px",
+              borderTop: "1px solid rgba(14,14,14,0.08)",
+            }}
+          >
+            <span
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.02em",
+                color: "#F77837",
+                lineHeight: 1,
+              }}
+            >
+              {project.stat.value}
+            </span>
+            <span
+              style={{
+                fontSize: "0.78rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#7A7670",
+              }}
+            >
+              {project.stat.label}
+            </span>
+          </div>
+        )}
+
+        {/* CTA */}
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
+            marginTop: "12px",
+            fontSize: "0.92rem",
+            fontWeight: 700,
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            color: "#0E0E0E",
+          }}
+        >
+          View case study
+          <span
+            data-arrow
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              border: "1.5px solid #0E0E0E",
+              background: "transparent",
+              color: "#0E0E0E",
+              fontSize: "1.05rem",
+              transition:
+                "background 0.25s, color 0.25s, transform 0.25s",
+            }}
+          >
+            →
+          </span>
+        </div>
       </div>
     </Link>
   );
 }
+
