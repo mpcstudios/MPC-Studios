@@ -31,7 +31,6 @@ body {
 .cursor-dot {
   width: 12px;
   height: 12px;
-  margin: -6px 0 0 -6px;
   background: #F77837;
   border-radius: 50%;
   position: fixed;
@@ -54,9 +53,12 @@ body {
 .cursor-ring {
   width: 36px;
   height: 36px;
-  margin: -18px 0 0 -18px;
   border: 1.5px solid #F77837;
   border-radius: 50%;
+  /* box-sizing: border-box keeps the rendered size at width/height
+     (not width + 2*border) so the JS `ringHalf = width/2` math is
+     accurate. */
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
