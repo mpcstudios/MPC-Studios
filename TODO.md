@@ -45,13 +45,12 @@ ship — keep it accurate so the launch checklist stays honest.
 
 - [x] Replace numbered row index with industry badge + description + stat
 - [x] Apply tan-hero / white-body pattern on detail pages
-- [ ] **Switch the Work index to a 2-column grid** (matches the homepage
-      Selected Work look) so more projects show above the fold
-      - Target: ~12 total projects on the page
-      - Use a floating card overlay for stats so the image stays large
-- [ ] **Minimal Work hero** — bold title only, drop the subhead /
-      decorative imagery; let the project list do the work
-- [ ] Add the missing case studies to round out 12 total
+- [x] **Switch the Work index to a 2-column grid** with floating stat
+      card overlay on each image (matches the homepage Selected Work
+      look)
+- [x] **Minimal Work hero** — bold title only ("Our work."), no
+      subhead or decorative copy
+- [ ] Add the missing case studies to round out ~12 total
 - [ ] Project page imagery — Kate to produce static images first,
       then videos / animations (perf priority)
 

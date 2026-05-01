@@ -580,15 +580,10 @@ body {
   /* Services — hide tags on small screens */
   .service-tags-wrap { display: none !important; }
 
-  /* Work — collapse the alternating-side rows to stacked image-over-text */
-  .work-rows { gap: 80px !important; }
-  .work-row {
+  /* Work — collapse the 2-column grid to a single column on mobile */
+  .work-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
-  }
-  .work-row .work-row-image,
-  .work-row .work-row-text {
-    grid-column: 1 !important;
+    gap: 56px !important;
   }
   .work-row .work-row-image { grid-row: 1 !important; }
   .work-row .work-row-text  { grid-row: 2 !important; }
