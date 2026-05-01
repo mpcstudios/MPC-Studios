@@ -28,7 +28,6 @@ export const BlogCollection: Collection = {
         "AI & Automation",
         "Digital Marketing",
         "Content",
-        "Software",
         "Strategy",
         "Web Design",
       ],

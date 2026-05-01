@@ -94,7 +94,7 @@ const fetchAllCards = unstable_cache(
 
     return rows;
   },
-  ["resources-blog-cards-v2"],
+  ["resources-blog-cards-v3"],
   { revalidate: 3600, tags: ["blog"] },
 );
 
