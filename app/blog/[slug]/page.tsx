@@ -38,7 +38,7 @@ export default async function BlogPostPage({
       <RevealInit />
 
       <main>
-        <section className="blog-hero-pad" style={{ background: "#fff" }}>
+        <section className="blog-hero-pad" style={{ background: "#F4F3F1" }}>
           <div className="content-wrap" style={{ maxWidth: "760px" }}>
             <Link
               href="/resources"
@@ -92,11 +92,15 @@ export default async function BlogPostPage({
                   aspectRatio: "16 / 9",
                   background: `#0E0E0E url(${post.coverImage}) center/cover`,
                   borderRadius: "20px",
-                  marginBottom: "48px",
                 }}
               />
             )}
-            {post.body && (
+          </div>
+        </section>
+
+        {post.body && (
+          <section style={{ background: "#fff", padding: "80px 0 120px" }}>
+            <div className="content-wrap" style={{ maxWidth: "760px" }}>
               <div
                 className="prose"
                 style={{
@@ -107,9 +111,9 @@ export default async function BlogPostPage({
               >
                 <PostBody body={post.body} />
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         <CTA />
       </main>

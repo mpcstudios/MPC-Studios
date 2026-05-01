@@ -30,7 +30,7 @@ export default async function ProjectPage({
       <RevealInit />
 
       <main>
-        <section style={{ background: "#fff", padding: "200px 0 80px" }}>
+        <section style={{ background: "#F4F3F1", padding: "200px 0 80px" }}>
           <div className="content-wrap" style={{ maxWidth: "900px" }}>
             <Link
               href="/work"
@@ -185,32 +185,41 @@ export default async function ProjectPage({
                 </div>
               )}
             </div>
-            {project.body && (
-              <div
-                className="prose"
-                style={{
-                  fontSize: "1.05rem",
-                  lineHeight: 1.75,
-                  color: "#2a2a2a",
-                }}
-              >
-                <ProjectBody body={project.body} />
-              </div>
-            )}
-            {project.url && (
-              <p style={{ marginTop: "40px" }}>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#F77837", fontWeight: 600 }}
-                >
-                  Visit live site ↗
-                </a>
-              </p>
-            )}
           </div>
         </section>
+
+        {(project.body || project.url) && (
+          <section
+            style={{ background: "#fff", padding: "80px 0 120px" }}
+          >
+            <div className="content-wrap" style={{ maxWidth: "900px" }}>
+              {project.body && (
+                <div
+                  className="prose"
+                  style={{
+                    fontSize: "1.05rem",
+                    lineHeight: 1.75,
+                    color: "#2a2a2a",
+                  }}
+                >
+                  <ProjectBody body={project.body} />
+                </div>
+              )}
+              {project.url && (
+                <p style={{ marginTop: "40px" }}>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#F77837", fontWeight: 600 }}
+                  >
+                    Visit live site ↗
+                  </a>
+                </p>
+              )}
+            </div>
+          </section>
+        )}
 
         <CTA />
       </main>

@@ -38,7 +38,7 @@ export default function ContactPage() {
 
       <main>
         {/* Hero */}
-        <section style={{ background: "#fff", padding: "200px 0 60px" }}>
+        <section style={{ background: "#F4F3F1", padding: "200px 0 60px" }}>
           <div className="content-wrap">
             <div className="reveal" style={{ maxWidth: "720px" }}>
               <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "20px" }}>
