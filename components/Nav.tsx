@@ -15,11 +15,19 @@ const serviceChildren: NavChild[] = [
   { label: "Digital Marketing Strategy", href: "/services/digital-marketing" },
 ];
 
+const industryChildren: NavChild[] = [
+  { label: "Banking", href: "/industries/banking" },
+  { label: "Legal", href: "/industries/legal" },
+  { label: "Construction", href: "/industries/construction" },
+  { label: "Research", href: "/industries/research" },
+];
+
 const links: NavLink[] = [
   { label: "Services", href: "/services", children: serviceChildren },
+  { label: "Industries", href: "/industries", children: industryChildren },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
-  { label: "Resources", href: "/resources" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 

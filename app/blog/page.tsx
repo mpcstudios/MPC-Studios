@@ -1,9 +1,9 @@
 import { unstable_cache } from "next/cache";
 import client from "@/tina/__generated__/databaseClient";
-import ResourcesPageClient, {
+import BlogPageClient, {
   type BlogCardItem,
   type CategoryRow,
-} from "./ResourcesPageClient";
+} from "./BlogPageClient";
 import { CATEGORIES, labelToSlug } from "./categories";
 
 // Rebuild the cards list at most once an hour; individual saves in the Tina
@@ -94,7 +94,7 @@ const fetchAllCards = unstable_cache(
 
     return rows;
   },
-  ["resources-blog-cards-v3"],
+  ["blog-cards-v1"],
   { revalidate: 3600, tags: ["blog"] },
 );
 
@@ -173,7 +173,7 @@ export default async function ResourcesPage() {
   const featuredStack = featuredOrdered.slice(1, 6);
 
   return (
-    <ResourcesPageClient
+    <BlogPageClient
       rows={rows}
       featured={featured}
       featuredStack={featuredStack}
