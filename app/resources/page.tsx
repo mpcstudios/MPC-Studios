@@ -148,6 +148,7 @@ export default async function ResourcesPage() {
     "AI & Automation",
     "Branding",
     "Content",
+    "Strategy",
   ];
 
   const seenSlugs = new Set<string>();
@@ -161,7 +162,7 @@ export default async function ResourcesPage() {
   }
   // Backfill from the global newest-first list if any slot is empty.
   for (const post of all) {
-    if (featuredOrdered.length >= 5) break;
+    if (featuredOrdered.length >= 6) break;
     if (!seenSlugs.has(post.slug)) {
       featuredOrdered.push(post);
       seenSlugs.add(post.slug);
@@ -169,7 +170,7 @@ export default async function ResourcesPage() {
   }
 
   const featured = featuredOrdered[0] ?? null;
-  const featuredStack = featuredOrdered.slice(1, 5);
+  const featuredStack = featuredOrdered.slice(1, 6);
 
   return (
     <ResourcesPageClient
