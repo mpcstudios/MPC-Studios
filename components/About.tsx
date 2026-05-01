@@ -137,7 +137,7 @@ export default function About() {
               crafted with both beauty and business goals in mind.
             </p>
             <Link
-              href="#contact"
+              href="/about"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

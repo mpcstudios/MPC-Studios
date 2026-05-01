@@ -77,6 +77,13 @@ const serviceLinks: FooterItem[] = [
   { label: "Digital Marketing Strategy", href: "/services/digital-marketing" },
   { label: "All services →", href: "/services" },
 ];
+const industryLinks: FooterItem[] = [
+  { label: "Banking", href: "/industries/banking" },
+  { label: "Legal", href: "/industries/legal" },
+  { label: "Construction", href: "/industries/construction" },
+  { label: "Research", href: "/industries/research" },
+  { label: "All industries →", href: "/industries" },
+];
 const companyLinks: FooterItem[] = [
   { label: "About Us", href: "/about" },
   { label: "Our Work", href: "/work" },
@@ -189,48 +196,16 @@ export default function Footer() {
           }}
         >
           <FooterCol title="Services" items={serviceLinks} />
+          <FooterCol title="Industries" items={industryLinks} />
           <FooterCol title="Company" items={companyLinks} />
-          <div>
-            <h4
-              style={{
-                fontSize: "0.72rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "rgba(255,255,255,0.25)",
-                marginBottom: "20px",
-              }}
-            >
-              Contact
-            </h4>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", padding: 0, margin: 0 }}>
-              {[
-                { label: "sales@mpcstudios.com", href: "mailto:sales@mpcstudios.com" },
-                { label: "+1 (956) 423-2233", href: "tel:+19564232233" },
-                { label: "Schedule a call ↗", href: "/contact" },
-              ].map(({ label, href }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    style={{
-                      fontSize: "0.9rem",
-                      color: "rgba(255,255,255,0.45)",
-                      textDecoration: "none",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "#F77837")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color =
-                        "rgba(255,255,255,0.45)")
-                    }
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterCol
+            title="Contact"
+            items={[
+              { label: "sales@mpcstudios.com", href: "mailto:sales@mpcstudios.com" },
+              { label: "+1 (956) 423-2233", href: "tel:+19564232233" },
+              { label: "Schedule a call ↗", href: "/contact" },
+            ]}
+          />
         </div>
       </div>
 

@@ -87,7 +87,7 @@ export default function Services() {
             </h2>
           </div>
           <Link
-            href="#contact"
+            href="/contact"
             className="reveal reveal-d1 btn-gradient"
             style={{
               display: "inline-flex",

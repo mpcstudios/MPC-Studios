@@ -14,7 +14,6 @@ export const CATEGORIES: readonly Category[] = [
   { label: "AI & Automation",   slug: "ai-automation" },
   { label: "Digital Marketing", slug: "digital-marketing" },
   { label: "Content",           slug: "content" },
-  { label: "Software",          slug: "software" },
   { label: "Strategy",          slug: "strategy" },
   { label: "Web Design",        slug: "web-design" },
 ] as const;

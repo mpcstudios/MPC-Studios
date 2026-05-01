@@ -31,7 +31,6 @@ body {
 .cursor-dot {
   width: 12px;
   height: 12px;
-  margin: -6px 0 0 -6px;
   background: #F77837;
   border-radius: 50%;
   position: fixed;
@@ -54,9 +53,12 @@ body {
 .cursor-ring {
   width: 36px;
   height: 36px;
-  margin: -18px 0 0 -18px;
   border: 1.5px solid #F77837;
   border-radius: 50%;
+  /* box-sizing: border-box keeps the rendered size at width/height
+     (not width + 2*border) so the JS `ringHalf = width/2` math is
+     accurate. */
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
@@ -293,8 +295,12 @@ body {
     background-position 0.9s ease-out,
     transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2),
     box-shadow 0.25s ease;
-  /* Lifts white text off the lighter yellow portion of the gradient. */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  /* Lifts white text off the lighter yellow portion of the gradient.
+     Stacked tight + soft drop so the label stays legible across the
+     full sweep, including the brightest yellow part. */
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.25);
 }
 .btn-gradient:hover {
   background-position: 100% 100%;
@@ -318,7 +324,9 @@ body {
   isolation: isolate;
   border: 1.5px solid transparent;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.25);
   box-shadow: 0 4px 14px rgba(247, 120, 55, 0.28);
   transform: translateY(0) scale(1);
   will-change: transform;
