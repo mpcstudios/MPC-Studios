@@ -87,7 +87,7 @@ const industryLinks: FooterItem[] = [
 const companyLinks: FooterItem[] = [
   { label: "About Us", href: "/about" },
   { label: "Our Work", href: "/work" },
-  { label: "Resources", href: "/resources" },
+  { label: "Blog", href: "/blog" },
   { label: "Client Resources", href: "/client-resources" },
   { label: "Contact", href: "/contact" },
 ];

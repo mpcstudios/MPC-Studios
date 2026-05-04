@@ -38,41 +38,43 @@ export default function WorkPageClient({
       <RevealInit />
 
       <main>
-        {/* Hero */}
-        <section style={{ background: "#F4F3F1", padding: "200px 0 100px" }}>
+        {/* Hero — minimal, bold title only */}
+        <section
+          style={{ background: "#F4F3F1", padding: "200px 0 80px" }}
+        >
           <div className="content-wrap">
-            <div className="reveal" style={{ maxWidth: "720px" }}>
-              <p style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#F77837", marginBottom: "20px" }}>
-                Our work
-              </p>
-              <h1 style={{ fontFamily: 'var(--font-display, "Bricolage Grotesque", sans-serif)', fontSize: "clamp(2.8rem, 5vw, 4.5rem)", fontWeight: 800, lineHeight: 1.12, letterSpacing: "-0.03em", color: "#0E0E0E", marginBottom: "24px" }}>
-                Projects we&apos;re proud of
-              </h1>
-              <p style={{ fontSize: "1.125rem", lineHeight: 1.75, color: "#7A7670" }}>
-                A selection of recent work across web design, brand identity, and digital strategy for clients who demand results.
-              </p>
-            </div>
+            <h1
+              className="reveal"
+              style={{
+                fontFamily:
+                  'var(--font-display, "Bricolage Grotesque", sans-serif)',
+                fontSize: "clamp(3rem, 7vw, 6rem)",
+                fontWeight: 800,
+                lineHeight: 1.04,
+                letterSpacing: "-0.04em",
+                color: "#0E0E0E",
+                margin: 0,
+              }}
+            >
+              Our work.
+            </h1>
           </div>
         </section>
 
-        {/* Project rows — each project gets its own full-width editorial row */}
+        {/* 2-column grid of project cards with floating stat overlays */}
         <section className="section-pad" style={{ background: "#fff" }}>
           <div className="content-wrap">
             <div
-              className="work-rows"
+              className="work-grid"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "120px",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "48px",
+                alignItems: "start",
               }}
             >
               {projects.map((p, i) => (
-                <ProjectRow
-                  key={p.slug}
-                  project={p}
-                  /* Alternate image side per row for editorial rhythm. */
-                  imageSide={i % 2 === 0 ? "left" : "right"}
-                />
+                <ProjectGridCard key={p.slug} project={p} index={i} />
               ))}
             </div>
           </div>
@@ -119,68 +121,64 @@ export default function WorkPageClient({
 }
 
 /* -------------------------------------------------------------------------- */
-/*  ProjectRow — a single project as its own full-width editorial row         */
+/*  ProjectGridCard — image-led card with floating stat overlay               */
 /* -------------------------------------------------------------------------- */
 
-function ProjectRow({
+function ProjectGridCard({
   project,
-  imageSide,
+  index,
 }: {
   project: WorkListItem;
-  imageSide: "left" | "right";
+  index: number;
 }) {
-  const imageOnLeft = imageSide === "left";
+  /* Stagger reveal classes so cards fade up in sequence. */
+  const revealClass =
+    index === 0
+      ? "reveal"
+      : `reveal reveal-d${Math.min((index % 4) + 1, 4)}`;
 
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="reveal work-row"
+      className={revealClass}
       data-hover
       style={{
-        display: "grid",
-        /* Image side is always the wider 1.4fr column so left/right
-           rows render with identical image dimensions. */
-        gridTemplateColumns: imageOnLeft
-          ? "minmax(0, 1.4fr) minmax(0, 1fr)"
-          : "minmax(0, 1fr) minmax(0, 1.4fr)",
-        gap: "clamp(40px, 6vw, 100px)",
-        alignItems: "center",
-        cursor: "none",
+        display: "block",
         textDecoration: "none",
         color: "inherit",
+        cursor: "none",
+        transition: "transform 0.3s",
       }}
       onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
         const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
-        if (img) img.style.transform = "scale(1.04)";
+        if (img) img.style.transform = "scale(1.05)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
         if (arrow) {
           arrow.style.background = "#F77837";
           arrow.style.color = "#fff";
-          arrow.style.transform = "translateX(6px)";
         }
       }}
       onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
         const img = e.currentTarget.querySelector<HTMLElement>("[data-image]");
         if (img) img.style.transform = "scale(1)";
         const arrow = e.currentTarget.querySelector<HTMLElement>("[data-arrow]");
         if (arrow) {
-          arrow.style.background = "transparent";
+          arrow.style.background = "rgba(255,255,255,0.95)";
           arrow.style.color = "#0E0E0E";
-          arrow.style.transform = "translateX(0)";
         }
       }}
     >
-      {/* Image */}
+      {/* Image with floating stat overlay */}
       <div
-        className="work-row-image"
         style={{
-          gridColumn: imageOnLeft ? 1 : 2,
-          gridRow: 1,
-          width: "100%",
-          aspectRatio: "5 / 4",
-          borderRadius: "24px",
-          overflow: "hidden",
           position: "relative",
+          width: "100%",
+          aspectRatio: "4 / 3",
+          borderRadius: "20px",
+          overflow: "hidden",
+          marginBottom: "24px",
         }}
       >
         <div
@@ -194,6 +192,7 @@ function ProjectRow({
             transition: "transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1)",
           }}
         />
+
         {!project.coverImage && (
           <span
             style={{
@@ -207,6 +206,7 @@ function ProjectRow({
               fontSize: "4rem",
               color: "rgba(255,255,255,0.06)",
               letterSpacing: "0.1em",
+              pointerEvents: "none",
             }}
           >
             {project.client
@@ -216,101 +216,53 @@ function ProjectRow({
               .join("")}
           </span>
         )}
-      </div>
 
-      {/* Text column */}
-      <div
-        className="work-row-text"
-        style={{
-          gridColumn: imageOnLeft ? 2 : 1,
-          gridRow: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: "18px",
-        }}
-      >
-        {/* Industry badge */}
-        {project.industry && (
-          <span
-            style={{
-              alignSelf: "flex-start",
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              padding: "8px 14px",
-              borderRadius: "100px",
-              background: "rgba(247,120,55,0.10)",
-              color: "#F77837",
-              border: "1px solid rgba(247,120,55,0.25)",
-            }}
-          >
-            {project.industry}
-          </span>
-        )}
-
-        {/* Client name */}
-        <p
+        {/* Top-right corner arrow */}
+        <div
+          data-arrow
           style={{
-            fontFamily:
-              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.95)",
+            color: "#0E0E0E",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             fontSize: "1.1rem",
-            fontWeight: 700,
-            letterSpacing: "-0.01em",
-            color: "#0E0E0E",
-            margin: 0,
+            transition: "background 0.25s, color 0.25s",
+            zIndex: 2,
           }}
         >
-          {project.client}
-        </p>
+          ↗
+        </div>
 
-        {/* Title */}
-        <h3
-          style={{
-            fontFamily:
-              'var(--font-display, "Bricolage Grotesque", sans-serif)',
-            fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-            color: "#0E0E0E",
-            lineHeight: 1.2,
-            margin: 0,
-          }}
-        >
-          {project.title}
-        </h3>
-
-        {/* Description / services line */}
-        {project.description && (
-          <p
-            style={{
-              fontSize: "1rem",
-              lineHeight: 1.6,
-              color: "#7A7670",
-              margin: 0,
-            }}
-          >
-            {project.description}
-          </p>
-        )}
-
-        {/* Featured stat */}
+        {/* Floating stat card — bottom-left of image */}
         {project.stat && (
           <div
             style={{
+              position: "absolute",
+              bottom: "20px",
+              left: "20px",
+              background: "#fff",
+              borderRadius: "14px",
+              padding: "12px 18px",
               display: "flex",
               alignItems: "baseline",
-              gap: "14px",
-              marginTop: "4px",
-              paddingTop: "18px",
-              borderTop: "1px solid rgba(14,14,14,0.08)",
+              gap: "12px",
+              boxShadow: "0 10px 26px rgba(14,14,14,0.18)",
+              zIndex: 2,
+              maxWidth: "calc(100% - 40px)",
             }}
           >
             <span
               style={{
                 fontFamily:
                   'var(--font-display, "Bricolage Grotesque", sans-serif)',
-                fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
+                fontSize: "clamp(1.5rem, 2.2vw, 1.9rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.02em",
                 color: "#F77837",
@@ -321,53 +273,86 @@ function ProjectRow({
             </span>
             <span
               style={{
-                fontSize: "0.78rem",
+                fontSize: "0.7rem",
                 fontWeight: 600,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "#7A7670",
+                color: "#0E0E0E",
+                lineHeight: 1.2,
               }}
             >
               {project.stat.label}
             </span>
           </div>
         )}
+      </div>
 
-        {/* CTA */}
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "12px",
-            marginTop: "12px",
-            fontSize: "0.92rem",
-            fontWeight: 700,
-            letterSpacing: "0.04em",
-            textTransform: "uppercase",
-            color: "#0E0E0E",
-          }}
-        >
-          View case study
+      {/* Text below image */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          padding: "0 4px",
+        }}
+      >
+        {project.industry && (
           <span
-            data-arrow
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "44px",
-              height: "44px",
-              borderRadius: "50%",
-              border: "1.5px solid #0E0E0E",
-              background: "transparent",
-              color: "#0E0E0E",
-              fontSize: "1.05rem",
-              transition:
-                "background 0.25s, color 0.25s, transform 0.25s",
+              alignSelf: "flex-start",
+              fontSize: "0.7rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              padding: "6px 12px",
+              borderRadius: "100px",
+              background: "rgba(247,120,55,0.10)",
+              color: "#F77837",
+              border: "1px solid rgba(247,120,55,0.25)",
             }}
           >
-            →
+            {project.industry}
           </span>
-        </div>
+        )}
+
+        <p
+          style={{
+            fontSize: "0.95rem",
+            fontWeight: 600,
+            color: "#7A7670",
+            margin: 0,
+          }}
+        >
+          {project.client}
+        </p>
+
+        <h3
+          style={{
+            fontFamily:
+              'var(--font-display, "Bricolage Grotesque", sans-serif)',
+            fontSize: "clamp(1.25rem, 1.8vw, 1.7rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.01em",
+            color: "#0E0E0E",
+            lineHeight: 1.25,
+            margin: 0,
+          }}
+        >
+          {project.title}
+        </h3>
+
+        {project.description && (
+          <p
+            style={{
+              fontSize: "0.92rem",
+              lineHeight: 1.55,
+              color: "#7A7670",
+              margin: 0,
+            }}
+          >
+            {project.description}
+          </p>
+        )}
       </div>
     </Link>
   );

@@ -41,7 +41,7 @@ export default async function BlogPostPage({
         <section className="blog-hero-pad" style={{ background: "#F4F3F1" }}>
           <div className="content-wrap" style={{ maxWidth: "760px" }}>
             <Link
-              href="/resources"
+              href="/blog"
               style={{
                 fontSize: "0.85rem",
                 color: "#7A7670",

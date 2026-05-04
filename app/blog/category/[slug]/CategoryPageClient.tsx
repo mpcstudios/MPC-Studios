@@ -43,7 +43,7 @@ export default function CategoryPageClient({
           <div className="content-wrap">
             <div className="reveal" style={{ maxWidth: "820px" }}>
               <Link
-                href="/resources"
+                href="/blog"
                 style={{
                   display: "inline-block",
                   fontSize: "0.85rem",
@@ -159,8 +159,8 @@ function Pagination({
 }) {
   const pageHref = (n: number) =>
     n === 1
-      ? `/resources/category/${slug}`
-      : `/resources/category/${slug}?page=${n}`;
+      ? `/blog/category/${slug}`
+      : `/blog/category/${slug}?page=${n}`;
 
   const pages = new Set<number>();
   pages.add(1);

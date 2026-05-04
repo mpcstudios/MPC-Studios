@@ -24,7 +24,7 @@ export type CategoryRow = {
   totalCount: number;
 };
 
-export default function ResourcesPageClient({
+export default function BlogPageClient({
   rows,
   featured,
   featuredStack = [],
@@ -271,7 +271,7 @@ function FeaturedStackItem({ post }: { post: BlogCardItem }) {
 /* -------------------------------------------------------------------------- */
 
 function CategoryRowSection({ row }: { row: CategoryRow }) {
-  const categoryHref = `/resources/category/${row.slug}`;
+  const categoryHref = `/blog/category/${row.slug}`;
 
   return (
     <div className="reveal">

@@ -1,9 +1,9 @@
 /**
- * Canonical list of resource / blog categories — kept in the same order
- * the Tina `blog` collection enum defines them so the /resources row view
- * matches the admin dropdown.
+ * Canonical list of blog categories — kept in the same order the Tina
+ * `blog` collection enum defines them so the /blog row view matches the
+ * admin dropdown.
  *
- * `slug` is the URL segment under `/resources/category/<slug>` and is the
+ * `slug` is the URL segment under `/blog/category/<slug>` and is the
  * only persistent identifier — label text can change without breaking URLs.
  */
 
