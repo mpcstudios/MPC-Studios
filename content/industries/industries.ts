@@ -267,3 +267,10 @@ export const INDUSTRIES: IndustryConfig[] = [
 export function getIndustryBySlug(slug: string): IndustryConfig | undefined {
   return INDUSTRIES.find((i) => i.slug === slug);
 }
+
+export function getIndustryByLabel(
+  label: string | null | undefined,
+): IndustryConfig | undefined {
+  if (!label) return undefined;
+  return INDUSTRIES.find((i) => i.label === label);
+}

@@ -5,6 +5,9 @@ import Cursor from "@/components/Cursor";
 import RevealInit from "@/components/RevealInit";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import RelatedIndustryWork from "@/components/work/RelatedIndustryWork";
+import type { ProjectGridCardData } from "@/components/work/ProjectGridCard";
+import { getIndustryByLabel } from "@/content/industries/industries";
 import ProjectBody from "./ProjectBody";
 
 export default async function ProjectPage({
@@ -23,6 +26,44 @@ export default async function ProjectPage({
   }
 
   const project = res.data.project;
+
+  // Pull other projects in the same industry for the related-work section.
+  const relatedProjects: ProjectGridCardData[] = await (async () => {
+    if (!project.industry) return [];
+    try {
+      const r = await client.queries.projectConnection({ first: 100 });
+      const edges = r.data.projectConnection.edges ?? [];
+      return edges
+        .map((e) => e?.node)
+        .filter((n): n is NonNullable<typeof n> => !!n)
+        .filter(
+          (n) => n.industry === project.industry && n._sys.filename !== slug,
+        )
+        .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+        .slice(0, 3)
+        .map<ProjectGridCardData>((n) => ({
+          slug: n._sys.filename,
+          client: n.client,
+          title: n.title,
+          bg: n.bg ?? "#0E0E0E",
+          coverImage: n.coverImage ?? undefined,
+          industry: n.industry ?? undefined,
+          description: n.description ?? undefined,
+          stat: (() => {
+            for (const s of n.stats ?? []) {
+              if (s && s.value && s.label) {
+                return { value: s.value, label: s.label };
+              }
+            }
+            return undefined;
+          })(),
+        }));
+    } catch {
+      return [];
+    }
+  })();
+
+  const industryConfig = getIndustryByLabel(project.industry);
 
   return (
     <>
@@ -219,6 +260,14 @@ export default async function ProjectPage({
               )}
             </div>
           </section>
+        )}
+
+        {project.industry && relatedProjects.length > 0 && (
+          <RelatedIndustryWork
+            industryLabel={project.industry}
+            industrySlug={industryConfig?.slug ?? null}
+            projects={relatedProjects}
+          />
         )}
 
         <CTA />

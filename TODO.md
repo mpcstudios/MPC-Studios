@@ -19,10 +19,11 @@ meeting. Launch over polish; iteration continues post-launch.
 - [x] **Remove the "Contact" nav link** — May 4 decision: drop the
       redundant Contact item from the top nav and leave the
       "Start a project" CTA as the single contact path
-- [ ] Cross-link Industries ↔ Work pages
+- [x] Cross-link Industries ↔ Work pages
       - Each Industry page lists the relevant case studies (already done
         via auto-filter)
-      - Each Work case study links to the matching Industry page
+      - Each Work case study now ends with a "More <industry> work"
+        section linking to the matching `/industries/<slug>` page
 - [ ] FAQ section — **deferred to Phase 2**, not blocking launch
 
 ---
@@ -89,8 +90,6 @@ meeting. Launch over polish; iteration continues post-launch.
 - [x] `/industries` index + four detail pages (banking, legal,
       construction, research) with hero, intro, stats, why MPC, filtered
       case studies, filtered testimonials, CTA
-- [ ] Cross-link from each Industry detail page back to the Work index
-      / individual case studies
 - [ ] Mirror the "industry layout" treatment from the
       `/services/website-design-development` page across the rest of
       the site (industry-specific landing pages linking to relevant work)
