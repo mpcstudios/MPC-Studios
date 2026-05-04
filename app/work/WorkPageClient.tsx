@@ -61,7 +61,9 @@ export default function WorkPageClient({
           </div>
         </section>
 
-        {/* 2-column grid of project cards with floating stat overlays */}
+        {/* 2-column grid of project cards with floating stat overlays.
+            Left and right columns are split so the right side can be
+            offset downward, creating a staggered editorial rhythm. */}
         <section className="section-pad" style={{ background: "#fff" }}>
           <div className="content-wrap">
             <div
@@ -73,9 +75,43 @@ export default function WorkPageClient({
                 alignItems: "start",
               }}
             >
-              {projects.map((p, i) => (
-                <ProjectGridCard key={p.slug} project={p} index={i} />
-              ))}
+              <div
+                className="work-col-left"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "64px",
+                }}
+              >
+                {projects
+                  .filter((_, i) => i % 2 === 0)
+                  .map((p, i) => (
+                    <ProjectGridCard
+                      key={p.slug}
+                      project={p}
+                      index={i * 2}
+                    />
+                  ))}
+              </div>
+              <div
+                className="work-col-right"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "64px",
+                  marginTop: "96px",
+                }}
+              >
+                {projects
+                  .filter((_, i) => i % 2 === 1)
+                  .map((p, i) => (
+                    <ProjectGridCard
+                      key={p.slug}
+                      project={p}
+                      index={i * 2 + 1}
+                    />
+                  ))}
+              </div>
             </div>
           </div>
         </section>

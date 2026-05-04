@@ -580,10 +580,14 @@ body {
   /* Services — hide tags on small screens */
   .service-tags-wrap { display: none !important; }
 
-  /* Work — collapse the 2-column grid to a single column on mobile */
+  /* Work — collapse the 2-column grid to a single column on mobile
+     and remove the right-column offset so cards stack cleanly. */
   .work-grid {
     grid-template-columns: 1fr !important;
     gap: 56px !important;
+  }
+  .work-grid .work-col-right {
+    margin-top: 0 !important;
   }
   .work-row .work-row-image { grid-row: 1 !important; }
   .work-row .work-row-text  { grid-row: 2 !important; }
