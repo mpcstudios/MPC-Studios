@@ -19,9 +19,19 @@ const getFeaturedProjects = unstable_cache(
         title: n.title,
         bg: n.bg ?? "#0E0E0E",
         coverImage: n.coverImage ?? undefined,
+        industry: n.industry ?? undefined,
+        description: n.description ?? undefined,
+        stat: (() => {
+          for (const s of n.stats ?? []) {
+            if (s && s.value && s.label) {
+              return { value: s.value, label: s.label };
+            }
+          }
+          return undefined;
+        })(),
       }));
   },
-  ["home-featured-projects-v2"],
+  ["home-featured-projects-v3"],
   { revalidate: 3600, tags: ["project"] },
 );
 
