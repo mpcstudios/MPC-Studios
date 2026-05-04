@@ -16,7 +16,7 @@ meeting. Launch over polish; iteration continues post-launch.
       (Banking · Legal · Construction · Research) — confirmed at May 4
       meeting that Industries belongs in the header
 - [x] Rename "Resources" to "Blog" everywhere (route + label + folder)
-- [ ] **Remove the "Contact" nav link** — May 4 decision: drop the
+- [x] **Remove the "Contact" nav link** — May 4 decision: drop the
       redundant Contact item from the top nav and leave the
       "Start a project" CTA as the single contact path
 - [ ] Cross-link Industries ↔ Work pages

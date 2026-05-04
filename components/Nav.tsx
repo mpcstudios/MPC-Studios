@@ -28,7 +28,6 @@ const links: NavLink[] = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export default function Nav() {
