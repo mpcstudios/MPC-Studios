@@ -1,10 +1,11 @@
 # MPC Studios — Website TODO
 
-Living checklist of website work, derived from the May 1, 2026 planning
-sync (David + Kate) and ongoing iteration. Update this file when items
-ship — keep it accurate so the launch checklist stays honest.
+Living checklist of website work, derived from the May 1 + May 4, 2026
+planning syncs and ongoing iteration. Update this file when items ship —
+keep it accurate so the launch checklist stays honest.
 
-**Launch target:** end of week of May 4, 2026 (announce + push back if needed)
+**Launch target:** **Friday, May 8, 2026** — locked in at the May 4 team
+meeting. Launch over polish; iteration continues post-launch.
 
 ---
 
@@ -12,11 +13,12 @@ ship — keep it accurate so the launch checklist stays honest.
 
 - [x] Move Industries from header into footer (May 1 morning)
 - [x] **Reverse course:** put Industries dropdown back in the header
-      (Banking · Legal · Construction · Research)
+      (Banking · Legal · Construction · Research) — confirmed at May 4
+      meeting that Industries belongs in the header
 - [x] Rename "Resources" to "Blog" everywhere (route + label + folder)
-- [ ] Decide whether to keep both "Contact" link **and** "Start a project"
-      CTA in the header — David Watkins wants a contact method visible.
-      Likely fix: replace one with a visible **phone number** in the bar.
+- [ ] **Remove the "Contact" nav link** — May 4 decision: drop the
+      redundant Contact item from the top nav and leave the
+      "Start a project" CTA as the single contact path
 - [ ] Cross-link Industries ↔ Work pages
       - Each Industry page lists the relevant case studies (already done
         via auto-filter)
@@ -29,15 +31,22 @@ ship — keep it accurate so the launch checklist stays honest.
 
 - [x] Wire homepage CTAs to real routes (no more `#anchor` placeholders)
 - [x] Match active-link state in nav across routes
-- [ ] **Cards need real images** instead of monogram placeholders
-      (Selected Work + Services sections)
+- [x] **Apply Work-index card layout to homepage Selected Work**
+      (offset 2-column grid, floating stat overlay, corner arrow,
+      industry badge — `ProjectGridCard` shared between both surfaces)
+- [ ] **Cards need real cover images** instead of monogram placeholders
+      — May 4 decision: use **existing live-site screenshots** for any
+      project missing a hero image, no design placeholders
 - [ ] **Hover interactions on cards** — pick one direction:
       - Card expands on hover to reveal more case-study content
       - Or a "Made by Shape"–style badge / label slide-in
-      - Set animations to **trigger on hover, not loop continuously**
+      - Animations should **trigger on hover, not loop continuously**
+- [ ] **Stat boxes (homepage hero floating cards) — finalize purpose**
+      — David Watkins flagged at May 4 that the function isn't clear
+- [ ] Confirm client-logo order
 - [ ] Source ≥ 4 testimonials so the homepage row reads balanced
-      (Kate to chase David Watkins + Heather; Monday challenge for the
-      whole team to bring back 1 each except Nico)
+      (Kate chasing David Watkins + Heather; team-wide challenge from
+      the May 1 sync — each member except Nico brings back 1 quote)
 
 ---
 
@@ -50,9 +59,19 @@ ship — keep it accurate so the launch checklist stays honest.
       look)
 - [x] **Minimal Work hero** — bold title only ("Our work."), no
       subhead or decorative copy
-- [ ] Add the missing case studies to round out ~12 total
-- [ ] Project page imagery — Kate to produce static images first,
-      then videos / animations (perf priority)
+- [x] **Stagger left/right columns** — left column sits ~96px higher
+      than right (homepage rhythm applied to /work)
+- [ ] **Add missing case studies** — Sal to generate using the
+      case-study skill, prioritizing **AI / Automation / Portfolio**
+      projects. Suggested examples from May 4: **Coursera integration**
+      (custom software) and **Rialto** (AI/automation)
+- [ ] **Rialto access for Kate** — David McDonald to either grant Kate
+      Rialto admin access OR capture screenshots so it can be used as
+      a case-study example
+- [ ] **More images on individual project pages** — beyond the cover
+      shot, add supporting visuals on each `/work/[slug]` page
+- [ ] Project page imagery — Kate to produce static images first, then
+      videos / animations (perf priority)
 
 ---
 
@@ -60,7 +79,8 @@ ship — keep it accurate so the launch checklist stays honest.
 
 - [x] All subpages open on tan (`#F4F3F1`), next section contrasts
 - [ ] Standardize subpage headers to **minimal text-only style** so
-      large imagery can lead the page (Work page especially — see above)
+      large imagery can lead the page (Work index already shipped this
+      pattern)
 
 ---
 
@@ -74,6 +94,9 @@ ship — keep it accurate so the launch checklist stays honest.
 - [ ] Mirror the "industry layout" treatment from the
       `/services/website-design-development` page across the rest of
       the site (industry-specific landing pages linking to relevant work)
+- [ ] **Consider a Banking sub-track for AI & Automation** — Sal's
+      suggestion at May 4. Could be a banking-focused entry point on
+      `/services/ai-automation` or a dedicated industry+service page
 
 ---
 
@@ -115,11 +138,24 @@ ship — keep it accurate so the launch checklist stays honest.
 
 ## About page
 
-- [ ] **Team photos** — David to schedule one-on-one photo sessions
-      (~60 source images per person) and feed them through the
-      Higsfield AI headshot tool
+- [ ] **Team photos via Higsfield AI tool** — May 4 plan: 15-min
+      session with Jen, Sal, and Kate to capture **80 selfies each**
+      in front of a window. Selfies feed Higsfield to generate
+      professional character photos for the site
+      - [ ] Schedule the photo session (David McDonald, Jen, Sal, Kate)
+      - [ ] Capture selfies (Jen, Sal, Kate — fallback if shoot is
+            inconvenient)
 - [ ] Add testimonials section to balance the page
 - [ ] Apply same "needs life" pass to the dark blocks
+
+---
+
+## Feedback / review process
+
+- [ ] **David Watkins to submit consolidated website feedback** — Kate
+      Hurry triages and prioritizes the list to avoid a "quilted"
+      patchwork of unrelated tweaks
+- [ ] **Send NPC review link to Jen Sanchez** (David McDonald, Kate)
 
 ---
 
@@ -144,4 +180,4 @@ ship — keep it accurate so the launch checklist stays honest.
 
 ---
 
-_Last updated: May 1, 2026_
+_Last updated: May 4, 2026 — incorporates May 4 team-meeting decisions._
